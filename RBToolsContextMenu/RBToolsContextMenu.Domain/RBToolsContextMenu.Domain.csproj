@@ -11,6 +11,7 @@
         <AssemblyName>RBToolsContextMenu.Domain</AssemblyName>
         <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
+        <LangVersion>latest</LangVersion>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
@@ -38,6 +39,14 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Command.cs" />
+        <Compile Include="Options\RbtOption.cs" />
+        <Compile Include="Options\RepositoryOption.cs" />
+        <Compile Include="Options\ReviewRequestIdOption.cs" />
+        <Compile Include="Options\ServerOption.cs" />
+        <Compile Include="Options\SvnShowCopiesAsAddsOption.cs" />
+        <Compile Include="Options\TargetGroupsOption.cs" />
+        <Compile Include="Options\UpdateOptions.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

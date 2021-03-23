@@ -85,6 +85,10 @@
         <Project>{5e560b6b-0572-4b08-8a69-fe88316f2849}</Project>
         <Name>RBToolsContextMenu.Application</Name>
       </ProjectReference>
+      <ProjectReference Include="..\RBToolsContextMenu.Domain\RBToolsContextMenu.Domain.csproj">
+        <Project>{ec6ab851-1a26-46df-8fa0-a83da18ab340}</Project>
+        <Name>RBToolsContextMenu.Domain</Name>
+      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
