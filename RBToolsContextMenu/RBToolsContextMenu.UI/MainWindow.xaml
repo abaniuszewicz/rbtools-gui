@@ -5,8 +5,58 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RBToolsContextMenu.UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Review board sender" Height="350" Width="525">
+    <Window.DataContext>
+        <local:MainWindowViewModel/>
+    </Window.DataContext>
+    
+    <Window.Resources>
+        <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+        </Style>
+    </Window.Resources>
+    
     <Grid>
-        <TextBox x:Name="TextBox">Test</TextBox>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <TextBox Style="{StaticResource TextBoxStyle}"
+                 Grid.Row="0" Grid.Column="0"
+                 IsReadOnly="true"
+                 Text="{Binding ConsoleOutput, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Style="{StaticResource TextBoxStyle}"
+                 Grid.Row="1" Grid.Column="0"
+                 Text="{Binding Path=ConsoleInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 TextWrapping="Wrap"
+                 AcceptsReturn="False"/>
+        
+        <GroupBox Grid.Row="0" Grid.Column="1" Header="Options">
+            <StackPanel>
+                <CheckBox IsChecked="{Binding CopiesAsAddsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                          Content="Copies as adds" 
+                          ToolTip="Treat copies or moved files as new files"/>
+                <DockPanel>
+                    <Label Content="Existing review id"/>
+                    <TextBox Text="{Binding Path=ReviewId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             Width="50"
+                             ToolTip="Existing review id"/>
+                </DockPanel>
+            </StackPanel>
+        </GroupBox>
+        
+        <Button Grid.Row="1" Grid.Column="1"
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                Padding="15,5,15,5"
+                Content="Send"
+                Command="{Binding SendCommand}"/>
     </Grid>
 </Window>
