@@ -47,7 +47,6 @@
     <Compile Include="Options\IHasValue.cs" />
     <Compile Include="Options\IOption.cs" />
     <Compile Include="Options\Option.cs" />
-    <Compile Include="Options\OptionPrinter.cs" />
     <Compile Include="Options\Post\DiffGeneration\Include.cs" />
     <Compile Include="Options\Post\Fields\ChangeDescription.cs" />
     <Compile Include="Options\Post\Fields\Description.cs" />
