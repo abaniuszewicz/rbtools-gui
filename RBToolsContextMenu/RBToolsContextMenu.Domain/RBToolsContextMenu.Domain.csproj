@@ -46,6 +46,7 @@
     <Compile Include="Options\IHasShortForm.cs" />
     <Compile Include="Options\IHasValue.cs" />
     <Compile Include="Options\IRbtOption.cs" />
+    <Compile Include="Options\Post\Fields\BugsClosed.cs" />
     <Compile Include="Options\RbtOption.cs" />
     <Compile Include="Options\Post\DiffGeneration\Include.cs" />
     <Compile Include="Options\Post\Fields\ChangeDescription.cs" />

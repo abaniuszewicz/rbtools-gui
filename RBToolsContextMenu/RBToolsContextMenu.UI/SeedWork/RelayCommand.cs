@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace RBToolsContextMenu.UI.Framework
+namespace RBToolsContextMenu.UI.SeedWork
 {
     public class RelayCommand<T> : ICommand
     {

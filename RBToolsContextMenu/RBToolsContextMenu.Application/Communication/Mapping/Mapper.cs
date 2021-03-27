@@ -28,6 +28,8 @@ namespace RBToolsContextMenu.Application.Communication.Mapping
                 options.Add(new Description(dto.Description));
             if (dto.Summary != default)
                 options.Add(new Summary(dto.Summary));
+            if (dto.BugIds != null && dto.BugIds.Any())
+                options.Add(new BugsClosed(dto.BugIds));
             if (dto.TargetGroups != null && dto.TargetGroups.Any())
                 options.Add(new TargetGroups(dto.TargetGroups));
             if (dto.TargetPeople != null && dto.TargetPeople.Any())

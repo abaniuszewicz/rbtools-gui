@@ -31,6 +31,11 @@ namespace RBToolsContextMenu.Application.Communication.DTO
         public string Summary { get; set; }
         
         /// <summary>
+        /// Ids of bugs that were resolved.
+        /// </summary>
+        public IEnumerable<string> BugIds { get; set; }
+        
+        /// <summary>
         /// Names of groups that should perform review.
         /// </summary>
         public IEnumerable<string> TargetGroups { get; set; }

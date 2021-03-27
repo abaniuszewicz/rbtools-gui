@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using RBToolsContextMenu.UI.Properties;
 
-namespace RBToolsContextMenu.UI.Framework
+namespace RBToolsContextMenu.UI.SeedWork
 {
     public class NotifyPropertyChanged : INotifyPropertyChanged
     {
