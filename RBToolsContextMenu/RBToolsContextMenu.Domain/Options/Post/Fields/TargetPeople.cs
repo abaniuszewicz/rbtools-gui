@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RBToolsContextMenu.Domain.Options.Fields
+namespace RBToolsContextMenu.Domain.Options.Post.Fields
 {
-    public class TargetPeople : IOption, IHasLongForm, IHasValue
+    public class TargetPeople : Option, IHasLongForm, IHasValue
     {
         public string LongForm { get; } = "target-people";
         public string Value { get; }

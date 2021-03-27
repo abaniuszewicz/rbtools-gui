@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace RBToolsContextMenu.Domain.Options.DiffGeneration
+namespace RBToolsContextMenu.Domain.Options.Post.DiffGeneration
 {
-    public class Include : IOption, IHasLongForm, IHasShortForm, IHasValue
+    public class Include : Option, IHasLongForm, IHasShortForm, IHasValue
     {
         public string LongForm { get; } = "include";
         public string ShortForm { get; } = "I";

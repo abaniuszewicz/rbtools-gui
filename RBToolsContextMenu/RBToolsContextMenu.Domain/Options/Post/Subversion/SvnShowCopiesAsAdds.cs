@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace RBToolsContextMenu.Domain.Options.Subversion
+namespace RBToolsContextMenu.Domain.Options.Post.Subversion
 {
-    public class SvnShowCopiesAsAdds : IOption, IHasLongForm, IHasValue
+    public class SvnShowCopiesAsAdds : Option, IHasLongForm, IHasValue
     {
         public string LongForm { get; } = "svn-show-copies-as-adds";
         public string Value { get; }

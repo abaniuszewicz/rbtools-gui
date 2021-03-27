@@ -39,28 +39,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RbtCommand.cs" />
-    <Compile Include="IRbtCommand.cs" />
-    <Compile Include="Options\DiffGeneration\Include.cs" />
-    <Compile Include="Options\Fields\ChangeDescription.cs" />
-    <Compile Include="Options\Fields\Description.cs" />
-    <Compile Include="Options\Fields\Summary.cs" />
-    <Compile Include="Options\Fields\TargetGroups.cs" />
-    <Compile Include="Options\Fields\TargetPeople.cs" />
-    <Compile Include="Options\Fields\TestingDone.cs" />
+    <Compile Include="Commands\IRbtCommand.cs" />
+    <Compile Include="Commands\PostCommand.cs" />
+    <Compile Include="Commands\RbtCommand.cs" />
+    <Compile Include="Markers\IPrintable.cs" />
+    <Compile Include="Options\IHasLongForm.cs" />
     <Compile Include="Options\IHasShortForm.cs" />
     <Compile Include="Options\IHasValue.cs" />
-    <Compile Include="Options\IHasLongForm.cs" />
     <Compile Include="Options\IOption.cs" />
+    <Compile Include="Options\Option.cs" />
     <Compile Include="Options\OptionPrinter.cs" />
-    <Compile Include="Options\Posting\Open.cs" />
-    <Compile Include="Options\Posting\Publish.cs" />
-    <Compile Include="Options\Posting\ReviewRequestId.cs" />
-    <Compile Include="Options\Posting\Update.cs" />
-    <Compile Include="Options\Repository\Repository.cs" />
-    <Compile Include="Options\Server\Server.cs" />
-    <Compile Include="Options\Subversion\SvnShowCopiesAsAdds.cs" />
+    <Compile Include="Options\Post\DiffGeneration\Include.cs" />
+    <Compile Include="Options\Post\Fields\ChangeDescription.cs" />
+    <Compile Include="Options\Post\Fields\Description.cs" />
+    <Compile Include="Options\Post\Fields\Summary.cs" />
+    <Compile Include="Options\Post\Fields\TargetGroups.cs" />
+    <Compile Include="Options\Post\Fields\TargetPeople.cs" />
+    <Compile Include="Options\Post\Fields\TestingDone.cs" />
+    <Compile Include="Options\Post\Posting\Open.cs" />
+    <Compile Include="Options\Post\Posting\Publish.cs" />
+    <Compile Include="Options\Post\Posting\ReviewRequestId.cs" />
+    <Compile Include="Options\Post\Posting\Update.cs" />
+    <Compile Include="Options\Post\Repository\Repository.cs" />
+    <Compile Include="Options\Post\Server\Server.cs" />
+    <Compile Include="Options\Post\Subversion\SvnShowCopiesAsAdds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Options\Post" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

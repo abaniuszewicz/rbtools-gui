@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace RBToolsContextMenu.Domain.Options.Fields
+namespace RBToolsContextMenu.Domain.Options.Post.Fields
 {
-    public class Summary : IOption, IHasLongForm, IHasValue
+    public class Summary : Option, IHasLongForm, IHasValue
     {
         public string LongForm { get; } = "summary";
         public string Value { get; }
