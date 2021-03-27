@@ -4,6 +4,7 @@ using RBToolsContextMenu.Application.Communication.DTO;
 using RBToolsContextMenu.Domain.Commands;
 using RBToolsContextMenu.Domain.Options;
 using RBToolsContextMenu.Domain.Options.Post;
+using RBToolsContextMenu.Domain.Options.Post.DiffGeneration;
 using RBToolsContextMenu.Domain.Options.Post.Fields;
 using RBToolsContextMenu.Domain.Options.Post.Posting;
 using RBToolsContextMenu.Domain.Options.Post.Server;
@@ -41,6 +42,8 @@ namespace RBToolsContextMenu.Application.Communication.Mapping
                 options.Add(new Update());
             if (dto.SvnShowCopiesAsAdds)
                 options.Add(new SvnShowCopiesAsAdds(ShowCopiesAsAddsOption.Yes));
+            if (dto.IncludePaths != null && dto.IncludePaths.Any())
+                options.AddRange(dto.IncludePaths.Select(p => new Include(p)));
                 
             return new PostCommand(options);
         }
