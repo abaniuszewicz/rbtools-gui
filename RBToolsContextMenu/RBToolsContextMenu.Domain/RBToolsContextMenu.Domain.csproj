@@ -39,15 +39,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Command.cs" />
-    <Compile Include="Options\RbtOption.cs" />
-    <Compile Include="Options\RepositoryOption.cs" />
-    <Compile Include="Options\ReviewRequestIdOption.cs" />
-    <Compile Include="Options\ServerOption.cs" />
-    <Compile Include="Options\SpecifyFileOption.cs" />
-    <Compile Include="Options\SvnShowCopiesAsAddsOption.cs" />
-    <Compile Include="Options\TargetGroupsOption.cs" />
-    <Compile Include="Options\UpdateOptions.cs" />
+    <Compile Include="RbtCommand.cs" />
+    <Compile Include="IRbtCommand.cs" />
+    <Compile Include="Options\DiffGeneration\Include.cs" />
+    <Compile Include="Options\Fields\ChangeDescription.cs" />
+    <Compile Include="Options\Fields\Description.cs" />
+    <Compile Include="Options\Fields\Summary.cs" />
+    <Compile Include="Options\Fields\TargetGroups.cs" />
+    <Compile Include="Options\Fields\TargetPeople.cs" />
+    <Compile Include="Options\Fields\TestingDone.cs" />
+    <Compile Include="Options\IHasShortForm.cs" />
+    <Compile Include="Options\IHasValue.cs" />
+    <Compile Include="Options\IHasLongForm.cs" />
+    <Compile Include="Options\IOption.cs" />
+    <Compile Include="Options\OptionPrinter.cs" />
+    <Compile Include="Options\Posting\Open.cs" />
+    <Compile Include="Options\Posting\Publish.cs" />
+    <Compile Include="Options\Posting\ReviewRequestId.cs" />
+    <Compile Include="Options\Posting\Update.cs" />
+    <Compile Include="Options\Repository\Repository.cs" />
+    <Compile Include="Options\Server\Server.cs" />
+    <Compile Include="Options\Subversion\SvnShowCopiesAsAdds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

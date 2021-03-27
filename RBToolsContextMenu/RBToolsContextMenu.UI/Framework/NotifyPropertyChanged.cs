@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using RBToolsContextMenu.UI.Annotations;
+using RBToolsContextMenu.UI.Properties;
 
 namespace RBToolsContextMenu.UI.Framework
 {
