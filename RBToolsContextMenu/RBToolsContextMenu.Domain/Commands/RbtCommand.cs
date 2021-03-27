@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using RBToolsContextMenu.Domain.Markers;
 using RBToolsContextMenu.Domain.Options;
+using RBToolsContextMenu.Domain.SeedWork;
 
 namespace RBToolsContextMenu.Domain.Commands
 {

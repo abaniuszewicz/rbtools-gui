@@ -1,4 +1,4 @@
-﻿namespace RBToolsContextMenu.Domain.Markers
+﻿namespace RBToolsContextMenu.Domain.SeedWork
 {
     public interface IPrintable
     {
