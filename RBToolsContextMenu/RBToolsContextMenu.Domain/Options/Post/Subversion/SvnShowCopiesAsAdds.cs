@@ -2,7 +2,7 @@
 
 namespace RBToolsContextMenu.Domain.Options.Post.Subversion
 {
-    public class SvnShowCopiesAsAdds : Option, IHasLongForm, IHasValue
+    public class SvnShowCopiesAsAdds : RbtOption, IHasLongForm, IHasValue
     {
         public string LongForm { get; } = "svn-show-copies-as-adds";
         public string Value { get; }

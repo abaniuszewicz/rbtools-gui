@@ -1,9 +1,8 @@
 ﻿using System;
-using RBToolsContextMenu.Domain.SeedWork;
 
 namespace RBToolsContextMenu.Domain.Options
 {
-    public abstract class Option : IOption, IPrintable
+    public abstract class RbtOption : IRbtOption
     {
         public string Print()
         {

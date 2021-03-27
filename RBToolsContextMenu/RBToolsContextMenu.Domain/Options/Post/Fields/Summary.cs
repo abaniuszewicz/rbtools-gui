@@ -2,7 +2,7 @@
 
 namespace RBToolsContextMenu.Domain.Options.Post.Fields
 {
-    public class Summary : Option, IHasLongForm, IHasValue
+    public class Summary : RbtOption, IHasLongForm, IHasValue
     {
         public string LongForm { get; } = "summary";
         public string Value { get; }

@@ -5,10 +5,10 @@ using RBToolsContextMenu.Domain.SeedWork;
 
 namespace RBToolsContextMenu.Domain.Commands
 {
-    public abstract class RbtCommand : IRbtCommand, IPrintable
+    public abstract class RbtCommand : IRbtCommand
     {
         public abstract string Command { get; }
-        public abstract IEnumerable<IOption> Options { get; }
+        public abstract IEnumerable<IRbtOption> Options { get; }
         
         public string Print()
         {

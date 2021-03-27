@@ -2,7 +2,7 @@
 
 namespace RBToolsContextMenu.Domain.Options.Post.DiffGeneration
 {
-    public class Include : Option, IHasLongForm, IHasShortForm, IHasValue
+    public class Include : RbtOption, IHasLongForm, IHasShortForm, IHasValue
     {
         public string LongForm { get; } = "include";
         public string ShortForm { get; } = "I";

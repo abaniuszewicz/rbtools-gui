@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace RBToolsContextMenu.Domain.Options.Post.Fields
 {
-    public class TargetPeople : Option, IHasLongForm, IHasValue
+    public class TargetPeople : RbtOption, IHasLongForm, IHasValue
     {
         public string LongForm { get; } = "target-people";
         public string Value { get; }

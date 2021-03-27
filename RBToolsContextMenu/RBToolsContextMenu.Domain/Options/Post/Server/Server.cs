@@ -2,7 +2,7 @@
 
 namespace RBToolsContextMenu.Domain.Options.Post.Server
 {
-    public class Server : Option, IHasLongForm, IHasValue
+    public class Server : RbtOption, IHasLongForm, IHasValue
     {
         public string LongForm { get; } = "server";
         public string Value { get; }

@@ -2,7 +2,7 @@
 
 namespace RBToolsContextMenu.Domain.Options.Post.Fields
 {
-    public class ChangeDescription : Option, IHasLongForm, IHasShortForm, IHasValue
+    public class ChangeDescription : RbtOption, IHasLongForm, IHasShortForm, IHasValue
     {
         public string LongForm { get; } = "change-description";
         public string ShortForm { get; } = "m";

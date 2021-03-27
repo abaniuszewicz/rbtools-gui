@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace RBToolsContextMenu.Domain.Options.Post.Posting
 {
-    public class ReviewRequestId : Option, IHasLongForm, IHasShortForm, IHasValue
+    public class ReviewRequestId : RbtOption, IHasLongForm, IHasShortForm, IHasValue
     {
         public string LongForm { get; } = "review-request-id";
         public string ShortForm { get; } = "r";

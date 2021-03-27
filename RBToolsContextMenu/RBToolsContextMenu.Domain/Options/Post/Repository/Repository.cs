@@ -2,7 +2,7 @@
 
 namespace RBToolsContextMenu.Domain.Options.Post
 {
-    public class Repository : Option, IHasLongForm, IHasValue
+    public class Repository : RbtOption, IHasLongForm, IHasValue
     {
         public string LongForm { get; } = "repository";
         public string Value { get; }

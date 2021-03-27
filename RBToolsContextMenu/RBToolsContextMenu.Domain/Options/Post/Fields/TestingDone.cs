@@ -2,7 +2,7 @@
 
 namespace RBToolsContextMenu.Domain.Options.Post.Fields
 {
-    public class TestingDone : Option, IHasLongForm, IHasValue
+    public class TestingDone : RbtOption, IHasLongForm, IHasValue
     {
         public string LongForm { get; } = "testing-done";
         public string Value { get; }
