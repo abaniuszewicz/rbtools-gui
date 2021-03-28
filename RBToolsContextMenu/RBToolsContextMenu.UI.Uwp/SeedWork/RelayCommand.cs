@@ -10,10 +10,10 @@ namespace RBToolsContextMenu.UI.Uwp.SeedWork
     /// <see cref="RaiseCanExecuteChanged"/> needs to be called whenever
     /// <see cref="CanExecute"/> is expected to return a different value.
     /// </summary>
-    public class RelayCommand : ICommand
+    public class RelayCommand<T> : ICommand
     {
-        private readonly Action _execute;
-        private readonly Func<bool> _canExecute;
+        private readonly Action<T> _execute;
+        private readonly Predicate<T> _canExecute;
 
         /// <summary>
         /// Raised when RaiseCanExecuteChanged is called.
@@ -25,7 +25,7 @@ namespace RBToolsContextMenu.UI.Uwp.SeedWork
         /// </summary>
         /// <param name="execute">The execution logic.</param>
         /// <param name="canExecute">The execution status logic.</param>
-        public RelayCommand(Action execute, Func<bool> canExecute = null)
+        public RelayCommand(Action<T> execute, Predicate<T> canExecute = null)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
@@ -40,7 +40,7 @@ namespace RBToolsContextMenu.UI.Uwp.SeedWork
         /// <returns>true if this command can be executed; otherwise, false.</returns>
         public bool CanExecute(object parameter)
         {
-            return _canExecute?.Invoke() ?? true;
+            return _canExecute == null || _canExecute((T)parameter);
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace RBToolsContextMenu.UI.Uwp.SeedWork
         /// </param>
         public void Execute(object parameter)
         {
-            _execute();
+            _execute((T)parameter);
         }
 
         /// <summary>
