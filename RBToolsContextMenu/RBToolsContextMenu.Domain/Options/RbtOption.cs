@@ -12,7 +12,7 @@ namespace RBToolsContextMenu.Domain.Options
                 IHasShortForm form => $"-{form.ShortForm}",
                 IHasLongForm form and IHasValue value => $"--{form.LongForm} {value.Value}",
                 IHasLongForm form => $"--{form.LongForm}",
-                _ => throw new InvalidOperationException("This option does not implement any members that could be used for printing."), // HACK: not really proud of this
+                _ => throw new NotImplementedException("This option does not implement any members that could be used for printing."), // HACK: not really proud of this
             };
         }
     }

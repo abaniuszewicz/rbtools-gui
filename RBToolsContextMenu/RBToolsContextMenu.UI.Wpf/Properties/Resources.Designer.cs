@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RBToolsContextMenu.UI.Properties
+namespace RBToolsContextMenu.UI.Wpf.Properties
 {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
@@ -45,7 +45,7 @@ namespace RBToolsContextMenu.UI.Properties
                 if ((resourceMan == null))
                 {
                     global::System.Resources.ResourceManager temp =
-                        new global::System.Resources.ResourceManager("RBToolsContextMenu.UI.Properties.Resources",
+                        new global::System.Resources.ResourceManager("RBToolsContextMenu.UI.Wpf.Properties.Resources",
                             typeof(Resources).Assembly);
                     resourceMan = temp;
                 }

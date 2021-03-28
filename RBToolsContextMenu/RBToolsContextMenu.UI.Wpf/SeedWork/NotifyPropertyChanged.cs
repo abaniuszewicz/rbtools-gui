@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using RBToolsContextMenu.UI.Properties;
+using RBToolsContextMenu.UI.Wpf.Properties;
 
-namespace RBToolsContextMenu.UI.SeedWork
+namespace RBToolsContextMenu.UI.Wpf.SeedWork
 {
     public class NotifyPropertyChanged : INotifyPropertyChanged
     {

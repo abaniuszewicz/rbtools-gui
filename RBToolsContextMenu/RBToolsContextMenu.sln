@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RBToolsContextMenu.Domain",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RBToolsContextMenu.Application", "RBToolsContextMenu.Application\RBToolsContextMenu.Application.csproj", "{5E560B6B-0572-4B08-8A69-FE88316F2849}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RBToolsContextMenu.UI", "RBToolsContextMenu.UI\RBToolsContextMenu.UI.csproj", "{B6990C20-C540-497E-917C-001BA763C000}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RBToolsContextMenu.UI.Wpf", "RBToolsContextMenu.UI.Wpf\RBToolsContextMenu.UI.Wpf.csproj", "{B6990C20-C540-497E-917C-001BA763C000}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

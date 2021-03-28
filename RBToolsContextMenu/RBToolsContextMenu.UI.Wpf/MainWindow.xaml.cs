@@ -1,4 +1,4 @@
-﻿namespace RBToolsContextMenu.UI
+﻿namespace RBToolsContextMenu.UI.Wpf
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

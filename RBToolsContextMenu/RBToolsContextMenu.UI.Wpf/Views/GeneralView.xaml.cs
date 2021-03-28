@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace RBToolsContextMenu.UI.Views
+namespace RBToolsContextMenu.UI.Wpf.Views
 {
     public partial class GeneralView : UserControl
     {
