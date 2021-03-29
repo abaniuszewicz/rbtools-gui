@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:viewmodels="using:RBToolsContextMenu.UI.Uwp.ViewModels"
+    xmlns:converters="using:RBToolsContextMenu.UI.Uwp.Converters"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     NavigationCacheMode="Enabled">
@@ -15,6 +16,7 @@
     </Page.DataContext>
 
     <Page.Resources>
+        <converters:ReviewTypeToBooleanConverter x:Key="ReviewTypeToBooleanConverter"/>
         <Style TargetType="TextBox" x:Key="TextBoxStyle">
             <Setter Property="IsSpellCheckEnabled" Value="True"/>
             <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
@@ -55,66 +57,108 @@
 
         <Grid Grid.Row="1" Grid.Column="1"
               Grid.RowSpan="3"
-              Padding="15">
+              Padding="10">
+            
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <CheckBox Content="Open in browser" 
-                      IsChecked="{Binding OpenInBrowser}"
-                      Grid.Row="0"/>
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-            <CheckBox Content="Publish"
-                      IsChecked="{Binding Publish}"
-                      Grid.Row="1"/>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-            <CheckBox Content="SVN show copies as adds"
-                      IsChecked="{Binding SvnShowCopiesAsAdds}"
-                      Grid.Row="2"/>
+                    <ListView Header="Groups"
+                              Grid.Column="0"
+                              SelectionMode="Multiple"
+                              ItemsSource="{Binding Groups}">
+                    </ListView>
 
-            <muxc:RadioButtons Header="Review type"
-                               Grid.Row="3">
-                <RadioButton Content="New"/>
-                <RadioButton Content="Update"/>
-            </muxc:RadioButtons>
+                    <ListView Header="People"
+                              Grid.Column="1"
+                              SelectionMode="Multiple"
+                              ItemsSource="{Binding People}">
+                    </ListView>
+                </Grid>
 
-            <muxc:DropDownButton Content="Groups"
-                                 Grid.Row="4">
-                <muxc:DropDownButton.Flyout>
-                    <Flyout ShowMode="TransientWithDismissOnPointerMoveAway">
-                        <ListView SelectionMode="Multiple">
-                            <ListViewItem Content="Group1"/>
-                            <ListViewItem Content="Group2"/>
-                            <ListViewItem Content="Group3"/>
-                        </ListView>
-                    </Flyout>
-                </muxc:DropDownButton.Flyout>
-            </muxc:DropDownButton>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-            <muxc:DropDownButton Content="People"
-                                 Grid.Row="5">
-                <muxc:DropDownButton.Flyout>
-                    <Flyout ShowMode="TransientWithDismissOnPointerMoveAway">
-                        <ListView SelectionMode="Multiple">
-                            <ListViewItem Content="Person1"/>
-                            <ListViewItem Content="Person2"/>
-                            <ListViewItem Content="Person3"/>
-                            <ListViewItem Content="Person4"/>
-                            <ListViewItem Content="Person5"/>
-                        </ListView>
-                    </Flyout>
-                </muxc:DropDownButton.Flyout>
-            </muxc:DropDownButton>
+                    <muxc:RadioButtons Header="Review type"
+                                   Grid.Column="0">
+                        <RadioButton Content="New" 
+                                 IsChecked="{Binding ReviewType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ReviewTypeToBooleanConverter}}"/>
+                        <RadioButton Content="Update"
+                                 IsChecked="{Binding ReviewType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ReviewTypeToBooleanConverter}, ConverterParameter=invert}"/>
+                    </muxc:RadioButtons>
+
+                    <StackPanel Grid.Column="1">
+
+                        <TextBox Header="Review id"
+                             IsEnabled="{Binding ReviewType, Converter={StaticResource ReviewTypeToBooleanConverter}, ConverterParameter=invert}"
+                             PlaceholderText="123"
+                             Text="{Binding ReviewId}"/>
+                        <TextBox Header="Changes"
+                             IsEnabled="{Binding ReviewType, Converter={StaticResource ReviewTypeToBooleanConverter}, ConverterParameter=invert}"
+                             PlaceholderText="What has been updated"
+                             AcceptsReturn="True"
+                             Height="150"
+                             Text="{Binding UpdateDescription, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+                </Grid>
+
+                <TextBox Header="Repository"
+                     Grid.Row="3"
+                     Text="{Binding Repository, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     PlaceholderText="Repository name"/>
+
+                <TextBox Header="Server"
+                     Grid.Row="4"
+                     Text="{Binding Server, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     PlaceholderText="Server url"/>
+
+                <CheckBox Content="Open in browser" 
+                      IsChecked="{Binding OpenInBrowser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      Grid.Row="5"/>
+
+                <CheckBox Content="Publish"
+                      IsChecked="{Binding Publish, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      Grid.Row="6"/>
+
+                <CheckBox Content="SVN show copies as adds"
+                      IsChecked="{Binding SvnShowCopiesAsAdds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      Grid.Row="7"/>
+            </Grid>
+            
+            <Button Content="Post"
+                    Command="{Binding PostCommand}"
+                    Style="{StaticResource AccentButtonStyle}"
+                    Grid.Row="1"
+                    Width="100" Height="50"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Margin="50"/>
 
         </Grid>
         
-        
+
 
     </Grid>
 </Page>

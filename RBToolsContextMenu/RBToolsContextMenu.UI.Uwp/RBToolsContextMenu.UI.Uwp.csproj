@@ -120,6 +120,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\InvertBooleanConverter.cs" />
+    <Compile Include="Converters\ReviewTypeToBooleanConverter.cs" />
+    <Compile Include="Models\Enums.cs" />
     <Compile Include="ViewModels\SendViewModel.cs" />
     <Compile Include="Views\CommunicationView.xaml.cs">
       <DependentUpon>CommunicationView.xaml</DependentUpon>
@@ -189,9 +192,7 @@
       <Version>4.5.0</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
