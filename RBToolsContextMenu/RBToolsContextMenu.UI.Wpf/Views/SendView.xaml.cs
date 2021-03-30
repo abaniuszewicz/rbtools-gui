@@ -2,9 +2,9 @@
 
 namespace RBToolsContextMenu.UI.Wpf.Views
 {
-    public partial class GeneralView : UserControl
+    public partial class SendView : Page
     {
-        public GeneralView()
+        public SendView()
         {
             InitializeComponent();
         }

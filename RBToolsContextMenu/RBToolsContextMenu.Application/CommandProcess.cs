@@ -49,7 +49,9 @@ namespace RBToolsContextMenu.Application
         public void Send(string message)
         {
             MessageSent?.Invoke(this, message);
+            _process.Start();
             _process.StandardInput.WriteLineAsync(message);
+            _process.Close();
         }
 
         public void Dispose()

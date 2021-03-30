@@ -7,7 +7,6 @@ namespace RBToolsContextMenu.Application
     public abstract class CommandIssuer : IDisposable
     {
         private readonly CommandProcess _commandProcess;
-        private readonly IRbtCommand _command;
         
         public event EventHandler<MessageEventArgs> MessageSent
         {
@@ -21,15 +20,14 @@ namespace RBToolsContextMenu.Application
             remove => _commandProcess.MessageReceived -= value;
         } 
 
-        protected CommandIssuer(IRbtCommand command)
+        protected CommandIssuer()
         {
             _commandProcess = new CommandProcess();
-            _command = command;
         }
 
-        public void Issue()
+        public void Issue(IRbtCommand command)
         {
-            var message = _command.Print();
+            var message = command.Print();
             _commandProcess.Send(message);
         }
 

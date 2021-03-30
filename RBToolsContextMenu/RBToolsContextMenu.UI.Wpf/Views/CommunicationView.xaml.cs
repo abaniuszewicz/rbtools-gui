@@ -2,9 +2,9 @@
 
 namespace RBToolsContextMenu.UI.Wpf.Views
 {
-    public partial class ConsoleView : UserControl
+    public partial class CommunicationView : Page
     {
-        public ConsoleView()
+        public CommunicationView()
         {
             InitializeComponent();
         }
