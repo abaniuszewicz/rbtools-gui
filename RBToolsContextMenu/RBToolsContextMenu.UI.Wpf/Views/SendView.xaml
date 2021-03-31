@@ -5,68 +5,55 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:viewmodels="clr-namespace:RBToolsContextMenu.UI.Wpf.ViewModels"
       xmlns:converters="clr-namespace:RBToolsContextMenu.UI.Wpf.Converters"
-      xmlns:ui="http://schemas.modernwpf.com/2019"
+      xmlns:ui="http://schemas.modernwpf.com/2019" 
+      d:DataContext="{d:DesignInstance Type=viewmodels:SendViewModel}"
       mc:Ignorable="d"
       KeepAlive="True"
       Title="SendView">
 
-    <Page.DataContext>
-        <viewmodels:SendViewModel/>
-    </Page.DataContext>
-
     <Page.Resources>
         <converters:InvertBooleanConverter x:Key="InvertBooleanConverter"/>
         <converters:ReviewTypeToBooleanConverter x:Key="ReviewTypeToBooleanConverter"/>
-        <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}" x:Key="TextBoxStyle">
-            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-        </Style>
     </Page.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*" MaxWidth="400"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <TextBox Grid.Row="0" Grid.Column="0"
                  Grid.ColumnSpan="2"
                  ui:ControlHelper.Header="Summary"
-                 ui:ControlHelper.PlaceholderText="[new/modification] What has been changed"
+                 ui:ControlHelper.PlaceholderText="[new/modification] Short summary"
                  Text="{Binding Summary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <TextBox Style="{StaticResource TextBoxStyle}"
-                 Grid.Row="1" Grid.Column="0"
+        <TextBox Grid.Row="1" Grid.Column="0"
                  ui:ControlHelper.Header="Description"
                  ui:ControlHelper.PlaceholderText="What was the purpose of this modification"
                  AcceptsReturn="True"
+                 TextWrapping="Wrap"
                  Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <TextBox Style="{StaticResource TextBoxStyle}"
-                 Grid.Row="2" Grid.Column="0"
+        <TextBox Grid.Row="2" Grid.Column="0"
                  ui:ControlHelper.Header="Testing done"
                  ui:ControlHelper.PlaceholderText="What has been done in order to verify whether requirements have been fullfilled"
                  AcceptsReturn="True"
+                 TextWrapping="Wrap"
                  Text="{Binding TestingDone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <Grid Grid.Row="1" Grid.Column="1"
-              Grid.RowSpan="3">
+        <Border Grid.Row="1" Grid.Column="1"
+                Grid.RowSpan="3"
+                Padding="10">
+            <Grid>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <Grid Grid.Row="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -74,38 +61,53 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <Grid Grid.Row="1">
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
+                    <TextBlock Text="Groups"
+                               Grid.Column="0"
+                               Grid.Row="0"/>
+                    <TextBlock Text="People"
+                               Grid.Column="1"
+                               Grid.Row="0"/>
+
                     <ui:ListView ui:ControlHelper.Header="Groups"
-                              Grid.Column="0"
-                              SelectionMode="Multiple"
-                              ItemsSource="{Binding Groups}">
+                                 Grid.Column="0"
+                                 Grid.Row="1"
+                                 SelectionMode="Multiple"
+                                 ItemsSource="{Binding Groups}"
+                                 ScrollViewer.CanContentScroll="False">
                         <ui:ListView.Resources>
                             <Style TargetType="{x:Type ui:ListViewItem}">
-                                <Setter Property="Content" Value="{Binding Text, Mode=TwoWay}"/>
+                                <Setter Property="Content" Value="{Binding Display, Mode=TwoWay}"/>
                                 <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
                             </Style>
                         </ui:ListView.Resources>
                     </ui:ListView>
 
                     <ui:ListView ui:ControlHelper.Header="People"
-                              Grid.Column="1"
-                              SelectionMode="Multiple"
-                              ItemsSource="{Binding People}">
+                                 Grid.Column="1"
+                                 Grid.Row="1"
+                                 SelectionMode="Multiple"
+                                 ItemsSource="{Binding People}"
+                                 ScrollViewer.CanContentScroll="False">
                         <ui:ListView.Resources>
                             <Style TargetType="{x:Type ui:ListViewItem}">
-                                <Setter Property="Content" Value="{Binding Text, Mode=TwoWay}"/>
+                                <Setter Property="Content" Value="{Binding Display, Mode=TwoWay}"/>
                                 <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
                             </Style>
                         </ui:ListView.Resources>
                     </ui:ListView>
                 </Grid>
 
-                <Grid Grid.Row="2">
+                <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
@@ -135,37 +137,37 @@
                 </Grid>
 
                 <TextBox ui:ControlHelper.Header="Repository"
-                         Grid.Row="3"
+                         Grid.Row="2"
                          Text="{Binding Repository, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          ui:ControlHelper.PlaceholderText="Repository name"/>
 
                 <TextBox ui:ControlHelper.Header="Server"
-                         Grid.Row="4"
+                         Grid.Row="3"
                          Text="{Binding Server, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          ui:ControlHelper.PlaceholderText="Server url"/>
 
-                <CheckBox Content="Open in browser" 
-                          IsChecked="{Binding OpenInBrowser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                          Grid.Row="5"/>
+                <StackPanel Grid.Row="4"
+                            Margin="0,20,0,0">
+                    <CheckBox Content="Open in browser" 
+                              IsChecked="{Binding OpenInBrowser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                <CheckBox Content="Publish"
-                          IsChecked="{Binding Publish, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                          Grid.Row="6"/>
+                    <CheckBox Content="Publish"
+                              IsChecked="{Binding Publish, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                <CheckBox Content="SVN show copies as adds"
-                          IsChecked="{Binding SvnShowCopiesAsAdds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                          Grid.Row="7"/>
+                    <CheckBox Content="SVN show copies as adds"
+                              IsChecked="{Binding SvnShowCopiesAsAdds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+
+                <Button Content="Post"
+                        Command="{Binding PostCommand}"
+                        Style="{StaticResource AccentButtonStyle}"
+                        Grid.Row="5"
+                        Grid.Column="1"
+                        Width="100" Height="50"
+                        Margin="20"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"/>
             </Grid>
-
-            <Button Content="Post"
-                    Command="{Binding PostCommand}"
-                    Style="{StaticResource AccentButtonStyle}"
-                    Grid.Row="1"
-                    Width="100" Height="50"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Bottom"
-                    Margin="50"/>
-
-        </Grid>
+        </Border>
     </Grid>
 </Page>

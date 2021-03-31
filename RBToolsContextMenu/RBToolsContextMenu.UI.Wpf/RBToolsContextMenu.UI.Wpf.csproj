@@ -57,9 +57,10 @@
     </ApplicationDefinition>
     <Compile Include="Converters\InvertBooleanConverter.cs" />
     <Compile Include="Converters\ReviewTypeToBooleanConverter.cs" />
+    <Compile Include="Mapping\Mapper.cs" />
     <Compile Include="Models\Enums.cs" />
-    <Compile Include="Models\PostCommandIssuer.cs" />
     <Compile Include="Models\SelectableText.cs" />
+    <Compile Include="Settings\SettingsLoader.cs" />
     <Compile Include="ViewModels\CommunicationViewModel.cs" />
     <Compile Include="ViewModels\SendViewModel.cs" />
     <Compile Include="Views\CommunicationView.xaml.cs">
@@ -116,6 +117,9 @@
   <ItemGroup>
     <PackageReference Include="ModernWpfUI">
       <Version>0.9.4</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.1</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

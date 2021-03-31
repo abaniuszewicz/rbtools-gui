@@ -4,31 +4,31 @@ namespace RBToolsContextMenu.UI.Wpf.Models
 {
     public class SelectableText : NotifyPropertyChanged
     {
-        private string _text;
+        private string _display;
+        private string _value;
         private bool _isSelected;
 
-        public SelectableText(string text)
+        public string Display
         {
-            Text = text;
-        }
-
-        public SelectableText(string text, bool isSelected)
-        {
-            Text = text;
-            IsSelected = isSelected;
-        }
-
-        public string Text
-        {
-            get => _text;
+            get => _display;
             set
             {
-                if (_text == value) return;
-                _text = value;
+                if (_display == value) return;
+                _display = value;
                 OnPropertyChanged();
             }
         }
 
+        public string Value
+        {
+            get => _value;
+            set
+            {
+                if (_value == value) return;
+                _value = value;
+                OnPropertyChanged();
+            }
+        }
 
         public bool IsSelected
         {
@@ -40,6 +40,5 @@ namespace RBToolsContextMenu.UI.Wpf.Models
                 OnPropertyChanged();
             }
         }
-
     }
 }

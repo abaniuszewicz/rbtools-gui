@@ -8,12 +8,6 @@ namespace RBToolsContextMenu.Application
     {
         private readonly CommandProcess _commandProcess;
         
-        public event EventHandler<MessageEventArgs> MessageSent
-        {
-            add => _commandProcess.MessageSent += value;
-            remove => _commandProcess.MessageSent -= value;
-        } 
-        
         public event EventHandler<MessageEventArgs> MessageReceived
         {
             add => _commandProcess.MessageReceived += value;
@@ -33,7 +27,7 @@ namespace RBToolsContextMenu.Application
 
         public void Dispose()
         {
-            _commandProcess?.Dispose();
+           // _commandProcess?.Dispose();
         }
     }
 }

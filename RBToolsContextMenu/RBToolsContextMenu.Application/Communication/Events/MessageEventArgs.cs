@@ -8,7 +8,7 @@ namespace RBToolsContextMenu.Application.Communication.Events
 
         public MessageEventArgs(string message)
         {
-            Message = message ?? throw new ArgumentNullException(nameof(message));
+            Message = message;
         }
         
         public static implicit operator MessageEventArgs(string message)

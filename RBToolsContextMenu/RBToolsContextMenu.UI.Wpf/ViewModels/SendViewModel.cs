@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using RBToolsContextMenu.Application.Communication.DTO;
+using RBToolsContextMenu.UI.Wpf.Mapping;
+using RBToolsContextMenu.Application;
 
 namespace RBToolsContextMenu.UI.Wpf.ViewModels
 {
@@ -20,16 +22,6 @@ namespace RBToolsContextMenu.UI.Wpf.ViewModels
         private bool _openInBrowser;
         private bool _publish;
         private bool _svnShowCopiesAsAdds;
-
-        public SendViewModel()
-        {
-            Groups.Add(new SelectableText("Developers"));
-            Groups.Add(new SelectableText("Testers"));
-
-            People.Add(new SelectableText("John", true));
-            People.Add(new SelectableText("Paul"));
-        }
-
         public string Summary
         {
             get => _summary;
@@ -156,43 +148,8 @@ namespace RBToolsContextMenu.UI.Wpf.ViewModels
             }
         }
 
-        public PostCommandIssuer Issuer { get; set; } = PostCommandIssuer.Instance;
+        public PostCommandIssuer Issuer { get; set; }
 
-        public ICommand PostCommand => new RelayCommand<RbtPostDto>(o => Issuer.Issue(CreateDto()));
-
-        private RbtPostDto CreateDto()
-        {
-            var dto = new RbtPostDto()
-            {
-                OpenBrowser = OpenInBrowser,
-                Publish = Publish,
-                SvnShowCopiesAsAdds = SvnShowCopiesAsAdds,
-            };
-
-            if (!string.IsNullOrWhiteSpace(Description))
-                dto.Description = Description;
-            if (!string.IsNullOrWhiteSpace(Summary))
-                dto.Summary = Summary;
-            if (!string.IsNullOrWhiteSpace(TestingDone))
-                dto.TestingDone = TestingDone;
-            if (!string.IsNullOrWhiteSpace(Repository))
-                dto.Repository = Repository;
-            if (!string.IsNullOrWhiteSpace(Server))
-                dto.Server = Server;
-
-            dto.TargetGroups = Groups.Where(g => g.IsSelected).Select(g => g.Text);
-            dto.TargetPeople = Groups.Where(p => p.IsSelected).Select(p => p.Text);
-
-            if (ReviewType == ReviewType.Update)
-            {
-                dto.Update = true;
-                if (!string.IsNullOrWhiteSpace(UpdateDescription))
-                    dto.UpdateDescription = UpdateDescription;
-                if (!string.IsNullOrWhiteSpace(ReviewId) && int.TryParse(ReviewId, out int reviewId))
-                    dto.ReviewRequestId = reviewId;
-            }
-
-            return dto;
-        }
+        public ICommand PostCommand => new RelayCommand<RbtPostDto>(o => Issuer.Issue(Mapper.CreateDto(this)));
     }
 }

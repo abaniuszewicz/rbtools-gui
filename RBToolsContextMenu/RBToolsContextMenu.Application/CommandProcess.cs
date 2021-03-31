@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading;
 using RBToolsContextMenu.Application.Communication.Events;
 
 namespace RBToolsContextMenu.Application
 {
     internal class CommandProcess : IDisposable
     {
+        private static readonly SemaphoreSlim _semaphore = new(1, 1);
         private Process _process;
 
-        public event EventHandler<MessageEventArgs> MessageSent;
+
         public event EventHandler<MessageEventArgs> MessageReceived; 
         
         public CommandProcess()
@@ -32,6 +34,10 @@ namespace RBToolsContextMenu.Application
                 },
                 EnableRaisingEvents = true,
             };
+
+            _process.Start();
+            _process.BeginOutputReadLine();
+            _process.BeginErrorReadLine();
         }
 
         private void WireMessageEvents()
@@ -46,12 +52,11 @@ namespace RBToolsContextMenu.Application
                 => MessageReceived?.Invoke(this, "Command process disposed.");
         }
 
-        public void Send(string message)
+        public async void Send(string message)
         {
-            MessageSent?.Invoke(this, message);
-            _process.Start();
-            _process.StandardInput.WriteLineAsync(message);
-            _process.Close();
+            await _semaphore.WaitAsync();
+            await _process.StandardInput.WriteLineAsync(message);
+            _semaphore.Release();
         }
 
         public void Dispose()
