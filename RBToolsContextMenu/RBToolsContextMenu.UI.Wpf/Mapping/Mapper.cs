@@ -15,8 +15,8 @@ namespace RBToolsContextMenu.UI.Wpf.Mapping
                 OpenBrowser = vm.OpenInBrowser,
                 Publish = vm.Publish,
                 SvnShowCopiesAsAdds = vm.SvnShowCopiesAsAdds,
-                TargetGroups = vm.Groups.Where(g => g.IsSelected).Select(g => g.Display),
-                TargetPeople = vm.People.Where(p => p.IsSelected).Select(p => p.Display),
+                TargetGroups = vm.Groups.Where(g => g.IsSelected).Select(g => g.Value),
+                TargetPeople = vm.People.Where(p => p.IsSelected).Select(p => p.Value),
                 IncludePaths = Environment.GetCommandLineArgs().Skip(1),
             };
 
