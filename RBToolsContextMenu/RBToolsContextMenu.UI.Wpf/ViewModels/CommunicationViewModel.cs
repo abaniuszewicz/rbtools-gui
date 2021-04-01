@@ -23,7 +23,7 @@ namespace RBToolsContextMenu.UI.Wpf.ViewModels
 
         private void AppendMessage(object sender, MessageEventArgs args)
         {
-            string message = args.Message;
+            var message = args.Message;
             if (string.IsNullOrWhiteSpace(message))
                 return;
 

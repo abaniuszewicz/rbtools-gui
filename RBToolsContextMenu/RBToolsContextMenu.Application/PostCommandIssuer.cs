@@ -13,7 +13,7 @@ namespace RBToolsContextMenu.Application
 
         public void Issue(RbtPostDto dto)
         {
-            IRbtCommand command = dto.AsPostCommand();
+            var command = dto.AsPostCommand();
             Issue(command);
         }
     }

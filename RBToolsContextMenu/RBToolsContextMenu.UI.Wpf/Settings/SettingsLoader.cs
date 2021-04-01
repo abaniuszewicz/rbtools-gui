@@ -8,8 +8,8 @@ namespace RBToolsContextMenu.UI.Wpf.Settings
     {
         public static SendViewModel LoadSendViewModel()
         {
-            string path = "settings.json";
-            string content = File.ReadAllText(path);
+            var path = "settings.json";
+            var content = File.ReadAllText(path);
             return JsonConvert.DeserializeObject<SendViewModel>(content);
         }
     }

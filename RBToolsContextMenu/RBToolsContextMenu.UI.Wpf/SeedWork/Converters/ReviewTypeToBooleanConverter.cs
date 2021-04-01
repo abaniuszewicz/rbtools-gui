@@ -1,14 +1,17 @@
-﻿using RBToolsContextMenu.UI.Wpf.Models;
-using System;
+﻿using System;
 using System.Globalization;
 using System.Windows.Data;
+using RBToolsContextMenu.UI.Wpf.Models;
 
-namespace RBToolsContextMenu.UI.Wpf.Converters
+namespace RBToolsContextMenu.UI.Wpf.SeedWork.Converters
 {
     public class ReviewTypeToBooleanConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (value == null)
+                return null;
+            
             var type = (ReviewType)value;
             var result = type switch
             {
@@ -25,11 +28,14 @@ namespace RBToolsContextMenu.UI.Wpf.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (value == null)
+                return null;
+            
             var result = (bool)value
                 ? ReviewType.New
                 : ReviewType.Update;
 
-            bool invert = parameter as string is "invert";
+            var invert = parameter as string is "invert";
             return result switch
             {
                 ReviewType.New when invert => ReviewType.Update,

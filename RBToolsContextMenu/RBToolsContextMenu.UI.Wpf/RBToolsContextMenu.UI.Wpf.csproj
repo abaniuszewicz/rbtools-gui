@@ -55,9 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Converters\InvertBooleanConverter.cs" />
-    <Compile Include="Converters\ReviewTypeToBooleanConverter.cs" />
-    <Compile Include="Mapping\Mapper.cs" />
+    <Compile Include="SeedWork\Converters\InvertBooleanConverter.cs" />
+    <Compile Include="SeedWork\Converters\ReviewTypeToBooleanConverter.cs" />
+    <Compile Include="SeedWork\Mapping\Mapper.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\SelectableText.cs" />
     <Compile Include="Settings\SettingsLoader.cs" />

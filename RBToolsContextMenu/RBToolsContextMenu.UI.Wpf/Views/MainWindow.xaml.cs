@@ -5,11 +5,9 @@ using ModernWpf.Controls;
 using RBToolsContextMenu.Application;
 using RBToolsContextMenu.UI.Wpf.Settings;
 using RBToolsContextMenu.UI.Wpf.ViewModels;
-using RBToolsContextMenu.UI.Wpf.Views;
-
 using WindowsControls = System.Windows.Controls;
 
-namespace RBToolsContextMenu.UI.Wpf
+namespace RBToolsContextMenu.UI.Wpf.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -23,7 +21,7 @@ namespace RBToolsContextMenu.UI.Wpf
         {
             InitializeComponent();
             _postCommandIssuer = new();
-            SendViewModel sendViewModel = SettingsLoader.LoadSendViewModel();
+            var sendViewModel = SettingsLoader.LoadSendViewModel();
             sendViewModel.Issuer = _postCommandIssuer;
 
             _navigationItemToDestinationType = new (NavigationViewItemBase, WindowsControls.Page)[]
@@ -53,13 +51,13 @@ namespace RBToolsContextMenu.UI.Wpf
             Frame.GoBack();
         }
 
-        private void Frame_ContentRendered(object sender, EventArgs e)
+        private void Frame_ContentRendered(object sender, EventArgs args)
         {
             var navigationItem = _navigationItemToDestinationType.FirstOrDefault(dict => dict.destination == Frame.Content).NavigationItem;
             NavigationView.SelectedItem = navigationItem ?? throw new InvalidOperationException("Failed to determine selected item.");
         }
 
-        private void Window_Closed(object sender, EventArgs e)
+        private void Window_Closed(object sender, EventArgs args)
         {
             Dispose();
         }

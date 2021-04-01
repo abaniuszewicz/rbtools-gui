@@ -4,8 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using RBToolsContextMenu.Application.Communication.DTO;
-using RBToolsContextMenu.UI.Wpf.Mapping;
 using RBToolsContextMenu.Application;
+using RBToolsContextMenu.UI.Wpf.SeedWork.Mapping;
 
 namespace RBToolsContextMenu.UI.Wpf.ViewModels
 {
@@ -22,6 +22,7 @@ namespace RBToolsContextMenu.UI.Wpf.ViewModels
         private bool _openInBrowser;
         private bool _publish;
         private bool _svnShowCopiesAsAdds;
+        
         public string Summary
         {
             get => _summary;
@@ -55,9 +56,9 @@ namespace RBToolsContextMenu.UI.Wpf.ViewModels
             }
         }
 
-        public ObservableCollection<SelectableText> Groups { get; } = new ObservableCollection<SelectableText>();
+        public ObservableCollection<SelectableText> Groups { get; } = new();
 
-        public ObservableCollection<SelectableText> People { get; } = new ObservableCollection<SelectableText>();
+        public ObservableCollection<SelectableText> People { get; } = new();
 
         public ReviewType ReviewType
         {

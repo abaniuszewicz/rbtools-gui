@@ -1,10 +1,10 @@
-﻿using RBToolsContextMenu.Application.Communication.DTO;
+﻿using System;
+using System.Linq;
+using RBToolsContextMenu.Application.Communication.DTO;
 using RBToolsContextMenu.UI.Wpf.Models;
 using RBToolsContextMenu.UI.Wpf.ViewModels;
-using System;
-using System.Linq;
 
-namespace RBToolsContextMenu.UI.Wpf.Mapping
+namespace RBToolsContextMenu.UI.Wpf.SeedWork.Mapping
 {
     public static class Mapper
     {
@@ -36,7 +36,7 @@ namespace RBToolsContextMenu.UI.Wpf.Mapping
                 dto.Update = true;
                 if (!string.IsNullOrWhiteSpace(vm.UpdateDescription))
                     dto.UpdateDescription = vm.UpdateDescription;
-                if (!string.IsNullOrWhiteSpace(vm.ReviewId) && int.TryParse(vm.ReviewId, out int reviewId))
+                if (!string.IsNullOrWhiteSpace(vm.ReviewId) && int.TryParse(vm.ReviewId, out var reviewId))
                     dto.ReviewRequestId = reviewId;
             }
 
