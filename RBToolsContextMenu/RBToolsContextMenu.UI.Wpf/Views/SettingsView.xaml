@@ -24,7 +24,7 @@
             <Setter Property="GridLinesVisibility" Value="All"/>
             <Setter Property="AutoGenerateColumns" Value="False"/>
             <Setter Property="HeadersVisibility" Value="Column"/>
-            <Setter Property="Margin" Value="5"/>
+            <Setter Property="MaxHeight" Value="600"/>
         </Style>
     </Page.Resources>
     
@@ -38,58 +38,114 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel MaxWidth="300">
-            <TextBox ui:ControlHelper.Header="Repository root"
-                     ui:ControlHelper.PlaceholderText="c:\svn\path"
-                     Text="{Binding RepositoryRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBox ui:ControlHelper.Header="Repository url"
-                     ui:ControlHelper.PlaceholderText="http://reviewboard.at.my.server"
-                     Text="{Binding RepositoryUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBox ui:ControlHelper.Header="Repository name"
-                     ui:ControlHelper.PlaceholderText="Name of your repository"
-                     Text="{Binding RepositoryName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        </StackPanel>
-
-        <StackPanel Grid.Row="0" Grid.Column="1">
-            <TextBlock Text="Groups" 
-                       HorizontalAlignment="Center"
-                       Margin="0,0,0,5"/>
+        <GroupBox Header="Groups"
+                  Grid.Row="0" Grid.Column="0"
+                  Margin="30,0,30,0">
             <DataGrid Style="{StaticResource DataGrid}"
                       ItemsSource="{Binding Groups}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Display"
-                                        Binding="{Binding Display}"/>
+                                        Binding="{Binding Display}"
+                                        Width="100">
+                        <DataGridTextColumn.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="ToolTip" Value="Text that will be visible for this item"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
                     <DataGridTextColumn Header="Value"
-                                        Binding="{Binding Value}"/>
-                    <DataGridCheckBoxColumn Header="Selected by default"
-                                            Binding="{Binding IsSelected}"/>
+                                        Binding="{Binding Value}"
+                                        Width="100">
+                        <DataGridTextColumn.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="ToolTip" Value="Actual value of this item"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
+                    <DataGridCheckBoxColumn Header="Selected"
+                                            Binding="{Binding IsSelected}">
+                        <DataGridCheckBoxColumn.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="ToolTip" Value="Whether item will be selected by default"/>
+                            </Style>
+                        </DataGridCheckBoxColumn.CellStyle>
+                    </DataGridCheckBoxColumn>
                 </DataGrid.Columns>
             </DataGrid>
-        </StackPanel>
+        </GroupBox>
 
-        <StackPanel Grid.Row="0" Grid.Column="2">
-            <TextBlock Text="People" 
-                       HorizontalAlignment="Center" 
-                       Margin="0,0,0,5"/>
+        <GroupBox Header="People"
+                  Grid.Row="0" Grid.Column="1"
+                  Margin="30,0,30,0">
             <DataGrid Style="{StaticResource DataGrid}"
                       ItemsSource="{Binding People}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Display"
-                                        Binding="{Binding Display}"/>
+                                        Binding="{Binding Display}"
+                                        Width="100">
+                        <DataGridTextColumn.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="ToolTip" Value="Text that will be visible for this item"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
                     <DataGridTextColumn Header="Value"
-                                        Binding="{Binding Value}"/>
-                    <DataGridCheckBoxColumn Header="Selected by default"
-                                            Binding="{Binding IsSelected}"/>
+                                        Binding="{Binding Value}"
+                                        Width="100">
+                        <DataGridTextColumn.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="ToolTip" Value="Actual value of this item"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
+                    <DataGridCheckBoxColumn Header="Selected"
+                                            Binding="{Binding IsSelected}">
+                        <DataGridCheckBoxColumn.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="ToolTip" Value="Whether item will be selected by default"/>
+                            </Style>
+                        </DataGridCheckBoxColumn.CellStyle>
+                    </DataGridCheckBoxColumn>
                 </DataGrid.Columns>
             </DataGrid>
-        </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Repository settings"
+                  Grid.Row="0" Grid.Column="2"
+                  Margin="30,0,30,0">
+            <StackPanel Width="200">
+                <TextBox ui:ControlHelper.Header="Repository root"
+                         ui:ControlHelper.PlaceholderText="path"
+                         Text="{Binding RepositoryRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox ui:ControlHelper.Header="Repository url"
+                         ui:ControlHelper.PlaceholderText="url"
+                         Text="{Binding RepositoryUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox ui:ControlHelper.Header="Repository name"
+                         ui:ControlHelper.PlaceholderText="name"
+                         Text="{Binding RepositoryName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Default selections"
+                  Grid.Row="0" Grid.Column="3"
+                  Margin="30,0,30,0">
+            <StackPanel MaxWidth="300">
+                <CheckBox Content="Open in browser" 
+                              IsChecked="{Binding OpenInBrowser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <CheckBox Content="Publish"
+                              IsChecked="{Binding Publish, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <CheckBox Content="SVN show copies as adds"
+                              IsChecked="{Binding SvnShowCopiesAsAdds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+        </GroupBox>
 
         <StackPanel Orientation="Horizontal"
-                    Grid.Row="2" Grid.Column="4">
+                    Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5"
+                    HorizontalAlignment="Right">
             <Button Content="Export"
                     ToolTip="Export settings to file"
                     Style="{StaticResource AccentButton}"/>

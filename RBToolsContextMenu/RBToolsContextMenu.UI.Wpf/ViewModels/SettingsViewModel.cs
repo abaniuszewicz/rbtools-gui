@@ -1,11 +1,6 @@
 ﻿using RBToolsContextMenu.UI.Wpf.Models;
 using RBToolsContextMenu.UI.Wpf.SeedWork;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RBToolsContextMenu.UI.Wpf.ViewModels
 {
@@ -14,6 +9,9 @@ namespace RBToolsContextMenu.UI.Wpf.ViewModels
         private string _repositoryRoot;
         private string _repositoryUrl;
         private string _repositoryName;
+        private bool _openInBrowser;
+        private bool _publish;
+        private bool _svnShowCopiesAsAdds;
 
         public ObservableCollection<SelectableText> Groups { get; } = new ObservableCollection<SelectableText>();
 
@@ -48,6 +46,39 @@ namespace RBToolsContextMenu.UI.Wpf.ViewModels
             {
                 if (_repositoryName == value) return;
                 _repositoryName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool OpenInBrowser
+        {
+            get => _openInBrowser;
+            set
+            {
+                if (_openInBrowser == value) return;
+                _openInBrowser = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool Publish
+        {
+            get => _publish;
+            set
+            {
+                if (_publish == value) return;
+                _publish = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool SvnShowCopiesAsAdds
+        {
+            get => _svnShowCopiesAsAdds;
+            set
+            {
+                if (_svnShowCopiesAsAdds == value) return;
+                _svnShowCopiesAsAdds = value;
                 OnPropertyChanged();
             }
         }
