@@ -63,6 +63,7 @@
     <Compile Include="Settings\SettingsLoader.cs" />
     <Compile Include="ViewModels\CommunicationViewModel.cs" />
     <Compile Include="ViewModels\SendViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="Views\CommunicationView.xaml.cs">
       <DependentUpon>CommunicationView.xaml</DependentUpon>
     </Compile>

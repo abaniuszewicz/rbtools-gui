@@ -4,9 +4,101 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:RBToolsContextMenu.UI.Wpf.Views"
+      xmlns:ui="http://schemas.modernwpf.com/2019"
       mc:Ignorable="d"
-      Title="SettingsView" Height="450" Width="800">
-    <Grid>
-        <TextBlock Text="Settings"/>
+      Title="SettingsView">
+
+    <Page.Resources>
+        <Style TargetType="Button" x:Key="AccentButton" BasedOn="{StaticResource AccentButtonStyle}">
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="DataGrid" x:Key="DataGrid" BasedOn="{StaticResource {x:Type DataGrid}}">
+            <Setter Property="CanUserAddRows" Value="True"/>
+            <Setter Property="CanUserDeleteRows" Value="True"/>
+            <Setter Property="CanUserReorderColumns" Value="True"/>
+            <Setter Property="CanUserResizeColumns" Value="True"/>
+            <Setter Property="CanUserResizeRows" Value="False"/>
+            <Setter Property="CanUserSortColumns" Value="True"/>
+            <Setter Property="GridLinesVisibility" Value="All"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+    </Page.Resources>
+    
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel MaxWidth="300">
+            <TextBox ui:ControlHelper.Header="Repository root"
+                     ui:ControlHelper.PlaceholderText="c:\svn\path"
+                     Text="{Binding RepositoryRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox ui:ControlHelper.Header="Repository url"
+                     ui:ControlHelper.PlaceholderText="http://reviewboard.at.my.server"
+                     Text="{Binding RepositoryUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox ui:ControlHelper.Header="Repository name"
+                     ui:ControlHelper.PlaceholderText="Name of your repository"
+                     Text="{Binding RepositoryName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <TextBlock Text="Groups" 
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,5"/>
+            <DataGrid Style="{StaticResource DataGrid}"
+                      ItemsSource="{Binding Groups}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Display"
+                                        Binding="{Binding Display}"/>
+                    <DataGridTextColumn Header="Value"
+                                        Binding="{Binding Value}"/>
+                    <DataGridCheckBoxColumn Header="Selected by default"
+                                            Binding="{Binding IsSelected}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Grid.Column="2">
+            <TextBlock Text="People" 
+                       HorizontalAlignment="Center" 
+                       Margin="0,0,0,5"/>
+            <DataGrid Style="{StaticResource DataGrid}"
+                      ItemsSource="{Binding People}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Display"
+                                        Binding="{Binding Display}"/>
+                    <DataGridTextColumn Header="Value"
+                                        Binding="{Binding Value}"/>
+                    <DataGridCheckBoxColumn Header="Selected by default"
+                                            Binding="{Binding IsSelected}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="2" Grid.Column="4">
+            <Button Content="Export"
+                    ToolTip="Export settings to file"
+                    Style="{StaticResource AccentButton}"/>
+            <Button Content="Import"
+                    ToolTip="Import settings from file"
+                    Style="{StaticResource AccentButton}"/>
+            <Button Content="Save"
+                    ToolTip="Save changes"
+                    Style="{StaticResource AccentButton}"/>
+        </StackPanel>
     </Grid>
 </Page>

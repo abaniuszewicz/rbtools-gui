@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using RBToolsContextMenu.UI.Wpf.ViewModels;
+using System.Windows.Controls;
 
 namespace RBToolsContextMenu.UI.Wpf.Views
 {
@@ -7,6 +8,7 @@ namespace RBToolsContextMenu.UI.Wpf.Views
         public SettingsView()
         {
             InitializeComponent();
+            DataContext = new SettingsViewModel();
         }
     }
 }
