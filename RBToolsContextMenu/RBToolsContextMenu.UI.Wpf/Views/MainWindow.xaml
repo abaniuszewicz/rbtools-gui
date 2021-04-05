@@ -16,7 +16,8 @@
                        ItemInvoked="NavigationView_ItemInvoked"
                        BackRequested="NavigationView_BackRequested"
                        IsSettingsVisible="False"
-                       IsPaneOpen="False">
+                       IsPaneOpen="False"
+                       OpenPaneLength="250">
 
         <ui:NavigationView.MenuItems>
             <ui:NavigationViewItem x:Name="SendNavigationItem"
@@ -25,7 +26,7 @@
                                    Icon="Send"
                                    Tag="Send"/>
             <ui:NavigationViewItem x:Name="CommunicationNavigationItem"
-                                   Content="Underlying Communication"
+                                   Content="Underlying communication"
                                    ToolTipService.ToolTip="Allows you to peek communication stack sent via reviewboard tools"
                                    Icon="Repair"
                                    Tag="Communication"/>

@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>RBToolsContextMenu.UI.Wpf</RootNamespace>
     <AssemblyName>RBToolsContextMenu.UI.Wpf</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -16,6 +16,7 @@
     <LangVersion>latest</LangVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -55,12 +56,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Properties\IsExternalInit.cs" />
     <Compile Include="SeedWork\Converters\InvertBooleanConverter.cs" />
     <Compile Include="SeedWork\Converters\ReviewTypeToBooleanConverter.cs" />
     <Compile Include="SeedWork\Mapping\Mapper.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\SelectableText.cs" />
-    <Compile Include="Settings\SettingsLoader.cs" />
+    <Compile Include="Utilities\Settings\SettingsMemento.cs" />
     <Compile Include="ViewModels\CommunicationViewModel.cs" />
     <Compile Include="ViewModels\SendViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
@@ -113,6 +115,10 @@
     <ProjectReference Include="..\RBToolsContextMenu.Application\RBToolsContextMenu.Application.csproj">
       <Project>{5e560b6b-0572-4b08-8a69-fe88316f2849}</Project>
       <Name>RBToolsContextMenu.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RBToolsContextMenu.Persistence\RBToolsContextMenu.Persistence.csproj">
+      <Project>{1a857b89-6eae-4282-81e5-ede54ecdd57c}</Project>
+      <Name>RBToolsContextMenu.Persistence</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

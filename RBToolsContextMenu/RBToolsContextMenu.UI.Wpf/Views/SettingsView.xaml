@@ -44,13 +44,14 @@
 
         <GroupBox Header="Groups"
                   Grid.Row="0" Grid.Column="0"
-                  Margin="30,0,30,0">
+                  Margin="15,0,15,0">
             <DataGrid Style="{StaticResource DataGrid}"
                       ItemsSource="{Binding Groups}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Display"
                                         Binding="{Binding Display}"
-                                        Width="100">
+                                        Width="100"
+                                        CanUserResize="False">
                         <DataGridTextColumn.CellStyle>
                             <Style TargetType="DataGridCell">
                                 <Setter Property="ToolTip" Value="Text that will be visible for this item"/>
@@ -59,34 +60,38 @@
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="Value"
                                         Binding="{Binding Value}"
-                                        Width="100">
+                                        Width="150"
+                                        CanUserResize="False">
                         <DataGridTextColumn.CellStyle>
                             <Style TargetType="DataGridCell">
                                 <Setter Property="ToolTip" Value="Actual value of this item"/>
                             </Style>
                         </DataGridTextColumn.CellStyle>
                     </DataGridTextColumn>
-                    <DataGridCheckBoxColumn Header="Selected"
-                                            Binding="{Binding IsSelected}">
+                    <!--<DataGridCheckBoxColumn Header="Selected"
+                                            Binding="{Binding IsSelected}"
+                                            Width="100"
+                                            CanUserResize="False">
                         <DataGridCheckBoxColumn.CellStyle>
                             <Style TargetType="DataGridCell">
                                 <Setter Property="ToolTip" Value="Whether item will be selected by default"/>
                             </Style>
                         </DataGridCheckBoxColumn.CellStyle>
-                    </DataGridCheckBoxColumn>
+                    </DataGridCheckBoxColumn>-->
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
 
         <GroupBox Header="People"
                   Grid.Row="0" Grid.Column="1"
-                  Margin="30,0,30,0">
+                  Margin="15,0,15,0">
             <DataGrid Style="{StaticResource DataGrid}"
                       ItemsSource="{Binding People}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Display"
                                         Binding="{Binding Display}"
-                                        Width="100">
+                                        Width="100"
+                                        CanUserResize="False">
                         <DataGridTextColumn.CellStyle>
                             <Style TargetType="DataGridCell">
                                 <Setter Property="ToolTip" Value="Text that will be visible for this item"/>
@@ -95,28 +100,31 @@
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="Value"
                                         Binding="{Binding Value}"
-                                        Width="100">
+                                        Width="150"
+                                        CanUserResize="False">
                         <DataGridTextColumn.CellStyle>
                             <Style TargetType="DataGridCell">
                                 <Setter Property="ToolTip" Value="Actual value of this item"/>
                             </Style>
                         </DataGridTextColumn.CellStyle>
                     </DataGridTextColumn>
-                    <DataGridCheckBoxColumn Header="Selected"
-                                            Binding="{Binding IsSelected}">
+                    <!--<DataGridCheckBoxColumn Header="Selected"
+                                            Binding="{Binding IsSelected}"
+                                            Width="100"
+                                            CanUserResize="False">
                         <DataGridCheckBoxColumn.CellStyle>
                             <Style TargetType="DataGridCell">
                                 <Setter Property="ToolTip" Value="Whether item will be selected by default"/>
                             </Style>
                         </DataGridCheckBoxColumn.CellStyle>
-                    </DataGridCheckBoxColumn>
+                    </DataGridCheckBoxColumn>-->
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
 
         <GroupBox Header="Repository settings"
                   Grid.Row="0" Grid.Column="2"
-                  Margin="30,0,30,0">
+                  Margin="15,0,15,0">
             <StackPanel Width="200">
                 <TextBox ui:ControlHelper.Header="Repository root"
                          ui:ControlHelper.PlaceholderText="path"
@@ -148,13 +156,16 @@
                     HorizontalAlignment="Right">
             <Button Content="Export"
                     ToolTip="Export settings to file"
-                    Style="{StaticResource AccentButton}"/>
+                    Style="{StaticResource AccentButton}"
+                    Command="{Binding ExportCommand}"/>
             <Button Content="Import"
                     ToolTip="Import settings from file"
-                    Style="{StaticResource AccentButton}"/>
+                    Style="{StaticResource AccentButton}"
+                    Command="{Binding ImportCommand}"/>
             <Button Content="Save"
                     ToolTip="Save changes"
-                    Style="{StaticResource AccentButton}"/>
+                    Style="{StaticResource AccentButton}"
+                    Command="{Binding SaveCommand}"/>
         </StackPanel>
     </Grid>
 </Page>

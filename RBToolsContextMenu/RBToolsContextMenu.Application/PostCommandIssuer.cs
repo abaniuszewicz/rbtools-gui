@@ -6,8 +6,8 @@ namespace RBToolsContextMenu.Application
 {
     public class PostCommandIssuer : CommandIssuer
     {
-        public PostCommandIssuer() 
-            : base()
+        public PostCommandIssuer(string root) 
+            : base(root)
         {
         }
 

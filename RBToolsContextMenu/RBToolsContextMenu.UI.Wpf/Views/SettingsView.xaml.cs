@@ -5,10 +5,10 @@ namespace RBToolsContextMenu.UI.Wpf.Views
 {
     public partial class SettingsView : Page
     {
-        public SettingsView()
+        public SettingsView(SettingsViewModel settingsViewModel)
         {
             InitializeComponent();
-            DataContext = new SettingsViewModel();
+            DataContext = settingsViewModel;
         }
     }
 }

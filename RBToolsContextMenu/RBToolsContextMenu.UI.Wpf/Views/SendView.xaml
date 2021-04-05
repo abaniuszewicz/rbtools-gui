@@ -57,8 +57,6 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0">
@@ -136,17 +134,22 @@
                     </StackPanel>
                 </Grid>
 
-                <TextBox ui:ControlHelper.Header="Repository"
+                <!--<TextBox ui:ControlHelper.Header="Repository root"
                          Grid.Row="2"
+                         Text="{Binding Root, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         ui:ControlHelper.PlaceholderText="Root"/>
+
+                <TextBox ui:ControlHelper.Header="Repository name"
+                         Grid.Row="3"
                          Text="{Binding Repository, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                         ui:ControlHelper.PlaceholderText="Repository name"/>
+                         ui:ControlHelper.PlaceholderText="Name"/>
 
                 <TextBox ui:ControlHelper.Header="Server"
-                         Grid.Row="3"
+                         Grid.Row="4"
                          Text="{Binding Server, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                         ui:ControlHelper.PlaceholderText="Server url"/>
+                         ui:ControlHelper.PlaceholderText="Server"/>-->
 
-                <StackPanel Grid.Row="4"
+                <StackPanel Grid.Row="2"
                             Margin="0,20,0,0">
                     <CheckBox Content="Open in browser" 
                               IsChecked="{Binding OpenInBrowser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -161,7 +164,7 @@
                 <Button Content="Post"
                         Command="{Binding PostCommand}"
                         Style="{StaticResource AccentButtonStyle}"
-                        Grid.Row="5"
+                        Grid.Row="3"
                         Grid.Column="1"
                         Width="100" Height="50"
                         Margin="20"

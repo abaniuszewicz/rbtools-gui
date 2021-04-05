@@ -16,6 +16,7 @@ namespace RBToolsContextMenu.UI.Wpf.ViewModels
         private string _testingDone;
         private string _reviewId;
         private string _updateDescription;
+        private string _root;
         private string _repository;
         private string _server;
         private ReviewType _reviewType;
@@ -56,9 +57,9 @@ namespace RBToolsContextMenu.UI.Wpf.ViewModels
             }
         }
 
-        public ObservableCollection<SelectableText> Groups { get; } = new();
+        public ObservableCollection<SelectableText> Groups { get; set; } = new();
 
-        public ObservableCollection<SelectableText> People { get; } = new();
+        public ObservableCollection<SelectableText> People { get; set; } = new();
 
         public ReviewType ReviewType
         {
@@ -90,6 +91,17 @@ namespace RBToolsContextMenu.UI.Wpf.ViewModels
             {
                 if (_updateDescription == value) return;
                 _updateDescription = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Root
+        {
+            get => _root;
+            set
+            {
+                if (_root == value) return;
+                _root = value;
                 OnPropertyChanged();
             }
         }

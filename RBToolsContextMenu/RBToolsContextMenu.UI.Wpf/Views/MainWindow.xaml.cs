@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using ModernWpf.Controls;
 using RBToolsContextMenu.Application;
-using RBToolsContextMenu.UI.Wpf.Settings;
+using RBToolsContextMenu.Persistence.IO;
+using RBToolsContextMenu.Persistence.Serialization;
+using RBToolsContextMenu.UI.Wpf.Utilities.Settings;
 using RBToolsContextMenu.UI.Wpf.ViewModels;
 using WindowsControls = System.Windows.Controls;
 
@@ -20,19 +22,46 @@ namespace RBToolsContextMenu.UI.Wpf.Views
         public MainWindow()
         {
             InitializeComponent();
-            _postCommandIssuer = new();
-            var sendViewModel = SettingsLoader.LoadSendViewModel();
+
+            IFileLoader loader = new JsonFileLoader();
+            IFileSaver saver = new JsonFileSaver();
+            ISerializer serializer = new JsonSerializer();
+
+            var settingsViewModel = new SettingsViewModel(loader, saver, serializer);
+            var sendViewModel = new SendViewModel();
+            var communicationViewModel = new CommunicationViewModel();
+
+            var memento = GetMemento(loader, serializer);
+            memento?.RestoreTo(settingsViewModel);
+            memento?.RestoreTo(sendViewModel);
+
+            _postCommandIssuer = new PostCommandIssuer(memento?.RepositoryRoot);
             sendViewModel.Issuer = _postCommandIssuer;
+            communicationViewModel.Issuer = _postCommandIssuer;
 
             _navigationItemToDestinationType = new (NavigationViewItemBase, WindowsControls.Page)[]
             {
                 (SendNavigationItem, new SendView(sendViewModel)),
-                (CommunicationNavigationItem, new CommunicationView(new CommunicationViewModel() { Issuer = _postCommandIssuer })),
-                (SettingsNavigationItem, new SettingsView()),
+                (CommunicationNavigationItem, new CommunicationView(communicationViewModel)),
+                (SettingsNavigationItem, new SettingsView(settingsViewModel)),
             };
 
             Frame.Navigate(_navigationItemToDestinationType.First().destination);
         }
+
+        private SettingsMemento GetMemento(IFileLoader loader, ISerializer serializer)
+        {
+            try
+            {
+                string content = loader.Load("settings");
+                return serializer.Deserialize<SettingsMemento>(content);
+            }
+            catch
+            {
+                return null; // do nothing, we expect that settings might not exist yet upon first run
+            }
+        }
+
 
         private void NavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {

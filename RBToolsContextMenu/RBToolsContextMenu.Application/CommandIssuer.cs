@@ -14,9 +14,9 @@ namespace RBToolsContextMenu.Application
             remove => _commandProcess.MessageReceived -= value;
         } 
 
-        protected CommandIssuer()
+        protected CommandIssuer(string root)
         {
-            _commandProcess = new CommandProcess();
+            _commandProcess = new CommandProcess(root);
         }
 
         public void Issue(IRbtCommand command)

@@ -13,19 +13,20 @@ namespace RBToolsContextMenu.Application
 
         public event EventHandler<MessageEventArgs> MessageReceived; 
         
-        public CommandProcess()
+        public CommandProcess(string root)
         {
-            InitializeCmdProcess();
+            InitializeCmdProcess(root);
             WireMessageEvents();
         }
 
-        private void InitializeCmdProcess()
+        private void InitializeCmdProcess(string root)
         {
             _process = new Process()
             {
                 StartInfo = new ProcessStartInfo()
                 {
                     FileName = "cmd.exe",
+                    WorkingDirectory = root,
                     UseShellExecute = false,
                     RedirectStandardInput = true,
                     RedirectStandardOutput = true,

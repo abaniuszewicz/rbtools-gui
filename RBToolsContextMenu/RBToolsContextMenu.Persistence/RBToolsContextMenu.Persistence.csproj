@@ -35,18 +35,23 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IO\IFileSerializer.cs" />
-    <Compile Include="IO\JsonFileSerializer.cs" />
+    <Compile Include="Exceptions\UserAbortedActionException.cs" />
+    <Compile Include="IO\IFileSaver.cs" />
+    <Compile Include="IO\IPathProvider.cs" />
+    <Compile Include="IO\JsonFileLoader.cs" />
+    <Compile Include="IO\JsonFileSaver.cs" />
+    <Compile Include="IO\JsonSettingsPathProvider.cs" />
+    <Compile Include="Serialization\ISerializer.cs" />
+    <Compile Include="IO\IFileLoader.cs" />
+    <Compile Include="Serialization\JsonSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings\ISettingsLoader.cs" />
-    <Compile Include="Settings\ISettingsSaver.cs" />
-    <Compile Include="Settings\SettingsManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
