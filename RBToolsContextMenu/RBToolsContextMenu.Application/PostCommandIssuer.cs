@@ -1,6 +1,5 @@
 ﻿using RBToolsContextMenu.Application.Communication.DTO;
 using RBToolsContextMenu.Application.Communication.Mapping;
-using RBToolsContextMenu.Domain.Commands;
 
 namespace RBToolsContextMenu.Application
 {
