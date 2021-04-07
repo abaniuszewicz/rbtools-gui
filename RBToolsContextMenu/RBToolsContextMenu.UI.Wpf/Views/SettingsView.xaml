@@ -18,13 +18,15 @@
             <Setter Property="CanUserAddRows" Value="True"/>
             <Setter Property="CanUserDeleteRows" Value="True"/>
             <Setter Property="CanUserReorderColumns" Value="True"/>
-            <Setter Property="CanUserResizeColumns" Value="True"/>
             <Setter Property="CanUserResizeRows" Value="False"/>
             <Setter Property="CanUserSortColumns" Value="True"/>
             <Setter Property="GridLinesVisibility" Value="All"/>
             <Setter Property="AutoGenerateColumns" Value="False"/>
             <Setter Property="HeadersVisibility" Value="Column"/>
             <Setter Property="MaxHeight" Value="600"/>
+            <Style.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="Transparent"/>
+            </Style.Resources>
         </Style>
     </Page.Resources>
     
@@ -68,16 +70,6 @@
                             </Style>
                         </DataGridTextColumn.CellStyle>
                     </DataGridTextColumn>
-                    <!--<DataGridCheckBoxColumn Header="Selected"
-                                            Binding="{Binding IsSelected}"
-                                            Width="100"
-                                            CanUserResize="False">
-                        <DataGridCheckBoxColumn.CellStyle>
-                            <Style TargetType="DataGridCell">
-                                <Setter Property="ToolTip" Value="Whether item will be selected by default"/>
-                            </Style>
-                        </DataGridCheckBoxColumn.CellStyle>
-                    </DataGridCheckBoxColumn>-->
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
@@ -108,16 +100,6 @@
                             </Style>
                         </DataGridTextColumn.CellStyle>
                     </DataGridTextColumn>
-                    <!--<DataGridCheckBoxColumn Header="Selected"
-                                            Binding="{Binding IsSelected}"
-                                            Width="100"
-                                            CanUserResize="False">
-                        <DataGridCheckBoxColumn.CellStyle>
-                            <Style TargetType="DataGridCell">
-                                <Setter Property="ToolTip" Value="Whether item will be selected by default"/>
-                            </Style>
-                        </DataGridCheckBoxColumn.CellStyle>
-                    </DataGridCheckBoxColumn>-->
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
