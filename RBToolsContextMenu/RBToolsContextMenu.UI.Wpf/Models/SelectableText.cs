@@ -54,6 +54,9 @@ namespace RBToolsContextMenu.UI.Wpf.Models
 
         public bool Equals(SelectableText other)
         {
+            if (other is null)
+                return false;
+            
             return (Display ?? string.Empty) == (other.Display ?? string.Empty)
                 && (Value ?? string.Empty) == (other.Value ?? string.Empty)
                 && IsSelected == other.IsSelected;
@@ -68,7 +71,7 @@ namespace RBToolsContextMenu.UI.Wpf.Models
         {
             unchecked
             {
-                int hash = 17;
+                var hash = 17;
                 hash = hash * 23 + Display?.GetHashCode() ?? 0;
                 hash = hash * 23 + Value?.GetHashCode() ?? 0;
                 hash = hash * 23 + IsSelected.GetHashCode();

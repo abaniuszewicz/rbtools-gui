@@ -19,13 +19,13 @@ namespace RBToolsContextMenu.Persistence.IO
             if (!result.HasValue || !result.Value)
                 throw new UserAbortedActionException("Load operation was aborted by the user");
 
-            string path = dialog.FileName;
+            var path = dialog.FileName;
             return File.ReadAllText(path);
         }
 
         public string Load(string key)
         {
-            string path = _pathProvider.GetPathFromKey(key);
+            var path = _pathProvider.GetPathFromKey(key);
             return File.ReadAllText(path);
         }
     }

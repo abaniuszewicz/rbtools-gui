@@ -35,8 +35,8 @@ namespace RBToolsContextMenu.UI.Wpf.Utilities.Settings
 
         public void RestoreTo(SettingsViewModel settings)
         {
-            settings.Groups = new ObservableCollection<SelectableText>(Groups.Select(g => g.DeepCopy()));
-            settings.People = new ObservableCollection<SelectableText>(People.Select(p => p.DeepCopy()));
+            ReplaceContent(settings.Groups, Groups);
+            ReplaceContent(settings.People, People);
             settings.RepositoryRoot = RepositoryRoot;
             settings.RepositoryUrl = RepositoryUrl;
             settings.RepositoryName = RepositoryName;
@@ -47,29 +47,35 @@ namespace RBToolsContextMenu.UI.Wpf.Utilities.Settings
 
         public void RestoreTo(SendViewModel send)
         {
-            send.Groups = new ObservableCollection<SelectableText>(Groups.Select(g => g.DeepCopy()));
-            send.People = new ObservableCollection<SelectableText>(People.Select(p => p.DeepCopy()));
+            ReplaceContent(send.Groups, Groups);
+            ReplaceContent(send.People, People);
             send.Root = RepositoryRoot;
             send.Server = RepositoryUrl;
             send.Repository = RepositoryName;
             send.OpenInBrowser = OpenInBrowser;
             send.Publish = Publish;
             send.SvnShowCopiesAsAdds = SvnShowCopiesAsAdds;
-
         }
 
         public bool HasChanged(SettingsViewModel settings)
         {
-            bool equals = Groups.SequenceEqual(settings.Groups)
-                && People.SequenceEqual(settings.People)
-                && (RepositoryRoot ?? string.Empty) == (settings.RepositoryRoot ?? string.Empty)
-                && (RepositoryUrl ?? string.Empty) == (settings.RepositoryUrl ?? string.Empty)
-                && (RepositoryName ?? string.Empty) == (settings.RepositoryName ?? string.Empty)
-                && OpenInBrowser == settings.OpenInBrowser
-                && Publish == settings.Publish
-                && SvnShowCopiesAsAdds == settings.SvnShowCopiesAsAdds;
+            var equals = Groups.SequenceEqual(settings.Groups)
+                         && People.SequenceEqual(settings.People)
+                         && (RepositoryRoot ?? string.Empty) == (settings.RepositoryRoot ?? string.Empty)
+                         && (RepositoryUrl ?? string.Empty) == (settings.RepositoryUrl ?? string.Empty)
+                         && (RepositoryName ?? string.Empty) == (settings.RepositoryName ?? string.Empty)
+                         && OpenInBrowser == settings.OpenInBrowser
+                         && Publish == settings.Publish
+                         && SvnShowCopiesAsAdds == settings.SvnShowCopiesAsAdds;
 
             return !equals;
+        }
+
+        private static void ReplaceContent(ICollection<SelectableText> collection, IEnumerable<SelectableText> replacement)
+        {
+            collection.Clear();
+            foreach (var selectableText in replacement)
+                collection.Add(selectableText.DeepCopy());
         }
     }
 }

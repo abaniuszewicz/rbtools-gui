@@ -23,7 +23,7 @@ namespace RBToolsContextMenu.Persistence.IO
 
         public void Save(string key, string content)
         {
-            string path = _pathProvider.GetPathFromKey(key);
+            var path = _pathProvider.GetPathFromKey(key);
             Directory.CreateDirectory(_pathProvider.Directory);
             File.WriteAllText(path, content);
         }

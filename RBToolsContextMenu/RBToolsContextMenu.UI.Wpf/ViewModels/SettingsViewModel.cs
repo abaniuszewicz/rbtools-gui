@@ -127,14 +127,14 @@ namespace RBToolsContextMenu.UI.Wpf.ViewModels
         private void Export(IFileSaver saver, ISerializer serializer)
         {
             var memento = new SettingsMemento(this);
-            string content = serializer.Serialize(memento);
+            var content = serializer.Serialize(memento);
             saver.Save(content);
         }
 
         private void Save(IFileSaver saver, ISerializer serializer)
         {
             _memento = new SettingsMemento(this);
-            string content = serializer.Serialize(_memento);
+            var content = serializer.Serialize(_memento);
             saver.Save("settings", content);
         }
     }

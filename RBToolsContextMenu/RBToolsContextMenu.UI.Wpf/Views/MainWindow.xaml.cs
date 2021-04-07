@@ -53,7 +53,7 @@ namespace RBToolsContextMenu.UI.Wpf.Views
         {
             try
             {
-                string content = loader.Load("settings");
+                var content = loader.Load("settings");
                 return serializer.Deserialize<SettingsMemento>(content);
             }
             catch
