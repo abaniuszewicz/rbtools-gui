@@ -14,7 +14,7 @@ namespace RBToolsContextMenu.Domain.Options.Post.Fields
             if (bugIds is null)
                 throw new ArgumentNullException(nameof(bugIds));
             if (!bugIds.Any())
-                throw new ArgumentException("You must specify at least one target group", nameof(bugIds));
+                throw new ArgumentException("You must specify at least one bug id", nameof(bugIds));
             
             Value = string.Join(",", bugIds);
         }

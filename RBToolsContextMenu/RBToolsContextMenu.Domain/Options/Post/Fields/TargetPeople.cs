@@ -14,7 +14,7 @@ namespace RBToolsContextMenu.Domain.Options.Post.Fields
             if (targetPeople is null)
                 throw new ArgumentNullException(nameof(targetPeople));
             if (!targetPeople.Any())
-                throw new ArgumentException("You must specify at least one target group", nameof(targetPeople));
+                throw new ArgumentException("You must specify at least one person", nameof(targetPeople));
             
             Value = string.Join(",", targetPeople);
         }
