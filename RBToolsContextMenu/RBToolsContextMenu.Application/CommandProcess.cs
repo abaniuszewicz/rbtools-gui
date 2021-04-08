@@ -10,7 +10,6 @@ namespace RBToolsContextMenu.Application
         private static readonly SemaphoreSlim _semaphore = new(1, 1);
         private Process _process;
 
-
         public event EventHandler<MessageEventArgs> MessageReceived; 
         
         public CommandProcess(string root)

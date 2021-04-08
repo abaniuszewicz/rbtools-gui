@@ -27,7 +27,7 @@ namespace RBToolsContextMenu.Application
 
         public void Dispose()
         {
-           // _commandProcess?.Dispose();
+           _commandProcess?.Dispose();
         }
     }
 }

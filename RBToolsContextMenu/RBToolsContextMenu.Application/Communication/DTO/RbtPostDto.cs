@@ -63,11 +63,11 @@ namespace RBToolsContextMenu.Application.Communication.DTO
         /// Specifies whether review request should be automatically published after posting.
         /// </summary>
         public bool Publish { get; set; }
-        
+
         /// <summary>
         /// Specifies existing id of review request that should be updated by current post.
         /// </summary>
-        public int ReviewRequestId { get; set; }
+        public int? ReviewRequestId { get; set; }
         
         /// <summary>
         /// Specifies whether should automatically determine existing review to be updated by current post.

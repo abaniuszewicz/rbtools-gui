@@ -62,7 +62,6 @@ namespace RBToolsContextMenu.UI.Wpf.Views
             }
         }
 
-
         private void NavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
             var destination = _navigationItemToDestinationType.FirstOrDefault(dict => dict.NavigationItem == args.InvokedItemContainer).destination;

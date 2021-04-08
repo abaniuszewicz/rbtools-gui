@@ -42,6 +42,8 @@ namespace RBToolsContextMenu.Application.Communication.Mapping
                 options.Add(new Publish());
             if (dto.Update)
                 options.Add(new Update());
+            if (dto.Update && dto.ReviewRequestId.HasValue)
+                options.Add(new ReviewRequestId(dto.ReviewRequestId.Value));
             if (dto.SvnShowCopiesAsAdds)
                 options.Add(new SvnShowCopiesAsAdds(ShowCopiesAsAddsOption.Yes));
             if (dto.IncludePaths != null && dto.IncludePaths.Any())
