@@ -57,6 +57,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Properties\IsExternalInit.cs" />
+    <Compile Include="SeedWork\Converters\ReviewTypeToVisibilityConverter.cs" />
     <Compile Include="SeedWork\Converters\InvertBooleanConverter.cs" />
     <Compile Include="SeedWork\Converters\ReviewTypeToBooleanConverter.cs" />
     <Compile Include="SeedWork\Mapping\Mapper.cs" />
@@ -128,6 +129,11 @@
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ThirdPartyLicenses.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using ModernWpf.Controls;
 using RBToolsContextMenu.Application;
@@ -64,6 +65,12 @@ namespace RBToolsContextMenu.UI.Wpf.Views
 
         private void NavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
+            if (args.InvokedItemContainer == LicensesNavigationItem)
+            {
+                Process.Start(@"Resources\ThirdPartyLicenses.txt");
+                return;
+            }
+
             var destination = _navigationItemToDestinationType.FirstOrDefault(dict => dict.NavigationItem == args.InvokedItemContainer).destination;
             if (destination == default)
                 throw new ArgumentOutOfRangeException(nameof(args), "Failed to determine destination frame.");

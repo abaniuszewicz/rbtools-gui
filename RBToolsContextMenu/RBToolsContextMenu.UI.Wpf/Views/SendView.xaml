@@ -14,6 +14,7 @@
     <Page.Resources>
         <converters:InvertBooleanConverter x:Key="InvertBooleanConverter"/>
         <converters:ReviewTypeToBooleanConverter x:Key="ReviewTypeToBooleanConverter"/>
+        <converters:ReviewTypeToVisibilityConverter x:Key="ReviewTypeToVisibilityConverter"/>
     </Page.Resources>
 
     <Grid>
@@ -30,7 +31,7 @@
         <TextBox Grid.Row="0" Grid.Column="0"
                  Grid.ColumnSpan="2"
                  ui:ControlHelper.Header="Summary"
-                 ui:ControlHelper.PlaceholderText="[new/modification] Short summary"
+                 ui:ControlHelper.PlaceholderText="Short summary"
                  Text="{Binding Summary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBox Grid.Row="1" Grid.Column="0"
@@ -113,20 +114,21 @@
 
                     <ui:RadioButtons Header="Review type"
                                      Grid.Column="0">
-                        <RadioButton Content="New" 
+                        <RadioButton Content="New"
+                                     ToolTip="Indicates that these changes should be posted as new review"
                                      IsChecked="{Binding ReviewType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ReviewTypeToBooleanConverter}}"/>
                         <RadioButton Content="Update"
+                                     ToolTip="Indicates that these changes should update already existing review"
                                      IsChecked="{Binding ReviewType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ReviewTypeToBooleanConverter}, ConverterParameter=invert}"/>
                     </ui:RadioButtons>
 
-                    <StackPanel Grid.Column="1">
+                    <StackPanel Grid.Column="1"
+                                IsEnabled="{Binding ReviewType, Converter={StaticResource ReviewTypeToBooleanConverter}, ConverterParameter=invert}">
 
                         <TextBox ui:ControlHelper.Header="Review id"
-                                 IsEnabled="{Binding ReviewType, Converter={StaticResource ReviewTypeToBooleanConverter}, ConverterParameter=invert}"
                                  ui:ControlHelper.PlaceholderText="123"
                                  Text="{Binding ReviewId}"/>
                         <TextBox ui:ControlHelper.Header="Changes"
-                                 IsEnabled="{Binding ReviewType, Converter={StaticResource ReviewTypeToBooleanConverter}, ConverterParameter=invert}"
                                  ui:ControlHelper.PlaceholderText="What has been updated"
                                  AcceptsReturn="True"
                                  Height="150"
@@ -134,34 +136,23 @@
                     </StackPanel>
                 </Grid>
 
-                <!--<TextBox ui:ControlHelper.Header="Repository root"
-                         Grid.Row="2"
-                         Text="{Binding Root, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                         ui:ControlHelper.PlaceholderText="Root"/>
-
-                <TextBox ui:ControlHelper.Header="Repository name"
-                         Grid.Row="3"
-                         Text="{Binding Repository, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                         ui:ControlHelper.PlaceholderText="Name"/>
-
-                <TextBox ui:ControlHelper.Header="Server"
-                         Grid.Row="4"
-                         Text="{Binding Server, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                         ui:ControlHelper.PlaceholderText="Server"/>-->
-
                 <StackPanel Grid.Row="2"
                             Margin="0,20,0,0">
                     <CheckBox Content="Open in browser" 
+                              ToolTip="When selected will open review in default browser right after posting"
                               IsChecked="{Binding OpenInBrowser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                     <CheckBox Content="Publish"
+                              ToolTip="When selected will publish review right after posting"
                               IsChecked="{Binding Publish, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                     <CheckBox Content="SVN show copies as adds"
+                              ToolTip="When selected will treat copied/moved files as new ones"
                               IsChecked="{Binding SvnShowCopiesAsAdds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
 
                 <Button Content="Post"
+                        ToolTip="Post review"
                         Command="{Binding PostCommand}"
                         Style="{StaticResource AccentButtonStyle}"
                         Grid.Row="3"

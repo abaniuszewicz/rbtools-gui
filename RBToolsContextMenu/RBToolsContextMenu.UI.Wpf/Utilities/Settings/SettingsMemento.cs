@@ -1,7 +1,6 @@
 ﻿using RBToolsContextMenu.UI.Wpf.Models;
 using RBToolsContextMenu.UI.Wpf.ViewModels;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace RBToolsContextMenu.UI.Wpf.Utilities.Settings

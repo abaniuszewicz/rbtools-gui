@@ -59,5 +59,23 @@ namespace RBToolsContextMenu.UI.Wpf.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to - RBTools ---------------------------------------------------------------------
+        ///https://github.com/reviewboard/rbtools
+        ///
+        ///Copyright (c) 2007-2010  Christian Hammond
+        ///Copyright (c) 2007-2010  David Trowbridge
+        ///
+        ///Permission is hereby granted, free of charge, to any person obtaining a copy of
+        ///this software and associated documentation files (the &quot;Software&quot;), to deal in
+        ///the Software without restriction, including without limitation the rights to
+        ///use, copy, modify, merge, publish, distribute, sublicense, and [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string ThirdPartyLicenses {
+            get {
+                return ResourceManager.GetString("ThirdPartyLicenses", resourceCulture);
+            }
+        }
     }
 }

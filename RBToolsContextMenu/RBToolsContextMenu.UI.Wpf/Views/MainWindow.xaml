@@ -38,6 +38,11 @@
                                    ToolTipService.ToolTip="Allows you to adjust application settings"
                                    Icon="Setting"
                                    Tag="Settings"/>
+            <ui:NavigationViewItem x:Name="LicensesNavigationItem"
+                                   Content="3rd party licenses"
+                                   ToolTipService.ToolTip="Read third party licenses"
+                                   Icon="Attach"
+                                   Tag="Licenses"/>
         </ui:NavigationView.FooterMenuItems>
 
         <ui:Frame x:Name="Frame" ContentRendered="Frame_ContentRendered"/>
