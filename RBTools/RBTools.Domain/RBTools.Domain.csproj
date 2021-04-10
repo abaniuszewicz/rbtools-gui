@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EC6AB851-1A26-46DF-8FA0-A83DA18AB340}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RBTools.Domain</RootNamespace>
+    <AssemblyName>RBTools.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commands\IRbtCommand.cs" />
+    <Compile Include="Commands\PostCommand.cs" />
+    <Compile Include="Commands\RbtCommand.cs" />
+    <Compile Include="Options\IHasLongForm.cs" />
+    <Compile Include="Options\IHasShortForm.cs" />
+    <Compile Include="Options\IHasValue.cs" />
+    <Compile Include="Options\IRbtOption.cs" />
+    <Compile Include="Options\Post\Fields\BugsClosed.cs" />
+    <Compile Include="Options\RbtOption.cs" />
+    <Compile Include="Options\Post\DiffGeneration\Include.cs" />
+    <Compile Include="Options\Post\Fields\ChangeDescription.cs" />
+    <Compile Include="Options\Post\Fields\Description.cs" />
+    <Compile Include="Options\Post\Fields\Summary.cs" />
+    <Compile Include="Options\Post\Fields\TargetGroups.cs" />
+    <Compile Include="Options\Post\Fields\TargetPeople.cs" />
+    <Compile Include="Options\Post\Fields\TestingDone.cs" />
+    <Compile Include="Options\Post\Posting\Open.cs" />
+    <Compile Include="Options\Post\Posting\Publish.cs" />
+    <Compile Include="Options\Post\Posting\ReviewRequestId.cs" />
+    <Compile Include="Options\Post\Posting\Update.cs" />
+    <Compile Include="Options\Post\Repository\Repository.cs" />
+    <Compile Include="Options\Post\Server\Server.cs" />
+    <Compile Include="Options\Post\Subversion\SvnShowCopiesAsAdds.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeedWork\CommandParameterEncoder.cs" />
+    <Compile Include="SeedWork\IPrintable.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+</Project>
