@@ -48,6 +48,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 - Newtonsoft.Json -------------------------------------------------------------
+https://github.com/JamesNK/Newtonsoft.Json
 
 The MIT License (MIT)
 
