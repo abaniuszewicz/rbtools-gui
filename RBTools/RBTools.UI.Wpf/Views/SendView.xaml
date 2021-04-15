@@ -15,6 +15,7 @@
         <converters:InvertBooleanConverter x:Key="InvertBooleanConverter"/>
         <converters:ReviewTypeToBooleanConverter x:Key="ReviewTypeToBooleanConverter"/>
         <converters:ReviewTypeToVisibilityConverter x:Key="ReviewTypeToVisibilityConverter"/>
+        <converters:IgnoreNewItemPlaceholderConverter x:Key="IgnoreNewItemPlaceholderConverter"/>
     </Page.Resources>
 
     <Grid>
@@ -43,7 +44,7 @@
 
         <TextBox Grid.Row="2" Grid.Column="0"
                  ui:ControlHelper.Header="Testing done"
-                 ui:ControlHelper.PlaceholderText="What has been done in order to verify whether requirements have been fullfilled"
+                 ui:ControlHelper.PlaceholderText="What has been done in order to verify whether requirements have been fulfilled"
                  AcceptsReturn="True"
                  TextWrapping="Wrap"
                  Text="{Binding TestingDone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -81,12 +82,13 @@
                                  Grid.Column="0"
                                  Grid.Row="1"
                                  SelectionMode="Multiple"
-                                 ItemsSource="{Binding Groups}"
+                                 ItemsSource="{Binding Settings.Groups}"
                                  ScrollViewer.CanContentScroll="False">
                         <ui:ListView.Resources>
                             <Style TargetType="{x:Type ui:ListViewItem}">
-                                <Setter Property="Content" Value="{Binding Display, Mode=TwoWay}"/>
+                                <Setter Property="Content" Value="{Binding Display, Mode=OneWay}"/>
                                 <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
+                                <Setter Property="Visibility" Value="{Binding Converter={StaticResource IgnoreNewItemPlaceholderConverter}}"/>
                             </Style>
                         </ui:ListView.Resources>
                     </ui:ListView>
@@ -95,12 +97,13 @@
                                  Grid.Column="1"
                                  Grid.Row="1"
                                  SelectionMode="Multiple"
-                                 ItemsSource="{Binding People}"
+                                 ItemsSource="{Binding Settings.People}"
                                  ScrollViewer.CanContentScroll="False">
                         <ui:ListView.Resources>
                             <Style TargetType="{x:Type ui:ListViewItem}">
-                                <Setter Property="Content" Value="{Binding Display, Mode=TwoWay}"/>
+                                <Setter Property="Content" Value="{Binding Display, Mode=OneWay}"/>
                                 <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
+                                <Setter Property="Visibility" Value="{Binding Converter={StaticResource IgnoreNewItemPlaceholderConverter}}"/>
                             </Style>
                         </ui:ListView.Resources>
                     </ui:ListView>
@@ -141,15 +144,15 @@
                             Margin="0,20,0,0">
                     <CheckBox Content="Open in browser" 
                               ToolTip="When selected will open review in default browser right after posting"
-                              IsChecked="{Binding OpenInBrowser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                              IsChecked="{Binding Settings.OpenInBrowser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                     <CheckBox Content="Publish"
                               ToolTip="When selected will publish review right after posting"
-                              IsChecked="{Binding Publish, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                              IsChecked="{Binding Settings.Publish, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                     <CheckBox Content="SVN show copies as adds"
                               ToolTip="When selected will treat copied/moved files as new ones"
-                              IsChecked="{Binding SvnShowCopiesAsAdds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                              IsChecked="{Binding Settings.SvnShowCopiesAsAdds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
 
                 <Button Content="Post"

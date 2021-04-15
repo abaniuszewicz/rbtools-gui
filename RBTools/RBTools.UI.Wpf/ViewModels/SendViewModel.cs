@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows.Input;
 using RBTools.Application;
 using RBTools.Application.Communication.DTO;
@@ -16,14 +15,19 @@ namespace RBTools.UI.Wpf.ViewModels
         private string _testingDone;
         private string _reviewId;
         private string _updateDescription;
-        private string _root;
-        private string _repository;
-        private string _server;
         private ReviewType _reviewType;
-        private bool _openInBrowser;
-        private bool _publish;
-        private bool _svnShowCopiesAsAdds;
-        
+
+        public SendViewModel(Settings settings, PostCommandIssuer issuer)
+        {
+            Settings = settings;
+            Issuer = issuer;
+        }
+
+        public Settings Settings { get; }
+        public PostCommandIssuer Issuer { get; }
+
+        public ICommand PostCommand => new RelayCommand<RbtPostDto>(o => Issuer.Issue(Mapper.CreateDto(this)));
+
         public string Summary
         {
             get => _summary;
@@ -56,10 +60,6 @@ namespace RBTools.UI.Wpf.ViewModels
                 OnPropertyChanged();
             }
         }
-
-        public ObservableCollection<SelectableText> Groups { get; set; } = new();
-
-        public ObservableCollection<SelectableText> People { get; set; } = new();
 
         public ReviewType ReviewType
         {
@@ -94,75 +94,5 @@ namespace RBTools.UI.Wpf.ViewModels
                 OnPropertyChanged();
             }
         }
-
-        public string Root
-        {
-            get => _root;
-            set
-            {
-                if (_root == value) return;
-                _root = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string Repository
-        {
-            get => _repository;
-            set
-            {
-                if (_repository == value) return;
-                _repository = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string Server
-        {
-            get => _server;
-            set
-            {
-                if (_server == value) return;
-                _server = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public bool OpenInBrowser
-        {
-            get => _openInBrowser;
-            set
-            {
-                if (_openInBrowser == value) return;
-                _openInBrowser = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public bool Publish
-        {
-            get => _publish;
-            set
-            {
-                if (_publish == value) return;
-                _publish = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public bool SvnShowCopiesAsAdds
-        {
-            get => _svnShowCopiesAsAdds;
-            set
-            {
-                if (_svnShowCopiesAsAdds == value) return;
-                _svnShowCopiesAsAdds = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public PostCommandIssuer Issuer { get; set; }
-
-        public ICommand PostCommand => new RelayCommand<RbtPostDto>(o => Issuer.Issue(Mapper.CreateDto(this)));
     }
 }

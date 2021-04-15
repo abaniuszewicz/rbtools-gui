@@ -12,11 +12,11 @@ namespace RBTools.UI.Wpf.SeedWork.Mapping
         {
             var dto = new RbtPostDto()
             {
-                OpenBrowser = vm.OpenInBrowser,
-                Publish = vm.Publish,
-                SvnShowCopiesAsAdds = vm.SvnShowCopiesAsAdds,
-                TargetGroups = vm.Groups.Where(g => g.IsSelected).Select(g => g.Value),
-                TargetPeople = vm.People.Where(p => p.IsSelected).Select(p => p.Value),
+                OpenBrowser = vm.Settings.OpenInBrowser,
+                Publish = vm.Settings.Publish,
+                SvnShowCopiesAsAdds = vm.Settings.SvnShowCopiesAsAdds,
+                TargetGroups = vm.Settings.Groups.Where(g => g.IsSelected).Select(g => g.Value),
+                TargetPeople = vm.Settings.People.Where(p => p.IsSelected).Select(p => p.Value),
                 IncludePaths = Environment.GetCommandLineArgs().Skip(1),
             };
 
@@ -26,10 +26,10 @@ namespace RBTools.UI.Wpf.SeedWork.Mapping
                 dto.Summary = vm.Summary;
             if (!string.IsNullOrWhiteSpace(vm.TestingDone))
                 dto.TestingDone = vm.TestingDone;
-            if (!string.IsNullOrWhiteSpace(vm.Repository))
-                dto.Repository = vm.Repository;
-            if (!string.IsNullOrWhiteSpace(vm.Server))
-                dto.Server = vm.Server;
+            if (!string.IsNullOrWhiteSpace(vm.Settings.RepositoryName))
+                dto.Repository = vm.Settings.RepositoryName;
+            if (!string.IsNullOrWhiteSpace(vm.Settings.RepositoryUrl))
+                dto.Server = vm.Settings.RepositoryUrl;
 
             if (vm.ReviewType == ReviewType.Update)
             {

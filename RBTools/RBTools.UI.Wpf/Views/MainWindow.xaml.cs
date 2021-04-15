@@ -2,12 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Autofac;
 using ModernWpf.Controls;
-using RBTools.Application;
-using RBTools.Infrastructure.Persistence.IO;
-using RBTools.Infrastructure.Persistence.Serialization;
-using RBTools.UI.Wpf.Utilities.Settings;
-using RBTools.UI.Wpf.ViewModels;
 using WindowsControls = System.Windows.Controls;
 
 namespace RBTools.UI.Wpf.Views
@@ -15,52 +11,22 @@ namespace RBTools.UI.Wpf.Views
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : IDisposable
+    public partial class MainWindow
     {
-        private readonly PostCommandIssuer _postCommandIssuer;
         private readonly IEnumerable<(NavigationViewItemBase NavigationItem, WindowsControls.Page destination)> _navigationItemToDestinationType;
 
-        public MainWindow()
+        public MainWindow(ILifetimeScope scope)
         {
             InitializeComponent();
 
-            IFileLoader loader = new JsonFileLoader();
-            IFileSaver saver = new JsonFileSaver();
-            ISerializer serializer = new JsonSerializer();
-
-            var settingsViewModel = new SettingsViewModel(loader, saver, serializer);
-            var sendViewModel = new SendViewModel();
-            var communicationViewModel = new CommunicationViewModel();
-
-            var memento = GetMemento(loader, serializer);
-            memento?.RestoreTo(settingsViewModel);
-            memento?.RestoreTo(sendViewModel);
-
-            _postCommandIssuer = new PostCommandIssuer(memento?.RepositoryRoot);
-            sendViewModel.Issuer = _postCommandIssuer;
-            communicationViewModel.Issuer = _postCommandIssuer;
-
             _navigationItemToDestinationType = new (NavigationViewItemBase, WindowsControls.Page)[]
             {
-                (SendNavigationItem, new SendView(sendViewModel)),
-                (CommunicationNavigationItem, new CommunicationView(communicationViewModel)),
-                (SettingsNavigationItem, new SettingsView(settingsViewModel)),
+                (SendNavigationItem, scope.Resolve<SendView>()),
+                (CommunicationNavigationItem, scope.Resolve<CommunicationView>()),
+                (SettingsNavigationItem, scope.Resolve<SettingsView>()),
             };
 
             Frame.Navigate(_navigationItemToDestinationType.First().destination);
-        }
-
-        private SettingsMemento GetMemento(IFileLoader loader, ISerializer serializer)
-        {
-            try
-            {
-                var content = loader.Load("settings");
-                return serializer.Deserialize<SettingsMemento>(content);
-            }
-            catch
-            {
-                return null; // do nothing, we expect that settings might not exist yet upon first run
-            }
         }
 
         private void NavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
@@ -90,16 +56,6 @@ namespace RBTools.UI.Wpf.Views
         {
             var navigationItem = _navigationItemToDestinationType.FirstOrDefault(dict => dict.destination == Frame.Content).NavigationItem;
             NavigationView.SelectedItem = navigationItem ?? throw new InvalidOperationException("Failed to determine selected item.");
-        }
-
-        private void Window_Closed(object sender, EventArgs args)
-        {
-            Dispose();
-        }
-
-        public void Dispose()
-        {
-            _postCommandIssuer.Dispose();
         }
     }
 }

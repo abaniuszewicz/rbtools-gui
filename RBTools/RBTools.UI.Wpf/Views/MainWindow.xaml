@@ -8,8 +8,7 @@
         Title="Review board sender" 
         MinHeight="768" MinWidth="1366"
         Height="768" Width="1366"
-        ui:WindowHelper.UseModernWindowStyle="True"
-        Closed="Window_Closed">
+        ui:WindowHelper.UseModernWindowStyle="True">
 
     <ui:NavigationView x:Name="NavigationView" 
                        IsBackEnabled="{Binding ElementName=Frame, Path=CanGoBack}"

@@ -7,8 +7,13 @@ namespace RBTools.UI.Wpf.ViewModels
 {
     public class CommunicationViewModel : NotifyPropertyChanged
     {
-        private string _commandStack;
         private PostCommandIssuer _issuer;
+        private string _commandStack;
+
+        public CommunicationViewModel(PostCommandIssuer issuer)
+        {
+            Issuer = issuer;
+        }
 
         public string CommandStack
         {

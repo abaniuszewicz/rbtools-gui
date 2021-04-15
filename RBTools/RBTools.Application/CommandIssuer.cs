@@ -19,7 +19,7 @@ namespace RBTools.Application
             _commandProcess = new CommandProcess(root);
         }
 
-        public void Issue(IRbtCommand command)
+        protected void Issue(IRbtCommand command)
         {
             var message = command.Print();
             _commandProcess.Send(message);

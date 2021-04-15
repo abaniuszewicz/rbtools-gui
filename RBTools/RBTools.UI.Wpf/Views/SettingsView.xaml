@@ -49,7 +49,7 @@
                   Grid.Row="0" Grid.Column="0"
                   Margin="15,0,15,0">
             <DataGrid Style="{StaticResource DataGrid}"
-                      ItemsSource="{Binding Groups}">
+                      ItemsSource="{Binding Settings.Groups}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Display"
                                         Binding="{Binding Display}"
@@ -79,7 +79,7 @@
                   Grid.Row="0" Grid.Column="1"
                   Margin="15,0,15,0">
             <DataGrid Style="{StaticResource DataGrid}"
-                      ItemsSource="{Binding People}">
+                      ItemsSource="{Binding Settings.People}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Display"
                                         Binding="{Binding Display}"
@@ -111,13 +111,13 @@
             <StackPanel Width="200">
                 <TextBox ui:ControlHelper.Header="Repository root"
                          ui:ControlHelper.PlaceholderText="path"
-                         Text="{Binding RepositoryRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                         Text="{Binding Settings.RepositoryRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBox ui:ControlHelper.Header="Repository url"
                          ui:ControlHelper.PlaceholderText="url"
-                         Text="{Binding RepositoryUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                         Text="{Binding Settings.RepositoryUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBox ui:ControlHelper.Header="Repository name"
                          ui:ControlHelper.PlaceholderText="name"
-                         Text="{Binding RepositoryName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                         Text="{Binding Settings.RepositoryName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
         </GroupBox>
 
@@ -126,11 +126,11 @@
                   Margin="30,0,30,0">
             <StackPanel MaxWidth="300">
                 <CheckBox Content="Open in browser" 
-                              IsChecked="{Binding OpenInBrowser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                              IsChecked="{Binding Settings.OpenInBrowser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <CheckBox Content="Publish"
-                              IsChecked="{Binding Publish, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                              IsChecked="{Binding Settings.Publish, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <CheckBox Content="SVN show copies as adds"
-                              IsChecked="{Binding SvnShowCopiesAsAdds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                              IsChecked="{Binding Settings.SvnShowCopiesAsAdds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
         </GroupBox>
 
