@@ -131,6 +131,7 @@
                         <TextBox ui:ControlHelper.Header="Changes"
                                  ui:ControlHelper.PlaceholderText="What has been updated"
                                  AcceptsReturn="True"
+                                 TextWrapping="Wrap"
                                  Height="150"
                                  Text="{Binding UpdateDescription, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>

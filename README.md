@@ -14,7 +14,7 @@ Using RBTools GUI you can forget about:
 - [x] typing all of paths that should be included in the review - paths are assigned based on files you select for the review
 - [x] having to escape CLI-illegal characters - this will be done behind the scenes for your convenience
 
-### :x: Resign on rigid command line interface
+### :x: Resign from rigid command line interface
 
 ![rbt-cli-workflow](Assets/rbtools_cli.gif)
 
@@ -48,7 +48,7 @@ To deploy and make use of RBTools GUI on a live system, you're gonna need:
 * Access to Review Board server (see [Review Board Administration Guide](https://www.reviewboard.org/docs/manual/dev/admin/))
 * RBTools [downloaded](https://www.reviewboard.org/downloads/rbtools/), installed & added to the PATH
 
-Having this set up all you have to do is to install this application itself. You should ensure that shortcut is located at `%appdata%\Roaming\Microsoft\Windows\SendTo\` as this is required for proper [workflow](##Workflow).
+Having this set up all you have to do is to install this application itself. You should ensure that shortcut is located at `%appdata%\Roaming\Microsoft\Windows\SendTo\` as this is required for proper [workflow](#Workflow).
 
 On the first launch you might want to create/import settings that define repository configuration as well as default selections of available options. This has to be done just once.
 
