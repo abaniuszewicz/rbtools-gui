@@ -120,17 +120,13 @@
       <Project>{5e560b6b-0572-4b08-8a69-fe88316f2849}</Project>
       <Name>RBTools.Application</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RBTools.Persistence\RBTools.Persistence.csproj">
+    <ProjectReference Include="..\RBTools.Infrastructure.Persistence\RBTools.Infrastructure.Persistence.csproj">
       <Project>{1a857b89-6eae-4282-81e5-ede54ecdd57c}</Project>
-      <Name>RBTools.Persistence</Name>
+      <Name>RBTools.Infrastructure.Persistence</Name>
     </ProjectReference>
     <ProjectReference Include="..\RBToolsGUI.Application\RBTools.Application.csproj">
       <Project>{5e560b6b-0572-4b08-8a69-fe88316f2849}</Project>
       <Name>RBTools.Application</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RBToolsGUI.Persistence\RBTools.Persistence.csproj">
-      <Project>{1a857b89-6eae-4282-81e5-ede54ecdd57c}</Project>
-      <Name>RBTools.Persistence</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

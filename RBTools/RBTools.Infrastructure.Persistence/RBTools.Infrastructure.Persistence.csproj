@@ -7,8 +7,8 @@
     <ProjectGuid>{1A857B89-6EAE-4282-81E5-EDE54ECDD57C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RBTools.Persistence</RootNamespace>
-    <AssemblyName>RBTools.Persistence</AssemblyName>
+    <RootNamespace>RBTools.Infrastructure.Persistence</RootNamespace>
+    <AssemblyName>RBTools.Infrastructure.Persistence</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -56,6 +56,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <LangVersion>preview</LangVersion>
   </PropertyGroup>

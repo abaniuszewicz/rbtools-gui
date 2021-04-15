@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RBTools.Application", "RBTo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RBTools.UI.Wpf", "RBTools.UI.Wpf\RBTools.UI.Wpf.csproj", "{B6990C20-C540-497E-917C-001BA763C000}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RBTools.Persistence", "RBTools.Persistence\RBTools.Persistence.csproj", "{1A857B89-6EAE-4282-81E5-EDE54ECDD57C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RBTools.Infrastructure.Persistence", "RBTools.Infrastructure.Persistence\RBTools.Infrastructure.Persistence.csproj", "{1A857B89-6EAE-4282-81E5-EDE54ECDD57C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

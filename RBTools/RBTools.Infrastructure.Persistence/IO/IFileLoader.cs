@@ -1,6 +1,6 @@
-﻿using RBTools.Persistence.Exceptions;
+﻿using RBTools.Infrastructure.Persistence.Exceptions;
 
-namespace RBTools.Persistence.IO
+namespace RBTools.Infrastructure.Persistence.IO
 {
     public interface IFileLoader
     {

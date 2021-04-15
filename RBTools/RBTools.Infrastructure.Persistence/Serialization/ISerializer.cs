@@ -1,4 +1,4 @@
-﻿namespace RBTools.Persistence.Serialization
+﻿namespace RBTools.Infrastructure.Persistence.Serialization
 {
     public interface ISerializer
     {

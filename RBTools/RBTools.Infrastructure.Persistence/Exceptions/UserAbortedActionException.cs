@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RBTools.Persistence.Exceptions
+namespace RBTools.Infrastructure.Persistence.Exceptions
 {
     public class UserAbortedActionException : Exception
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace RBTools.Persistence.IO
+namespace RBTools.Infrastructure.Persistence.IO
 {
     internal class JsonSettingsPathProvider : IPathProvider
     {

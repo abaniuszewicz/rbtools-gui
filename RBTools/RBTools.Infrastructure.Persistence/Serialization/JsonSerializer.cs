@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace RBTools.Persistence.Serialization
+namespace RBTools.Infrastructure.Persistence.Serialization
 {
     public class JsonSerializer : ISerializer
     {

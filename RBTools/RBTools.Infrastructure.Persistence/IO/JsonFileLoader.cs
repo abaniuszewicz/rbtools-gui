@@ -1,8 +1,8 @@
 ﻿using System.IO;
 using Microsoft.Win32;
-using RBTools.Persistence.Exceptions;
+using RBTools.Infrastructure.Persistence.Exceptions;
 
-namespace RBTools.Persistence.IO
+namespace RBTools.Infrastructure.Persistence.IO
 {
     public class JsonFileLoader : IFileLoader
     {

@@ -1,4 +1,4 @@
-﻿namespace RBTools.Persistence.IO
+﻿namespace RBTools.Infrastructure.Persistence.IO
 {
     public interface IFileSaver
     {

@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Microsoft.Win32;
 
-namespace RBTools.Persistence.IO
+namespace RBTools.Infrastructure.Persistence.IO
 {
     public class JsonFileSaver : IFileSaver
     {
