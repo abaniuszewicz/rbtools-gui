@@ -26,7 +26,7 @@ Using RBTools GUI you can forget about:
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development purposes. See [deployment](##Deployment) for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development purposes. See [deployment](#Deployment) for notes on how to deploy the project on a live system.
 
 ### Prerequisites
 
