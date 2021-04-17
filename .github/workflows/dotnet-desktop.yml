@@ -14,24 +14,24 @@ jobs:
     env:
       Solution_Name: RBTools.sln
       Working_Directory: RBTools
-      dotNET_Version: '4.8.x'
+      NETCORE_VERSION: '5.0.101'
 
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-
-    - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@v1.0.2
+      
+    - name: Setup .NET Core SDK ${{ env.NETCORE_VERSION }}
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.NETCORE_VERSION }}
       
     - name: Restore NuGet Packages
       working-directory: ${{ env.Working_Directory }}
-      run: nuget restore ${{ env.Solution_Name }}
+      run: dotnet restore
 
     - name: Build the application
       working-directory: ${{ env.Working_Directory }}
-      run: msbuild ${{ env.Solution_Name }} /t:Build /p:Configuration=Release
-      env:
-        Configuration: ${{ matrix.configuration }}
+      run: dotnet build
         
     - name: Execute unit tests
       run: dotnet test
