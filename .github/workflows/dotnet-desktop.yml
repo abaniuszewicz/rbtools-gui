@@ -23,7 +23,7 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.2
       
     - name: Restore NuGet Packages
-      run: nuget restore ${{ Solution_Name }}
+      run: nuget restore ${{ env.Solution_Name }}
 
     # Execute all unit tests in the solution
 #     - name: Execute unit tests
@@ -32,7 +32,7 @@ jobs:
 
     # Restore the application to populate the obj folder with RuntimeIdentifiers
     - name: Build the application
-      run: msbuild ${{ Solution_Name }} /t:Build /p:Configuration=Release
+      run: msbuild ${{ env.Solution_Name }} /t:Build /p:Configuration=Release
       working-directory: ${{ env.Working_Directory }}
       env:
         Configuration: ${{ matrix.configuration }}
