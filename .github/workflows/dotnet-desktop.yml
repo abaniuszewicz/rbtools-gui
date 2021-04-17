@@ -8,6 +8,7 @@ on: [ workflow_dispatch ]
 
 jobs:
   build:
+    name: Build and Test
     runs-on: windows-latest 
     
     env:
@@ -26,14 +27,12 @@ jobs:
       working-directory: ${{ env.Working_Directory }}
       run: nuget restore ${{ env.Solution_Name }}
 
-    # Execute all unit tests in the solution
-#     - name: Execute unit tests
-#       run: dotnet test
-#       working-directory: ${{ env.Working_Directory }}
-
-    # Restore the application to populate the obj folder with RuntimeIdentifiers
     - name: Build the application
       working-directory: ${{ env.Working_Directory }}
       run: msbuild ${{ env.Solution_Name }} /t:Build /p:Configuration=Release
       env:
         Configuration: ${{ matrix.configuration }}
+        
+    - name: Execute unit tests
+      run: dotnet test
+      working-directory: ${{ env.Working_Directory }}
