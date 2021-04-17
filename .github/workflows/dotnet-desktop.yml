@@ -18,7 +18,7 @@ jobs:
     env:
       Solution_Name: RBTools
       Working_Directory: RBTools
-      dotNET_Version: 4.8
+      dotNET_Version: '4.8'
 
     steps:
     - name: Checkout
