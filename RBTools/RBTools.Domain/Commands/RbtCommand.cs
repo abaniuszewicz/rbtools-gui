@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using RBTools.Domain.Options;
-using RBTools.Domain.SeedWork;
 
 namespace RBTools.Domain.Commands
 {
@@ -12,7 +11,7 @@ namespace RBTools.Domain.Commands
         
         public string Print()
         {
-            var options = Options.OfType<IPrintable>()
+            var options = Options
                 .Select(po => po.Print());
             
             return options.Any()
