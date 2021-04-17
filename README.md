@@ -56,7 +56,7 @@ On the first launch you might want to create/import settings that define reposit
 
 * [Report bug](https://github.com/abaniuszewicz/rbtools-gui/issues) or [request new feature](https://github.com/abaniuszewicz/rbtools-gui/issues) and help verify ones checked in
 * Review [source code changes](https://github.com/abaniuszewicz/rbtools-gui/pulls)
-* Submit [pull request](https://github.com/microsoft/vscode/pulls)
+* Submit [pull request](https://github.com/abaniuszewicz/rbtools-gui/pulls)
 
 ## License
 
