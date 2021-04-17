@@ -11,21 +11,21 @@ namespace RBTools.Domain.Tests.Commands
     public class RbtCommandTests
     {
         private Mock<RbtCommand> _command;
-        
+
         [SetUp]
         public void SetUp()
         {
             _command = new Mock<RbtCommand>();
             _command.Setup(c => c.Command).Returns("commandName");
         }
-        
+
         [Test]
         public void Print_WhenNoOptionsSpecified_ReturnsOnlyRbtAndNameOfCommand()
         {
             _command.Setup(c => c.Options).Returns(Enumerable.Empty<IRbtOption>());
 
             var text = _command.Object.Print();
-            
+
             Assert.AreEqual("rbt commandName", text);
         }
 
@@ -34,10 +34,10 @@ namespace RBTools.Domain.Tests.Commands
         {
             var option = new Mock<IRbtOption>();
             option.Setup(o => o.Print()).Returns("option");
-            _command.Setup(c => c.Options).Returns(new[] {option.Object});
+            _command.Setup(c => c.Options).Returns(new[] { option.Object });
 
             var text = _command.Object.Print();
-            
+
             Assert.AreEqual("rbt commandName option", text);
         }
 
@@ -50,10 +50,10 @@ namespace RBTools.Domain.Tests.Commands
             option1.Setup(o => o.Print()).Returns("1");
             option2.Setup(o => o.Print()).Returns("2");
             option3.Setup(o => o.Print()).Returns("3");
-            _command.Setup(c => c.Options).Returns(new[] {option1.Object, option2.Object, option3.Object});
+            _command.Setup(c => c.Options).Returns(new[] { option1.Object, option2.Object, option3.Object });
 
             var text = _command.Object.Print();
-            
+
             Assert.AreEqual("rbt commandName 1 2 3", text);
         }
     }

@@ -1,5 +1,5 @@
-﻿using Autofac;
-using System.Windows;
+﻿using System.Windows;
+using Autofac;
 using RBTools.Application;
 using RBTools.Infrastructure.Persistence.IO;
 using RBTools.Infrastructure.Persistence.Serialization;
@@ -19,13 +19,13 @@ namespace RBTools.UI.Wpf
             IFileLoader loader = new JsonFileLoader();
             ISerializer serializer = new JsonSerializer();
             var settings = GetSettings(loader, serializer);
-            
+
             var builder = new ContainerBuilder();
-            
+
             builder.RegisterInstance(loader).As<IFileLoader>();
             builder.RegisterInstance(serializer).As<ISerializer>();
             builder.RegisterType<JsonFileSaver>().As<IFileSaver>();
-            
+
             builder.RegisterInstance(settings).AsSelf()
                 .SingleInstance();
             builder.RegisterType<PostCommandIssuer>().AsSelf()
@@ -40,13 +40,13 @@ namespace RBTools.UI.Wpf
             builder.RegisterType<CommunicationView>().AsSelf();
             builder.RegisterType<SendView>().AsSelf();
             builder.RegisterType<SettingsView>().AsSelf();
-            
+
             var container = builder.Build();
             using var scope = container.BeginLifetimeScope();
             var mainWindow = scope.Resolve<MainWindow>();
             mainWindow.ShowDialog();
         }
-        
+
         private static Settings GetSettings(IFileLoader loader, ISerializer serializer)
         {
             try

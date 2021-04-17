@@ -1,16 +1,15 @@
 ﻿<Page x:Class="RBTools.UI.Wpf.Views.SettingsView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:ui="http://schemas.modernwpf.com/2019"
-      xmlns:viewModels="clr-namespace:RBTools.UI.Wpf.ViewModels"
-      d:DataContext="{d:DesignInstance Type=viewModels:SendViewModel}"
-      mc:Ignorable="d"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
       Title="SettingsView">
-
+    
     <Page.Resources>
-        <Style TargetType="Button" x:Key="AccentButton" BasedOn="{StaticResource AccentButtonStyle}">
+        <Style TargetType="Button" x:Key="AccentButton">
             <Setter Property="Width" Value="100"/>
             <Setter Property="Height" Value="50"/>
             <Setter Property="Margin" Value="5"/>
@@ -30,7 +29,7 @@
             </Style.Resources>
         </Style>
     </Page.Resources>
-    
+
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

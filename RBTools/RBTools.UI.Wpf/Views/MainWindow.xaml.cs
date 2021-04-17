@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Windows;
 using Autofac;
 using ModernWpf.Controls;
 using WindowsControls = System.Windows.Controls;
@@ -11,7 +12,7 @@ namespace RBTools.UI.Wpf.Views
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow
+    public partial class MainWindow : Window
     {
         private readonly IEnumerable<(NavigationViewItemBase NavigationItem, WindowsControls.Page destination)> _navigationItemToDestinationType;
 
@@ -33,7 +34,8 @@ namespace RBTools.UI.Wpf.Views
         {
             if (args.InvokedItemContainer == LicensesNavigationItem)
             {
-                Process.Start(@"Resources\ThirdPartyLicenses.txt");
+                var licensePath = @"Resources\ThirdPartyLicenses.txt";
+                Process.Start(new ProcessStartInfo(licensePath) { UseShellExecute = true });
                 return;
             }
 

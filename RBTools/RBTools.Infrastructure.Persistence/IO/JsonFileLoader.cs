@@ -1,6 +1,6 @@
 ﻿using System.IO;
-using Microsoft.Win32;
 using RBTools.Infrastructure.Persistence.Exceptions;
+using Microsoft.Win32;
 
 namespace RBTools.Infrastructure.Persistence.IO
 {
@@ -10,6 +10,7 @@ namespace RBTools.Infrastructure.Persistence.IO
 
         public string Load()
         {
+            var x = new OpenFileDialog();
             var dialog = new OpenFileDialog()
             {
                 Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*",
