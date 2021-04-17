@@ -1,5 +1,4 @@
-https://github.com/abaniuszewicz/rbtools-gui/actions/workflows/dotnet-desktop/badge.svg
-
+![workflow](https://github.com/abaniuszewicz/rbtools-gui/actions/workflows/dotnet-desktop.yml/badge.svg)
 # RBTools GUI
 
 RBTools GUI is a application built on top of [RBTools](https://github.com/reviewboard/rbtools), a set of command line tools for use with [Review Board](https://github.com/reviewboard/reviewboard). It is designed to give you flexibility known from [`rbt`](https://www.reviewboard.org/docs/rbtools/2.0/#rbt-command) command, at the same time taking away the pain of CLI interaction.
