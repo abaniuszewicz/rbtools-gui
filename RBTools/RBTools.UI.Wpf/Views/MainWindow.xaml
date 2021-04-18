@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="768" Width="1366"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         ui:WindowHelper.UseModernWindowStyle="True">
     
@@ -42,6 +42,6 @@
                                    Tag="Licenses"/>
         </ui:NavigationView.FooterMenuItems>
 
-        <ui:Frame x:Name="Frame" ContentRendered="Frame_ContentRendered"/>
+        <ui:Frame x:Name="Frame" ContentRendered="Frame_ContentRendered" Padding="10"/>
     </ui:NavigationView>
 </Window>

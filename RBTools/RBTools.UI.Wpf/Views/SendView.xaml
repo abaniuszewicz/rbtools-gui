@@ -4,10 +4,10 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:ui="http://schemas.modernwpf.com/2019"
-      xmlns:converters="clr-namespace:RBTools.UI.Wpf.SeedWork.Converters"
+      xmlns:converters="clr-namespace:RBTools.UI.Wpf.SeedWork.Converters" 
+      xmlns:viewmodels="clr-namespace:RBTools.UI.Wpf.ViewModels" 
       d:DataContext="{d:DesignInstance Type=viewmodels:SendViewModel}"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
       Title="SendView"
       KeepAlive="True">
 
@@ -16,6 +16,14 @@
         <converters:ReviewTypeToBooleanConverter x:Key="ReviewTypeToBooleanConverter"/>
         <converters:ReviewTypeToVisibilityConverter x:Key="ReviewTypeToVisibilityConverter"/>
         <converters:IgnoreNewItemPlaceholderConverter x:Key="IgnoreNewItemPlaceholderConverter"/>
+        <Style TargetType="TextBox" x:Key="OneLineTextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="AcceptsTab" Value="True"/>
+        </Style>
+        <Style TargetType="TextBox" x:Key="MultiLineTextBox" BasedOn="{StaticResource OneLineTextBox}">
+            <Setter Property="AcceptsReturn" Value="True"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+        </Style>
     </Page.Resources>
 
     <Grid>
@@ -23,149 +31,140 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="*" MaxWidth="400"/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
 
-        <TextBox Grid.Row="0" Grid.Column="0"
-                 Grid.ColumnSpan="2"
-                 ui:ControlHelper.Header="Summary"
-                 ui:ControlHelper.PlaceholderText="Short summary"
-                 Text="{Binding Summary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        <TextBox Grid.Row="1" Grid.Column="0"
-                 ui:ControlHelper.Header="Description"
-                 ui:ControlHelper.PlaceholderText="What was the purpose of this modification"
-                 AcceptsReturn="True"
-                 TextWrapping="Wrap"
-                 Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Grid.Row="0"
+                     ui:ControlHelper.Header="Summary"
+                     ui:ControlHelper.PlaceholderText="Short summary"
+                     Style="{StaticResource OneLineTextBox}"
+                     Text="{Binding Summary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <TextBox Grid.Row="2" Grid.Column="0"
-                 ui:ControlHelper.Header="Testing done"
-                 ui:ControlHelper.PlaceholderText="What has been done in order to verify whether requirements have been fulfilled"
-                 AcceptsReturn="True"
-                 TextWrapping="Wrap"
-                 Text="{Binding TestingDone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Grid.Row="1"
+                     ui:ControlHelper.Header="Description"
+                     ui:ControlHelper.PlaceholderText="What was the purpose of this modification"
+                     Style="{StaticResource MultiLineTextBox}"
+                     Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <Border Grid.Row="1" Grid.Column="1"
-                Grid.RowSpan="3"
-                Padding="10">
-            <Grid>
+            <TextBox Grid.Row="2"
+                     ui:ControlHelper.Header="Testing done"
+                     ui:ControlHelper.PlaceholderText="What has been done in order to verify whether requirements have been fulfilled"
+                     Style="{StaticResource MultiLineTextBox}"
+                     Text="{Binding TestingDone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </Grid>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+        <Grid Grid.Column="1"
+              Margin="10,0,0,0">
 
-                <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*" MaxHeight="150"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <GroupBox Header="Groups"
+                          Grid.Row="0" Grid.Column="0">
+                    <ui:ListView ItemsSource="{Binding Settings.Groups}"
+                                 SelectionMode="Multiple"
+                                 ScrollViewer.CanContentScroll="False">
+                        <ui:ListView.Resources>
+                            <Style TargetType="{x:Type ui:ListViewItem}">
+                                <Setter Property="Content" Value="{Binding Display, Mode=OneWay}"/>
+                                <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
+                                <Setter Property="Visibility" Value="{Binding Converter={StaticResource IgnoreNewItemPlaceholderConverter}}"/>
+                            </Style>
+                        </ui:ListView.Resources>
+                    </ui:ListView>
+                </GroupBox>
+
+                <GroupBox Header="People"
+                          Grid.Row="0" Grid.Column="1">
+                    <ui:ListView ItemsSource="{Binding Settings.People}"
+                                 SelectionMode="Multiple"
+                                 ScrollViewer.CanContentScroll="False">
+                        <ui:ListView.Resources>
+                            <Style TargetType="{x:Type ui:ListViewItem}">
+                                <Setter Property="Content" Value="{Binding Display, Mode=OneWay}"/>
+                                <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
+                                <Setter Property="Visibility" Value="{Binding Converter={StaticResource IgnoreNewItemPlaceholderConverter}}"/>
+                            </Style>
+                        </ui:ListView.Resources>
+                    </ui:ListView>
+                </GroupBox>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <ui:RadioButtons Header="Review type"
+                                 Grid.Column="0">
+                    <RadioButton Content="New"
+                                 ToolTip="Indicates that these changes should be posted as new review"
+                                 IsChecked="{Binding ReviewType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ReviewTypeToBooleanConverter}}"/>
+                    <RadioButton Content="Update"
+                                 ToolTip="Indicates that these changes should update already existing review"
+                                 IsChecked="{Binding ReviewType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ReviewTypeToBooleanConverter}, ConverterParameter=invert}"/>
+                </ui:RadioButtons>
+
+                <Grid Grid.Column="1"
+                      IsEnabled="{Binding ReviewType, Converter={StaticResource ReviewTypeToBooleanConverter}, ConverterParameter=invert}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*" MaxHeight="150"/>
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="Groups"
-                               Grid.Column="0"
-                               Grid.Row="0"/>
-                    <TextBlock Text="People"
-                               Grid.Column="1"
-                               Grid.Row="0"/>
-
-                    <ui:ListView ui:ControlHelper.Header="Groups"
-                                 Grid.Column="0"
-                                 Grid.Row="1"
-                                 SelectionMode="Multiple"
-                                 ItemsSource="{Binding Settings.Groups}"
-                                 ScrollViewer.CanContentScroll="False">
-                        <ui:ListView.Resources>
-                            <Style TargetType="{x:Type ui:ListViewItem}">
-                                <Setter Property="Content" Value="{Binding Display, Mode=OneWay}"/>
-                                <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
-                                <Setter Property="Visibility" Value="{Binding Converter={StaticResource IgnoreNewItemPlaceholderConverter}}"/>
-                            </Style>
-                        </ui:ListView.Resources>
-                    </ui:ListView>
-
-                    <ui:ListView ui:ControlHelper.Header="People"
-                                 Grid.Column="1"
-                                 Grid.Row="1"
-                                 SelectionMode="Multiple"
-                                 ItemsSource="{Binding Settings.People}"
-                                 ScrollViewer.CanContentScroll="False">
-                        <ui:ListView.Resources>
-                            <Style TargetType="{x:Type ui:ListViewItem}">
-                                <Setter Property="Content" Value="{Binding Display, Mode=OneWay}"/>
-                                <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
-                                <Setter Property="Visibility" Value="{Binding Converter={StaticResource IgnoreNewItemPlaceholderConverter}}"/>
-                            </Style>
-                        </ui:ListView.Resources>
-                    </ui:ListView>
+                    <TextBox Grid.Row="0"
+                             ui:ControlHelper.Header="Review id"
+                             ui:ControlHelper.PlaceholderText="123"
+                             Style="{StaticResource OneLineTextBox}"
+                             Text="{Binding ReviewId}"/>
+                    <TextBox Grid.Row="1"
+                             ui:ControlHelper.Header="Changes"
+                             ui:ControlHelper.PlaceholderText="What has been updated"
+                             Style="{StaticResource MultiLineTextBox}"
+                             Text="{Binding UpdateDescription, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </Grid>
-
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <ui:RadioButtons Header="Review type"
-                                     Grid.Column="0">
-                        <RadioButton Content="New"
-                                     ToolTip="Indicates that these changes should be posted as new review"
-                                     IsChecked="{Binding ReviewType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ReviewTypeToBooleanConverter}}"/>
-                        <RadioButton Content="Update"
-                                     ToolTip="Indicates that these changes should update already existing review"
-                                     IsChecked="{Binding ReviewType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ReviewTypeToBooleanConverter}, ConverterParameter=invert}"/>
-                    </ui:RadioButtons>
-
-                    <StackPanel Grid.Column="1"
-                                IsEnabled="{Binding ReviewType, Converter={StaticResource ReviewTypeToBooleanConverter}, ConverterParameter=invert}">
-
-                        <TextBox ui:ControlHelper.Header="Review id"
-                                 ui:ControlHelper.PlaceholderText="123"
-                                 Text="{Binding ReviewId}"/>
-                        <TextBox ui:ControlHelper.Header="Changes"
-                                 ui:ControlHelper.PlaceholderText="What has been updated"
-                                 AcceptsReturn="True"
-                                 TextWrapping="Wrap"
-                                 Height="150"
-                                 Text="{Binding UpdateDescription, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    </StackPanel>
-                </Grid>
-
-                <StackPanel Grid.Row="2"
-                            Margin="0,20,0,0">
-                    <CheckBox Content="Open in browser" 
-                              ToolTip="When selected will open review in default browser right after posting"
-                              IsChecked="{Binding Settings.OpenInBrowser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-
-                    <CheckBox Content="Publish"
-                              ToolTip="When selected will publish review right after posting"
-                              IsChecked="{Binding Settings.Publish, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-
-                    <CheckBox Content="SVN show copies as adds"
-                              ToolTip="When selected will treat copied/moved files as new ones"
-                              IsChecked="{Binding Settings.SvnShowCopiesAsAdds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                </StackPanel>
-
-                <Button Content="Post"
-                        ToolTip="Post review"
-                        Command="{Binding PostCommand}"
-                        Style="{StaticResource AccentButtonStyle}"
-                        Grid.Row="3"
-                        Grid.Column="1"
-                        Width="100" Height="50"
-                        Margin="20"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Bottom"/>
             </Grid>
-        </Border>
+
+            <StackPanel Grid.Row="2">
+                <CheckBox Content="Open in browser" 
+                          ToolTip="When selected will open review in default browser right after posting"
+                          IsChecked="{Binding Settings.OpenInBrowser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <CheckBox Content="Publish"
+                          ToolTip="When selected will publish review right after posting"
+                          IsChecked="{Binding Settings.Publish, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <CheckBox Content="SVN show copies as adds"
+                          ToolTip="When selected will treat copied/moved files as new ones"
+                          IsChecked="{Binding Settings.SvnShowCopiesAsAdds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+
+            <Button Grid.Row="3"
+                    Margin="25"
+                    Content="Post"
+                    ToolTip="Post review"
+                    Command="{Binding PostCommand}"
+                    Style="{StaticResource AccentButtonStyle}"
+                    Width="100" Height="50"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"/>
+
+        </Grid>
     </Grid>
 </Page>

@@ -3,13 +3,19 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:ui="http://schemas.modernwpf.com/2019"
+      xmlns:ui="http://schemas.modernwpf.com/2019" 
+      xmlns:viewmodels="clr-namespace:RBTools.UI.Wpf.ViewModels" 
+      d:DataContext="{d:DesignInstance Type=viewmodels:SettingsViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="SettingsView">
+      Title="SettingsView"
+      KeepAlive="True">
     
     <Page.Resources>
-        <Style TargetType="Button" x:Key="AccentButton">
+        <Style TargetType="GroupBox" x:Key="EvenlySpacedGroupBox" BasedOn="{StaticResource {x:Type GroupBox}}">
+            <Setter Property="Margin" Value="10,0,10,0"/>
+        </Style>
+        <Style TargetType="Button" x:Key="AccentButton" BasedOn="{StaticResource AccentButtonStyle}">
             <Setter Property="Width" Value="100"/>
             <Setter Property="Height" Value="50"/>
             <Setter Property="Margin" Value="5"/>
@@ -23,118 +29,101 @@
             <Setter Property="GridLinesVisibility" Value="All"/>
             <Setter Property="AutoGenerateColumns" Value="False"/>
             <Setter Property="HeadersVisibility" Value="Column"/>
-            <Setter Property="MaxHeight" Value="600"/>
             <Style.Resources>
                 <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="Transparent"/>
             </Style.Resources>
         </Style>
+        <Style TargetType="DataGridCell" x:Key="DisplayColumnCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+            <Setter Property="ToolTip" Value="Text that will be visible for this item"/>
+        </Style>
+        <Style TargetType="DataGridCell" x:Key="ValueColumnCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+            <Setter Property="ToolTip" Value="Actual value of this item"/>
+        </Style>
     </Page.Resources>
 
-    <Grid Margin="10">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
 
-        <GroupBox Header="Groups"
-                  Grid.Row="0" Grid.Column="0"
-                  Margin="15,0,15,0">
-            <DataGrid Style="{StaticResource DataGrid}"
-                      ItemsSource="{Binding Settings.Groups}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Display"
-                                        Binding="{Binding Display}"
-                                        Width="100"
-                                        CanUserResize="False">
-                        <DataGridTextColumn.CellStyle>
-                            <Style TargetType="DataGridCell">
-                                <Setter Property="ToolTip" Value="Text that will be visible for this item"/>
-                            </Style>
-                        </DataGridTextColumn.CellStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="Value"
-                                        Binding="{Binding Value}"
-                                        Width="150"
-                                        CanUserResize="False">
-                        <DataGridTextColumn.CellStyle>
-                            <Style TargetType="DataGridCell">
-                                <Setter Property="ToolTip" Value="Actual value of this item"/>
-                            </Style>
-                        </DataGridTextColumn.CellStyle>
-                    </DataGridTextColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </GroupBox>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" MaxWidth="250"/>
+                <ColumnDefinition Width="*" MaxWidth="250"/>
+            </Grid.ColumnDefinitions>
 
-        <GroupBox Header="People"
-                  Grid.Row="0" Grid.Column="1"
-                  Margin="15,0,15,0">
-            <DataGrid Style="{StaticResource DataGrid}"
-                      ItemsSource="{Binding Settings.People}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Display"
-                                        Binding="{Binding Display}"
-                                        Width="100"
-                                        CanUserResize="False">
-                        <DataGridTextColumn.CellStyle>
-                            <Style TargetType="DataGridCell">
-                                <Setter Property="ToolTip" Value="Text that will be visible for this item"/>
-                            </Style>
-                        </DataGridTextColumn.CellStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="Value"
-                                        Binding="{Binding Value}"
-                                        Width="150"
-                                        CanUserResize="False">
-                        <DataGridTextColumn.CellStyle>
-                            <Style TargetType="DataGridCell">
-                                <Setter Property="ToolTip" Value="Actual value of this item"/>
-                            </Style>
-                        </DataGridTextColumn.CellStyle>
-                    </DataGridTextColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </GroupBox>
+            <GroupBox Header="Groups"
+                      Style="{StaticResource EvenlySpacedGroupBox}"
+                      Grid.Row="0" Grid.Column="0">
+                <DataGrid Style="{StaticResource DataGrid}"
+                          ItemsSource="{Binding Settings.Groups}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Display"
+                                            Width="100"
+                                            Binding="{Binding Display}"
+                                            CellStyle="{StaticResource DisplayColumnCell}"/>
+                        <DataGridTextColumn Header="Value"
+                                            Width="*"
+                                            Binding="{Binding Value}"
+                                            ToolTipService.ToolTip="Test"
+                                            CellStyle="{StaticResource ValueColumnCell}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
 
-        <GroupBox Header="Repository settings"
-                  Grid.Row="0" Grid.Column="2"
-                  Margin="15,0,15,0">
-            <StackPanel Width="200">
-                <TextBox ui:ControlHelper.Header="Repository root"
-                         ui:ControlHelper.PlaceholderText="path"
-                         Text="{Binding Settings.RepositoryRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBox ui:ControlHelper.Header="Repository url"
-                         ui:ControlHelper.PlaceholderText="url"
-                         Text="{Binding Settings.RepositoryUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBox ui:ControlHelper.Header="Repository name"
-                         ui:ControlHelper.PlaceholderText="name"
-                         Text="{Binding Settings.RepositoryName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
-        </GroupBox>
+            <GroupBox Header="People"
+                      Style="{StaticResource EvenlySpacedGroupBox}"
+                      Grid.Row="0" Grid.Column="1">
+                <DataGrid Style="{StaticResource DataGrid}"
+                          ItemsSource="{Binding Settings.People}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Display"
+                                            Width="100"
+                                            Binding="{Binding Display}"
+                                            CellStyle="{StaticResource DisplayColumnCell}"/>
+                        <DataGridTextColumn Header="Value"
+                                            Width="*"
+                                            Binding="{Binding Value}"
+                                            CellStyle="{StaticResource ValueColumnCell}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
 
-        <GroupBox Header="Default selections"
-                  Grid.Row="0" Grid.Column="3"
-                  Margin="30,0,30,0">
-            <StackPanel MaxWidth="300">
-                <CheckBox Content="Open in browser" 
+            <GroupBox Header="Repository settings"
+                      Style="{StaticResource EvenlySpacedGroupBox}"
+                      Grid.Row="0" Grid.Column="2">
+                <StackPanel>
+                    <TextBox ui:ControlHelper.Header="Repository root"
+                             ui:ControlHelper.PlaceholderText="path"
+                             Text="{Binding Settings.RepositoryRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox ui:ControlHelper.Header="Repository url"
+                             ui:ControlHelper.PlaceholderText="url"
+                             Text="{Binding Settings.RepositoryUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox ui:ControlHelper.Header="Repository name"
+                             ui:ControlHelper.PlaceholderText="name"
+                             Text="{Binding Settings.RepositoryName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="Default selections"
+                      Style="{StaticResource EvenlySpacedGroupBox}"
+                      Grid.Row="0" Grid.Column="3">
+                <StackPanel>
+                    <CheckBox Content="Open in browser" 
                               IsChecked="{Binding Settings.OpenInBrowser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <CheckBox Content="Publish"
+                    <CheckBox Content="Publish"
                               IsChecked="{Binding Settings.Publish, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <CheckBox Content="SVN show copies as adds"
+                    <CheckBox Content="SVN show copies as adds"
                               IsChecked="{Binding Settings.SvnShowCopiesAsAdds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
-        </GroupBox>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
 
         <StackPanel Orientation="Horizontal"
-                    Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5"
+                    Grid.Row="1"
                     HorizontalAlignment="Right">
             <Button Content="Export"
                     ToolTip="Export settings to file"
