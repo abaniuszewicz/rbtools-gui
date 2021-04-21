@@ -12,9 +12,8 @@
       KeepAlive="True">
 
     <Page.Resources>
-        <converters:InvertBooleanConverter x:Key="InvertBooleanConverter"/>
-        <converters:ReviewTypeToBooleanConverter x:Key="ReviewTypeToBooleanConverter"/>
-        <converters:ReviewTypeToVisibilityConverter x:Key="ReviewTypeToVisibilityConverter"/>
+        <converters:IsUpdateReviewTypeConverter x:Key="IsUpdateReviewTypeConverter"/>
+        <converters:IsPostCommitReviewTypeConverter x:Key="IsPostCommitReviewTypeConverter"/>
         <converters:IgnoreNewItemPlaceholderConverter x:Key="IgnoreNewItemPlaceholderConverter"/>
         <Style TargetType="TextBox" x:Key="OneLineTextBox" BasedOn="{StaticResource {x:Type TextBox}}">
             <Setter Property="AcceptsTab" Value="True"/>
@@ -63,7 +62,7 @@
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*" MaxHeight="150"/>
+                <RowDefinition Height="*" MaxHeight="300"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
@@ -105,43 +104,35 @@
                 </GroupBox>
             </Grid>
 
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+            <DockPanel Grid.Row="1">
+                <ComboBox ui:ControlHelper.Header="Review type"
+                          ItemsSource="{Binding ReviewTypes, Mode=OneTime}"
+                          SelectedItem="{Binding ReviewType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          DisplayMemberPath="Display"
+                          HorizontalAlignment="Stretch"
+                          DockPanel.Dock="Top"/>
+                <TextBox ui:ControlHelper.Header="Revision(s)"
+                         ui:ControlHelper.PlaceholderText="R or R1:R2 (svn) or R1..R2 (git)"
+                         Style="{StaticResource OneLineTextBox}"
+                         Text="{Binding Revision, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         IsEnabled="{Binding ReviewType, Converter={StaticResource IsPostCommitReviewTypeConverter}}"
+                         DockPanel.Dock="Top"/>
+                <TextBox ui:ControlHelper.Header="Review id"
+                         ui:ControlHelper.PlaceholderText="123"
+                         Style="{StaticResource OneLineTextBox}"
+                         Text="{Binding ReviewId}"
+                         IsEnabled="{Binding ReviewType, Converter={StaticResource IsUpdateReviewTypeConverter}}"
+                         DockPanel.Dock="Top"/>
+                <TextBox ui:ControlHelper.Header="Changes"
+                         ui:ControlHelper.PlaceholderText="What has been updated"
+                         Style="{StaticResource MultiLineTextBox}"
+                         Text="{Binding UpdateDescription, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         IsEnabled="{Binding ReviewType, Converter={StaticResource IsUpdateReviewTypeConverter}}"
+                         DockPanel.Dock="Bottom"/>
+            </DockPanel>
 
-                <ui:RadioButtons Header="Review type"
-                                 Grid.Column="0">
-                    <RadioButton Content="New"
-                                 ToolTip="Indicates that these changes should be posted as new review"
-                                 IsChecked="{Binding ReviewType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ReviewTypeToBooleanConverter}}"/>
-                    <RadioButton Content="Update"
-                                 ToolTip="Indicates that these changes should update already existing review"
-                                 IsChecked="{Binding ReviewType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ReviewTypeToBooleanConverter}, ConverterParameter=invert}"/>
-                </ui:RadioButtons>
-
-                <Grid Grid.Column="1"
-                      IsEnabled="{Binding ReviewType, Converter={StaticResource ReviewTypeToBooleanConverter}, ConverterParameter=invert}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*" MaxHeight="150"/>
-                    </Grid.RowDefinitions>
-
-                    <TextBox Grid.Row="0"
-                             ui:ControlHelper.Header="Review id"
-                             ui:ControlHelper.PlaceholderText="123"
-                             Style="{StaticResource OneLineTextBox}"
-                             Text="{Binding ReviewId}"/>
-                    <TextBox Grid.Row="1"
-                             ui:ControlHelper.Header="Changes"
-                             ui:ControlHelper.PlaceholderText="What has been updated"
-                             Style="{StaticResource MultiLineTextBox}"
-                             Text="{Binding UpdateDescription, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                </Grid>
-            </Grid>
-
-            <StackPanel Grid.Row="2">
+            <StackPanel Grid.Row="2"
+                        Margin="0,25,0,0">
                 <CheckBox Content="Open in browser" 
                           ToolTip="When selected will open review in default browser right after posting"
                           IsChecked="{Binding Settings.OpenInBrowser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>

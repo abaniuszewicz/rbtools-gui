@@ -48,6 +48,8 @@ namespace RBTools.Application.Communication.Mapping
                 options.Add(new SvnShowCopiesAsAdds(ShowCopiesAsAddsOption.Yes));
             if (dto.IncludePaths != null && dto.IncludePaths.Any())
                 options.AddRange(dto.IncludePaths.Select(p => new Include(p)));
+            if (dto.Revision != default)
+                options.Add(new Revision(dto.Revision));
                 
             return new PostCommand(options);
         }

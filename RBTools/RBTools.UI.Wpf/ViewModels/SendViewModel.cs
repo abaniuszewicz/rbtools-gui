@@ -16,15 +16,18 @@ namespace RBTools.UI.Wpf.ViewModels
         private string _reviewId;
         private string _updateDescription;
         private ReviewType _reviewType;
+        private string _revision;
 
         public SendViewModel(Settings settings, PostCommandIssuer issuer)
         {
             Settings = settings;
             Issuer = issuer;
+            ReviewType = ReviewTypes.First();
         }
 
         public Settings Settings { get; }
         public PostCommandIssuer Issuer { get; }
+        public ReviewType[] ReviewTypes { get; } = new[] { ReviewType.PreCommitNew, ReviewType.PreCommitUpdate, ReviewType.PostCommitNew, ReviewType.PostCommitUpdate };
 
         public ICommand PostCommand => new RelayCommand<RbtPostDto>(o => Issuer.Issue(Mapper.CreateDto(this)));
 
@@ -68,6 +71,17 @@ namespace RBTools.UI.Wpf.ViewModels
             {
                 if (_reviewType == value) return;
                 _reviewType = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Revision
+        {
+            get => _revision;
+            set
+            {
+                if (_revision == value) return;
+                _revision = value;
                 OnPropertyChanged();
             }
         }

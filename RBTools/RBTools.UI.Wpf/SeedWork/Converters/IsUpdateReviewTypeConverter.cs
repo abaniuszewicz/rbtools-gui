@@ -1,14 +1,15 @@
-﻿using System;
+﻿using RBTools.UI.Wpf.Models;
+using System;
 using System.Globalization;
 using System.Windows.Data;
 
 namespace RBTools.UI.Wpf.SeedWork.Converters
 {
-    public class InvertBooleanConverter : IValueConverter
+    class IsUpdateReviewTypeConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value != null && !(bool)value;
+            return value is ReviewType reviewType && reviewType.IsUpdate;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

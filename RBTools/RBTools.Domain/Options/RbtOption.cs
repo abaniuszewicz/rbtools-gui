@@ -13,6 +13,7 @@ namespace RBTools.Domain.Options
                 IHasShortForm form => $"-{form.ShortForm}",
                 IHasLongForm form and IHasValue value => $"--{form.LongForm} {CommandParameterEncoder.Encode(value.Value)}",
                 IHasLongForm form => $"--{form.LongForm}",
+                IHasValue value => $"{CommandParameterEncoder.Encode(value.Value)}",
                 _ => throw new NotImplementedException("This option does not implement any members that could be used for printing."), // HACK: not really proud of this
             };
         }
