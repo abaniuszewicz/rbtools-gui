@@ -11,6 +11,11 @@ namespace RBTools.Application.Communication.DTO
         /// </summary>
         public IEnumerable<string> IncludePaths { get; set; }
         
+        /// <summary>
+        /// In case of post-commit review, revision or revision range.
+        /// </summary>
+        public string Revision { get; set; }
+
         #endregion
         
         #region Fields

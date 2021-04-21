@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using RBTools.Application.Communication.DTO;
-using RBTools.UI.Wpf.Models;
 using RBTools.UI.Wpf.ViewModels;
 
 namespace RBTools.UI.Wpf.SeedWork.Mapping
@@ -31,13 +30,19 @@ namespace RBTools.UI.Wpf.SeedWork.Mapping
             if (!string.IsNullOrWhiteSpace(vm.Settings.RepositoryUrl))
                 dto.Server = vm.Settings.RepositoryUrl;
 
-            if (vm.ReviewType == ReviewType.Update)
+            if (vm.ReviewType.IsUpdate)
             {
                 dto.Update = true;
                 if (!string.IsNullOrWhiteSpace(vm.UpdateDescription))
                     dto.UpdateDescription = vm.UpdateDescription;
                 if (!string.IsNullOrWhiteSpace(vm.ReviewId) && int.TryParse(vm.ReviewId, out var reviewId))
                     dto.ReviewRequestId = reviewId;
+            }
+
+            if (vm.ReviewType.IsPostCommit)
+            {
+                dto.IncludePaths = Enumerable.Empty<string>();
+                dto.Revision = vm.Revision;
             }
 
             return dto;
