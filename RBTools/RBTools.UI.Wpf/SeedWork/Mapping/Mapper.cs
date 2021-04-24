@@ -29,6 +29,8 @@ namespace RBTools.UI.Wpf.SeedWork.Mapping
                 dto.Repository = vm.Settings.RepositoryName;
             if (!string.IsNullOrWhiteSpace(vm.Settings.RepositoryUrl))
                 dto.Server = vm.Settings.RepositoryUrl;
+            if (!string.IsNullOrWhiteSpace(vm.BugIds))
+                dto.BugIds = vm.BugIds.Split(',', StringSplitOptions.RemoveEmptyEntries);
 
             if (vm.ReviewType.IsUpdate)
             {

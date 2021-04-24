@@ -61,7 +61,7 @@
               Margin="10,0,0,0">
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.5*"/>
                 <RowDefinition Height="*" MaxHeight="300"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -104,7 +104,8 @@
                 </GroupBox>
             </Grid>
 
-            <DockPanel Grid.Row="1">
+            <DockPanel Grid.Row="1"
+                       LastChildFill="True">
                 <ComboBox ui:ControlHelper.Header="Review type"
                           ItemsSource="{Binding ReviewTypes, Mode=OneTime}"
                           SelectedItem="{Binding ReviewType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -123,6 +124,11 @@
                          Text="{Binding ReviewId}"
                          IsEnabled="{Binding ReviewType, Converter={StaticResource IsUpdateReviewTypeConverter}}"
                          DockPanel.Dock="Top"/>
+                <TextBox ui:ControlHelper.Header="Bug ids"
+                         ui:ControlHelper.PlaceholderText="Comma separated bug ids"
+                         Style="{StaticResource OneLineTextBox}"
+                         Text="{Binding BugIds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         DockPanel.Dock="Bottom"/>
                 <TextBox ui:ControlHelper.Header="Changes"
                          ui:ControlHelper.PlaceholderText="What has been updated"
                          Style="{StaticResource MultiLineTextBox}"
@@ -140,10 +146,6 @@
                 <CheckBox Content="Publish"
                           ToolTip="When selected will publish review right after posting"
                           IsChecked="{Binding Settings.Publish, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-
-                <CheckBox Content="SVN show copies as adds"
-                          ToolTip="When selected will treat copied/moved files as new ones"
-                          IsChecked="{Binding Settings.SvnShowCopiesAsAdds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
 
             <Button Grid.Row="3"
