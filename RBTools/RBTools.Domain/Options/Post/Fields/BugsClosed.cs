@@ -6,7 +6,7 @@ namespace RBTools.Domain.Options.Post.Fields
 {
     public class BugsClosed : RbtOption, IHasLongForm, IHasValue
     {
-        public string LongForm { get; } = "--bugs-closed";
+        public string LongForm { get; } = "bugs-closed";
         public string Value { get; }
 
         public BugsClosed(IEnumerable<string> bugIds)

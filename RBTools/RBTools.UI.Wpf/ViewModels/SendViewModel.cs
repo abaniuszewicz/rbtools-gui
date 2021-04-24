@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using RBTools.Application;
 using RBTools.Application.Communication.DTO;
@@ -17,6 +19,7 @@ namespace RBTools.UI.Wpf.ViewModels
         private string _updateDescription;
         private ReviewType _reviewType;
         private string _revision;
+        private string _bugIds;
 
         public SendViewModel(Settings settings, PostCommandIssuer issuer)
         {
@@ -28,7 +31,6 @@ namespace RBTools.UI.Wpf.ViewModels
         public Settings Settings { get; }
         public PostCommandIssuer Issuer { get; }
         public ReviewType[] ReviewTypes { get; } = new[] { ReviewType.PreCommitNew, ReviewType.PreCommitUpdate, ReviewType.PostCommitNew, ReviewType.PostCommitUpdate };
-
         public ICommand PostCommand => new RelayCommand<RbtPostDto>(o => Issuer.Issue(Mapper.CreateDto(this)));
 
         public string Summary
@@ -105,6 +107,17 @@ namespace RBTools.UI.Wpf.ViewModels
             {
                 if (_updateDescription == value) return;
                 _updateDescription = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string BugIds
+        {
+            get => _bugIds;
+            set
+            {
+                if (_bugIds == value) return;
+                _bugIds = value;
                 OnPropertyChanged();
             }
         }
