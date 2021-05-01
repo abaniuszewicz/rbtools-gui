@@ -14,8 +14,8 @@ namespace RBTools.UI.Wpf.SeedWork.Mapping
                 OpenBrowser = vm.Settings.OpenInBrowser,
                 Publish = vm.Settings.Publish,
                 SvnShowCopiesAsAdds = vm.Settings.SvnShowCopiesAsAdds,
-                TargetGroups = vm.Settings.Groups.Where(g => g.IsSelected).Select(g => g.Value),
-                TargetPeople = vm.Settings.People.Where(p => p.IsSelected).Select(p => p.Value),
+                // TargetGroups = vm.Settings.Groups.Where(g => g.IsSelected).Select(g => g.Value),
+                // TargetPeople = vm.Settings.People.Where(p => p.IsSelected).Select(p => p.Value),
                 IncludePaths = Environment.GetCommandLineArgs().Skip(1),
             };
 

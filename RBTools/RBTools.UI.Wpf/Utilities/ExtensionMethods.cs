@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using RBTools.Application.Models;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using RBTools.UI.Wpf.Models;
 
 namespace RBTools.UI.Wpf.Utilities
 {
     public static class ExtensionMethods
     {
-        public static void ReplaceContentWith(this ObservableCollection<SelectableText> original, IEnumerable<SelectableText> replacement)
+        public static void ReplaceContentWith(this ObservableCollection<AbbreviatedOption> original, IEnumerable<AbbreviatedOption> replacement)
         {
             original.Clear();
             foreach (var selectableText in replacement)

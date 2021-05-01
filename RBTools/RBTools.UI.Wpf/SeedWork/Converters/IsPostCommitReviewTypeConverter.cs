@@ -1,4 +1,4 @@
-﻿using RBTools.UI.Wpf.Models;
+﻿using RBTools.Application.Models;
 using System;
 using System.Globalization;
 using System.Windows.Data;
