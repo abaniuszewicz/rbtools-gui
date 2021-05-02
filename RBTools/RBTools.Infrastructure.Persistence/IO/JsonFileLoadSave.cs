@@ -5,7 +5,7 @@ using System.IO;
 
 namespace RBTools.Infrastructure.Persistence.IO
 {
-    public class JsonFileManager : IFileManager
+    public class JsonFileLoadSave : IFileLoadSave
     {
         private static readonly string Directory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RBToolsGUI");
 
@@ -41,6 +41,7 @@ namespace RBTools.Infrastructure.Persistence.IO
             var dialog = new SaveFileDialog()
             {
                 Filter = "JSON files (*.json)|*.json",
+                FileName = "file.json",
             };
 
             var result = dialog.ShowDialog();

@@ -1,9 +1,8 @@
 ﻿using Autofac;
-using RBTools.Application.Configuration;
+using RBTools.Application.Config;
 using RBTools.Infrastructure.Persistence.IO;
 using RBTools.Infrastructure.Persistence.IO.TempFiles;
 using RBTools.Infrastructure.Persistence.Serialization;
-using RBTools.Infrastructure.Persistence.Settings;
 
 namespace RBTools.Infrastructure.Persistence
 {
@@ -14,8 +13,8 @@ namespace RBTools.Infrastructure.Persistence
             base.Load(builder);
 
             builder.RegisterType<JsonSerializer>().As<ISerializer>();
-            builder.RegisterType<JsonFileManager>().As<IFileManager>();
-            builder.RegisterType<SettingsManager>().As<ISettingsManager>();
+            builder.RegisterType<JsonFileLoadSave>().As<IFileLoadSave>();
+            builder.RegisterType<SettingsManager>().As<IConfigurationManager>();
             builder.RegisterType<TempFile>().As<ITempFile>();
             builder.RegisterType<TempFileProvider>().As<ITempFileProvider>();
         }

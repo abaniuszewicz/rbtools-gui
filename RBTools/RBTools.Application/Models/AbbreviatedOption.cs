@@ -2,7 +2,7 @@
 
 namespace RBTools.Application.Models
 {
-    public class AbbreviatedOption : IEquatable<AbbreviatedOption>
+    public class AbbreviatedOption : IEquatable<AbbreviatedOption>, IDeepCopy<AbbreviatedOption>
     {
         public string Abbreviation { get; set; }
         public string Value { get; set; }

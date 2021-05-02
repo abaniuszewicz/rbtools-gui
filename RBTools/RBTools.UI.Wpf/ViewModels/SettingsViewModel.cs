@@ -1,5 +1,5 @@
 ﻿using System.Windows.Input;
-using RBTools.Application.Configuration;
+using RBTools.Application.Config;
 using RBTools.Application.Exceptions;
 using RBTools.UI.Wpf.SeedWork;
 
@@ -7,21 +7,21 @@ namespace RBTools.UI.Wpf.ViewModels
 {
     public class SettingsViewModel : NotifyPropertyChanged
     {
-        private ISettingsMemento _memento;
-        private readonly ISettingsManager _settingsManager;
+        private IConfigurationMemento _memento;
+        private readonly IConfigurationManager _settingsManager;
 
-        public SettingsViewModel(ISettings settings, ISettingsManager settingsManager)
+        public SettingsViewModel(ConfigurationViewModel configuration, IConfigurationManager settingsManager)
         {
-            Settings = settings;
+            Configuration = configuration;
             _settingsManager = settingsManager;
-            _memento = new SettingsMemento(settings);
+            _memento = new ConfigurationMemento(configuration.ToConfiguration());
             
             ImportCommand = new RelayCommand<object>(o => Import());
             ExportCommand = new RelayCommand<object>(o => Export());
-            SaveCommand = new RelayCommand<object>(o => Save(), o => _memento.HasStateChanged(Settings));
+            SaveCommand = new RelayCommand<object>(o => Save(), o => _memento.HasStateChanged(Configuration.ToConfiguration()));
         }
 
-        public ISettings Settings { get; }
+        public ConfigurationViewModel Configuration { get; }
         public ICommand ImportCommand { get; }
         public ICommand ExportCommand { get; }
         public ICommand SaveCommand { get; }
@@ -30,8 +30,8 @@ namespace RBTools.UI.Wpf.ViewModels
         {
             try
             {
-                ISettings settings = _settingsManager.Import();
-                Settings.RestoreFrom(settings);
+                IConfiguration configuration = _settingsManager.Import();
+                Configuration.FromConfiguration(configuration);
             }
             catch (UserAbortedActionException)
             {
@@ -41,12 +41,15 @@ namespace RBTools.UI.Wpf.ViewModels
 
         private void Export()
         {
-            _settingsManager.Export(Settings);
+            IConfiguration configuration = Configuration.ToConfiguration();
+            _settingsManager.Export(configuration);
         }
 
         private void Save()
         {
-            _settingsManager.Save(Settings);
+            IConfiguration configuration = Configuration.ToConfiguration();
+            _settingsManager.Save(configuration);
+            _memento = new ConfigurationMemento(configuration);
         }
     }
 }

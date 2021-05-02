@@ -1,6 +1,6 @@
 ﻿namespace RBTools.Infrastructure.Persistence.IO
 {
-    public interface IFileManager
+    public interface IFileLoadSave
     {
         public string Load(string filename);
         public string Load();

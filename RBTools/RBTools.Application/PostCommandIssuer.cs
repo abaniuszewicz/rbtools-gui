@@ -1,12 +1,12 @@
 ﻿using RBTools.Application.Communication.DTO;
 using RBTools.Application.Communication.Mapping;
-using RBTools.Application.Configuration;
+using RBTools.Application.Config;
 
 namespace RBTools.Application
 {
     public class PostCommandIssuer : CommandIssuer
     {
-        public PostCommandIssuer(ISettings settings) 
+        public PostCommandIssuer(IConfiguration settings) 
             : base(settings)
         {
         }

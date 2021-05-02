@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Threading;
 using RBTools.Application.Communication.Events;
-using RBTools.Application.Configuration;
 
 namespace RBTools.Application
 {

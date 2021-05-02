@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RBTools.Application.Configuration
+namespace RBTools.Application.Config
 {
-    public class Settings : ISettings
+    public interface IConfiguration
     {
-        public List<AbbreviatedOption> Groups { get; set; }
-        public List<AbbreviatedOption> People { get; set; }
+        public IEnumerable<AbbreviatedOption> Groups { get; set; }
+        public IEnumerable<AbbreviatedOption> People { get; set; }
         public string RepositoryRoot { get; set; }
         public string RepositoryUrl { get; set; }
         public string RepositoryName { get; set; }
@@ -15,7 +15,7 @@ namespace RBTools.Application.Configuration
         public bool Publish { get; set; }
         public bool SvnShowCopiesAsAdds { get; set; }
 
-        public void RestoreFrom(ISettings settings)
+        public void RestoreFrom(IConfiguration settings)
         {
             if (settings is null)
                 return;

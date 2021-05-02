@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using RBTools.Application.Configuration;
+using RBTools.Application.Config;
 
 namespace RBTools.Application
 {
@@ -9,8 +9,8 @@ namespace RBTools.Application
         {
             base.Load(builder);
 
-            builder.RegisterType<Settings>().As<ISettings>().SingleInstance();
-            builder.RegisterType<SettingsMemento>().As<ISettingsMemento>();
+            builder.RegisterType<Configuration>().As<IConfiguration>().SingleInstance();
+            builder.RegisterType<ConfigurationMemento>().As<IConfigurationMemento>();
             builder.RegisterType<PostCommandIssuer>().AsSelf().SingleInstance();
         }
     }

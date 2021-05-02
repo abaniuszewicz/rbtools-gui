@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:ui="http://schemas.modernwpf.com/2019"
-      xmlns:converters="clr-namespace:RBTools.UI.Wpf.SeedWork.Converters" 
+      xmlns:converters="clr-namespace:RBTools.UI.Wpf.Converters" 
       xmlns:viewmodels="clr-namespace:RBTools.UI.Wpf.ViewModels" 
       d:DataContext="{d:DesignInstance Type=viewmodels:SendViewModel}"
       mc:Ignorable="d" 
@@ -75,12 +75,12 @@
 
                 <GroupBox Header="Groups"
                           Grid.Row="0" Grid.Column="0">
-                    <ui:ListView ItemsSource="{Binding Settings.Groups}"
+                    <ui:ListView ItemsSource="{Binding Configuration.Groups}"
                                  SelectionMode="Multiple"
                                  ScrollViewer.CanContentScroll="False">
                         <ui:ListView.Resources>
                             <Style TargetType="{x:Type ui:ListViewItem}">
-                                <Setter Property="Content" Value="{Binding Display, Mode=OneWay}"/>
+                                <Setter Property="Content" Value="{Binding Abbreviation, Mode=OneWay}"/>
                                 <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
                                 <Setter Property="Visibility" Value="{Binding Converter={StaticResource IgnoreNewItemPlaceholderConverter}}"/>
                             </Style>
@@ -90,12 +90,12 @@
 
                 <GroupBox Header="People"
                           Grid.Row="0" Grid.Column="1">
-                    <ui:ListView ItemsSource="{Binding Settings.People}"
+                    <ui:ListView ItemsSource="{Binding Configuration.People}"
                                  SelectionMode="Multiple"
                                  ScrollViewer.CanContentScroll="False">
                         <ui:ListView.Resources>
                             <Style TargetType="{x:Type ui:ListViewItem}">
-                                <Setter Property="Content" Value="{Binding Display, Mode=OneWay}"/>
+                                <Setter Property="Content" Value="{Binding Abbreviation, Mode=OneWay}"/>
                                 <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
                                 <Setter Property="Visibility" Value="{Binding Converter={StaticResource IgnoreNewItemPlaceholderConverter}}"/>
                             </Style>
@@ -109,7 +109,7 @@
                 <ComboBox ui:ControlHelper.Header="Review type"
                           ItemsSource="{Binding ReviewTypes, Mode=OneTime}"
                           SelectedItem="{Binding ReviewType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                          DisplayMemberPath="Display"
+                          DisplayMemberPath="Type"
                           HorizontalAlignment="Stretch"
                           DockPanel.Dock="Top"/>
                 <TextBox ui:ControlHelper.Header="Revision(s)"
@@ -141,11 +141,11 @@
                         Margin="0,25,0,0">
                 <CheckBox Content="Open in browser" 
                           ToolTip="When selected will open review in default browser right after posting"
-                          IsChecked="{Binding Settings.OpenInBrowser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                          IsChecked="{Binding Configuration.OpenInBrowser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <CheckBox Content="Publish"
                           ToolTip="When selected will publish review right after posting"
-                          IsChecked="{Binding Settings.Publish, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                          IsChecked="{Binding Configuration.Publish, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
 
             <Button Grid.Row="3"

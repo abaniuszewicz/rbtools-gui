@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RBTools.Application.Configuration
+namespace RBTools.Application.Config
 {
-    public class SettingsMemento : ISettingsMemento
+    public class ConfigurationMemento : IConfigurationMemento
     {
-        public SettingsMemento(ISettings settings)
+        public ConfigurationMemento(IConfiguration settings)
         {
-            RestoreFrom(settings);
+            ((IConfiguration)this).RestoreFrom(settings);
         }
 
-        public List<AbbreviatedOption> Groups { get; set; }
-        public List<AbbreviatedOption> People { get; set; }
+        public IEnumerable<AbbreviatedOption> Groups { get; set; }
+        public IEnumerable<AbbreviatedOption> People { get; set; }
         public string RepositoryRoot { get; set; }
         public string RepositoryUrl { get; set; }
         public string RepositoryName { get; set; }
@@ -20,7 +20,7 @@ namespace RBTools.Application.Configuration
         public bool Publish { get; set; }
         public bool SvnShowCopiesAsAdds { get; set; }
 
-        public bool HasStateChanged(ISettings current)
+        public bool HasStateChanged(IConfiguration current)
         {
             var equals = AreEqual(Groups, current.Groups)
                          && AreEqual(People, current.People)
@@ -34,22 +34,7 @@ namespace RBTools.Application.Configuration
             return !equals;
         }
 
-        public void RestoreFrom(ISettings settings)
-        {
-            if (settings is null)
-                return;
-
-            Groups = settings.Groups?.Select(g => g?.DeepCopy()).ToList();
-            People = settings.People?.Select(p => p?.DeepCopy()).ToList();
-            RepositoryRoot = settings.RepositoryRoot;
-            RepositoryUrl = settings.RepositoryUrl;
-            RepositoryName = settings.RepositoryName;
-            OpenInBrowser = settings.OpenInBrowser;
-            Publish = settings.Publish;
-            SvnShowCopiesAsAdds = settings.SvnShowCopiesAsAdds;
-        }
-
-        private static bool AreEqual(List<AbbreviatedOption> first, List<AbbreviatedOption> second)
+        private static bool AreEqual(IEnumerable<AbbreviatedOption> first, IEnumerable<AbbreviatedOption> second)
         {
             bool isFirstEmpty = first is null || !first.Any();
             bool isSecondEmpty = second is null || !second.Any();

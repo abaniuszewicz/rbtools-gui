@@ -1,6 +1,6 @@
 ﻿using System;
 using RBTools.Application.Communication.Events;
-using RBTools.Application.Configuration;
+using RBTools.Application.Config;
 using RBTools.Domain.Commands;
 
 namespace RBTools.Application
@@ -15,7 +15,7 @@ namespace RBTools.Application
             remove => _commandProcess.MessageReceived -= value;
         } 
 
-        protected CommandIssuer(ISettings settings)
+        protected CommandIssuer(IConfiguration settings)
         {
             _commandProcess = new CommandProcess(settings.RepositoryRoot);
         }
