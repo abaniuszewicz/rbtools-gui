@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows.Input;
 using RBTools.Application;
 using RBTools.Application.Communication.DTO;
-using RBTools.UI.Wpf.Models;
+using RBTools.Application.Models;
 using RBTools.UI.Wpf.SeedWork;
-using RBTools.UI.Wpf.SeedWork.Mapping;
+using RBTools.UI.Wpf.Utilities;
 
 namespace RBTools.UI.Wpf.ViewModels
 {
@@ -21,17 +19,18 @@ namespace RBTools.UI.Wpf.ViewModels
         private string _revision;
         private string _bugIds;
 
-        public SendViewModel(Settings settings, PostCommandIssuer issuer)
+        public SendViewModel(ConfigurationViewModel configuration, PostCommandIssuer issuer)
         {
-            Settings = settings;
+            Configuration = configuration;
             Issuer = issuer;
             ReviewType = ReviewTypes.First();
         }
 
-        public Settings Settings { get; }
+        public ConfigurationViewModel Configuration { get; }
         public PostCommandIssuer Issuer { get; }
         public ReviewType[] ReviewTypes { get; } = new[] { ReviewType.PreCommitNew, ReviewType.PreCommitUpdate, ReviewType.PostCommitNew, ReviewType.PostCommitUpdate };
         public ICommand PostCommand => new RelayCommand<RbtPostDto>(o => Issuer.Issue(Mapper.CreateDto(this)));
+
 
         public string Summary
         {

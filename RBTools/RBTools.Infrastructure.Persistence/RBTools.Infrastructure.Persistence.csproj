@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net5.0-windows10.0.19041</TargetFramework>
@@ -7,9 +7,15 @@
     
 
     <ItemGroup>
+      <PackageReference Include="Autofac" Version="6.2.0" />
       <PackageReference Include="Newtonsoft.Json">
         <Version>13.0.1</Version>
       </PackageReference>
+    </ItemGroup>
+    
+
+    <ItemGroup>
+      <ProjectReference Include="..\RBTools.Application\RBTools.Application.csproj" />
     </ItemGroup>
 
 </Project>

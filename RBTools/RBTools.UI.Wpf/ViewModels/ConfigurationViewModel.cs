@@ -1,10 +1,12 @@
-﻿using System.Collections.ObjectModel;
+﻿using RBTools.Application.Config;
 using RBTools.UI.Wpf.SeedWork;
 using RBTools.UI.Wpf.Utilities;
+using System.Collections.ObjectModel;
+using System.Linq;
 
-namespace RBTools.UI.Wpf.Models
+namespace RBTools.UI.Wpf.ViewModels
 {
-    public class Settings : NotifyPropertyChanged
+    public class ConfigurationViewModel : NotifyPropertyChanged
     {
         private string _repositoryRoot;
         private string _repositoryUrl;
@@ -13,20 +15,13 @@ namespace RBTools.UI.Wpf.Models
         private bool _publish;
         private bool _svnShowCopiesAsAdds;
 
-        public void RestoreFrom(Settings other)
+        public ConfigurationViewModel(IConfiguration configuration)
         {
-            RepositoryRoot = other.RepositoryRoot;
-            RepositoryUrl = other.RepositoryUrl;
-            RepositoryName = other.RepositoryName;
-            OpenInBrowser = other.OpenInBrowser;
-            Publish = other.Publish;
-            SvnShowCopiesAsAdds = other.SvnShowCopiesAsAdds;
-            Groups.ReplaceContentWith(other.Groups);
-            People.ReplaceContentWith(other.People);
+            FromConfiguration(configuration);
         }
-        
-        public ObservableCollection<SelectableText> Groups { get; set; } = new ObservableCollection<SelectableText>();
-        public ObservableCollection<SelectableText> People { get; set; } = new ObservableCollection<SelectableText>();
+
+        public ObservableCollection<SelectableAbbreviatedOptionViewModel> Groups { get; set; } = new();
+        public ObservableCollection<SelectableAbbreviatedOptionViewModel> People { get; set; } = new();
 
         public string RepositoryRoot
         {
@@ -92,6 +87,35 @@ namespace RBTools.UI.Wpf.Models
                 _svnShowCopiesAsAdds = value;
                 OnPropertyChanged();
             }
+        }
+
+        public void FromConfiguration(IConfiguration configuration)
+        {
+            if (configuration.Groups is not null)
+                Groups.ReplaceContentWith(configuration.Groups.Select(ao => new SelectableAbbreviatedOptionViewModel(ao)));
+            if (configuration.People is not null)
+                People.ReplaceContentWith(configuration.People.Select(ao => new SelectableAbbreviatedOptionViewModel(ao)));
+            RepositoryRoot = configuration.RepositoryRoot;
+            RepositoryUrl = configuration.RepositoryUrl;
+            RepositoryName = configuration.RepositoryName;
+            OpenInBrowser = configuration.OpenInBrowser;
+            Publish = configuration.Publish;
+            SvnShowCopiesAsAdds = configuration.SvnShowCopiesAsAdds;
+        }
+
+        public IConfiguration ToConfiguration()
+        {
+            return new Configuration()
+            {
+                Groups = Groups.Select(g => g.ToAbbreviatedOption()),
+                People = People.Select(p => p.ToAbbreviatedOption()),
+                RepositoryRoot = RepositoryRoot,
+                RepositoryUrl = RepositoryUrl,
+                RepositoryName = RepositoryName,
+                OpenInBrowser = OpenInBrowser,
+                Publish = Publish,
+                SvnShowCopiesAsAdds = SvnShowCopiesAsAdds,
+            };
         }
     }
 }

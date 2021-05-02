@@ -1,5 +1,6 @@
 ﻿using System;
 using RBTools.Application.Communication.Events;
+using RBTools.Application.Config;
 using RBTools.Domain.Commands;
 
 namespace RBTools.Application
@@ -14,9 +15,9 @@ namespace RBTools.Application
             remove => _commandProcess.MessageReceived -= value;
         } 
 
-        protected CommandIssuer(string root)
+        protected CommandIssuer(IConfiguration settings)
         {
-            _commandProcess = new CommandProcess(root);
+            _commandProcess = new CommandProcess(settings.RepositoryRoot);
         }
 
         protected void Issue(IRbtCommand command)
@@ -25,7 +26,7 @@ namespace RBTools.Application
             _commandProcess.Send(message);
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
            _commandProcess?.Dispose();
         }

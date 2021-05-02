@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using RBTools.Domain.SeedWork;
 
 namespace RBTools.Domain.Options
 {

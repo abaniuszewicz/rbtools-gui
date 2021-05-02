@@ -1,60 +1,55 @@
 ﻿using System.Windows.Input;
-using RBTools.Infrastructure.Persistence.Exceptions;
-using RBTools.Infrastructure.Persistence.IO;
-using RBTools.Infrastructure.Persistence.Serialization;
-using RBTools.UI.Wpf.Models;
+using RBTools.Application.Config;
+using RBTools.Application.Exceptions;
 using RBTools.UI.Wpf.SeedWork;
 
 namespace RBTools.UI.Wpf.ViewModels
 {
     public class SettingsViewModel : NotifyPropertyChanged
     {
-        private SettingsMemento _memento;
+        private IConfigurationMemento _memento;
+        private readonly IConfigurationManager _settingsManager;
 
-        public SettingsViewModel(Settings settings, IFileLoader loader, IFileSaver saver, ISerializer serializer)
+        public SettingsViewModel(ConfigurationViewModel configuration, IConfigurationManager settingsManager)
         {
-            Settings = settings;
-            _memento = new SettingsMemento(settings);
+            Configuration = configuration;
+            _settingsManager = settingsManager;
+            _memento = new ConfigurationMemento(configuration.ToConfiguration());
             
-            ImportCommand = new RelayCommand<object>(o => Import(loader, serializer));
-            ExportCommand = new RelayCommand<object>(o => Export(saver, serializer));
-            SaveCommand = new RelayCommand<object>(o => Save(saver, serializer), o => _memento.HasChanged(Settings));
+            ImportCommand = new RelayCommand<object>(o => Import());
+            ExportCommand = new RelayCommand<object>(o => Export());
+            SaveCommand = new RelayCommand<object>(o => Save(), o => _memento.HasStateChanged(Configuration.ToConfiguration()));
         }
 
-        public Settings Settings { get; }
+        public ConfigurationViewModel Configuration { get; }
         public ICommand ImportCommand { get; }
         public ICommand ExportCommand { get; }
         public ICommand SaveCommand { get; }
 
-        private void Import(IFileLoader fileLoader, ISerializer serializer)
+        private void Import()
         {
-            string content;
-
             try
             {
-                content = fileLoader.Load();
+                IConfiguration configuration = _settingsManager.Import();
+                Configuration.FromConfiguration(configuration);
             }
             catch (UserAbortedActionException)
             {
                 return;
             }
-
-            var settings = serializer.Deserialize<Settings>(content);
-            Settings.RestoreFrom(settings);
         }
 
-        private void Export(IFileSaver saver, ISerializer serializer)
+        private void Export()
         {
-            var memento = new SettingsMemento(Settings);
-            var content = serializer.Serialize(memento);
-            saver.Save(content);
+            IConfiguration configuration = Configuration.ToConfiguration();
+            _settingsManager.Export(configuration);
         }
 
-        private void Save(IFileSaver saver, ISerializer serializer)
+        private void Save()
         {
-            var content = serializer.Serialize(Settings);
-            saver.Save("settings", content);
-            _memento = new SettingsMemento(Settings);
+            IConfiguration configuration = Configuration.ToConfiguration();
+            _settingsManager.Save(configuration);
+            _memento = new ConfigurationMemento(configuration);
         }
     }
 }

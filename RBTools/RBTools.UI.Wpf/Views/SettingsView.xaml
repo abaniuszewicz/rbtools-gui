@@ -59,16 +59,15 @@
                       Style="{StaticResource EvenlySpacedGroupBox}"
                       Grid.Row="0" Grid.Column="0">
                 <DataGrid Style="{StaticResource DataGrid}"
-                          ItemsSource="{Binding Settings.Groups}">
+                          ItemsSource="{Binding Configuration.Groups}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Display"
                                             Width="100"
-                                            Binding="{Binding Display}"
+                                            Binding="{Binding Abbreviation}"
                                             CellStyle="{StaticResource DisplayColumnCell}"/>
                         <DataGridTextColumn Header="Value"
                                             Width="*"
                                             Binding="{Binding Value}"
-                                            ToolTipService.ToolTip="Test"
                                             CellStyle="{StaticResource ValueColumnCell}"/>
                     </DataGrid.Columns>
                 </DataGrid>
@@ -78,11 +77,11 @@
                       Style="{StaticResource EvenlySpacedGroupBox}"
                       Grid.Row="0" Grid.Column="1">
                 <DataGrid Style="{StaticResource DataGrid}"
-                          ItemsSource="{Binding Settings.People}">
+                          ItemsSource="{Binding Configuration.People}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Display"
                                             Width="100"
-                                            Binding="{Binding Display}"
+                                            Binding="{Binding Abbreviation}"
                                             CellStyle="{StaticResource DisplayColumnCell}"/>
                         <DataGridTextColumn Header="Value"
                                             Width="*"
@@ -98,13 +97,13 @@
                 <StackPanel>
                     <TextBox ui:ControlHelper.Header="Repository root"
                              ui:ControlHelper.PlaceholderText="path"
-                             Text="{Binding Settings.RepositoryRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                             Text="{Binding Configuration.RepositoryRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBox ui:ControlHelper.Header="Repository url"
                              ui:ControlHelper.PlaceholderText="url"
-                             Text="{Binding Settings.RepositoryUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                             Text="{Binding Configuration.RepositoryUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBox ui:ControlHelper.Header="Repository name"
                              ui:ControlHelper.PlaceholderText="name"
-                             Text="{Binding Settings.RepositoryName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                             Text="{Binding Configuration.RepositoryName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
             </GroupBox>
 
@@ -113,11 +112,11 @@
                       Grid.Row="0" Grid.Column="3">
                 <StackPanel>
                     <CheckBox Content="Open in browser" 
-                              IsChecked="{Binding Settings.OpenInBrowser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                              IsChecked="{Binding Configuration.OpenInBrowser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <CheckBox Content="Publish"
-                              IsChecked="{Binding Settings.Publish, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                              IsChecked="{Binding Configuration.Publish, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <CheckBox Content="SVN show copies as adds"
-                              IsChecked="{Binding Settings.SvnShowCopiesAsAdds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                              IsChecked="{Binding Configuration.SvnShowCopiesAsAdds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
             </GroupBox>
         </Grid>
