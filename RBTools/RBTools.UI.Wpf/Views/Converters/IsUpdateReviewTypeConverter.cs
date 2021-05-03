@@ -3,7 +3,7 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 
-namespace RBTools.UI.Wpf.Converters
+namespace RBTools.UI.Wpf.Views.Converters
 {
     class IsUpdateReviewTypeConverter : IValueConverter
     {

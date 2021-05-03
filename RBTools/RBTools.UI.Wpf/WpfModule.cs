@@ -1,5 +1,8 @@
 ﻿using Autofac;
+using RBTools.Application.Communication.DTO;
+using RBTools.Application.Communication.Mapping;
 using RBTools.UI.Wpf.ViewModels;
+using RBTools.UI.Wpf.ViewModels.Mapping;
 using RBTools.UI.Wpf.Views;
 
 namespace RBTools.UI.Wpf
@@ -13,8 +16,8 @@ namespace RBTools.UI.Wpf
             builder.RegisterType<CommunicationViewModel>().AsSelf();
             builder.RegisterType<SendViewModel>().AsSelf();
             builder.RegisterType<SettingsViewModel>().AsSelf();
-            builder.RegisterType<ConfigurationViewModel>().AsSelf()
-                .SingleInstance();
+            builder.RegisterType<ConfigurationViewModel>().AsSelf().SingleInstance();
+            builder.RegisterType<SendViewModelToDtoMapper>().As<IMapper<SendViewModel, RbtPostDto>>();
 
             builder.RegisterType<MainWindow>().AsSelf();
             builder.RegisterType<CommunicationView>().AsSelf();

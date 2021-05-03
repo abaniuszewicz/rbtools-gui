@@ -3,15 +3,15 @@ using System.Diagnostics;
 using System.Threading;
 using RBTools.Application.Communication.Events;
 
-namespace RBTools.Application
+namespace RBTools.Application.Commands
 {
     internal class CommandProcess : IDisposable
     {
         private static readonly SemaphoreSlim Semaphore = new(1, 1);
         private Process _process;
 
-        public event EventHandler<MessageEventArgs> MessageReceived; 
-        
+        public event EventHandler<MessageEventArgs> MessageReceived;
+
         public CommandProcess(string root)
         {
             InitializeCmdProcess(root);
@@ -42,13 +42,13 @@ namespace RBTools.Application
 
         private void WireMessageEvents()
         {
-            _process.OutputDataReceived += (s, e) 
+            _process.OutputDataReceived += (s, e)
                 => MessageReceived?.Invoke(this, e.Data);
-            _process.ErrorDataReceived += (s, e) 
+            _process.ErrorDataReceived += (s, e)
                 => MessageReceived?.Invoke(this, e.Data);
-            _process.Exited += (s, e) 
+            _process.Exited += (s, e)
                 => MessageReceived?.Invoke(this, "Command process exited.");
-            _process.Disposed += (s, e) 
+            _process.Disposed += (s, e)
                 => MessageReceived?.Invoke(this, "Command process disposed.");
         }
 

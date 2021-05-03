@@ -1,12 +1,15 @@
 ﻿using RBTools.Application.Config;
+using RBTools.Application.Models;
 using RBTools.UI.Wpf.SeedWork;
 using RBTools.UI.Wpf.Utilities;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace RBTools.UI.Wpf.ViewModels
 {
-    public class ConfigurationViewModel : NotifyPropertyChanged
+    public class ConfigurationViewModel : NotifyPropertyChanged, IEquatable<IConfiguration>
     {
         private string _repositoryRoot;
         private string _repositoryUrl;
@@ -89,6 +92,20 @@ namespace RBTools.UI.Wpf.ViewModels
             }
         }
 
+        public bool Equals(IConfiguration other)
+        {
+            var equals = AreEqual(Groups.Select(sao => sao.ToAbbreviatedOption()), other.Groups)
+                         && AreEqual(People.Select(sao => sao.ToAbbreviatedOption()), other.People)
+                         && (RepositoryRoot ?? string.Empty) == (other.RepositoryRoot ?? string.Empty)
+                         && (RepositoryUrl ?? string.Empty) == (other.RepositoryUrl ?? string.Empty)
+                         && (RepositoryName ?? string.Empty) == (other.RepositoryName ?? string.Empty)
+                         && OpenInBrowser == other.OpenInBrowser
+                         && Publish == other.Publish
+                         && SvnShowCopiesAsAdds == other.SvnShowCopiesAsAdds;
+
+            return !equals;
+        }
+
         public void FromConfiguration(IConfiguration configuration)
         {
             if (configuration.Groups is not null)
@@ -116,6 +133,18 @@ namespace RBTools.UI.Wpf.ViewModels
                 Publish = Publish,
                 SvnShowCopiesAsAdds = SvnShowCopiesAsAdds,
             };
+        }
+
+        private static bool AreEqual(IEnumerable<AbbreviatedOption> first, IEnumerable<AbbreviatedOption> second)
+        {
+            bool isFirstEmpty = first is null || !first.Any();
+            bool isSecondEmpty = second is null || !second.Any();
+            if (isFirstEmpty ^ isSecondEmpty)
+                return false; // only one is empty
+            if (isFirstEmpty)
+                return true; // both are empty
+
+            return first.SequenceEqual(second);
         }
     }
 }

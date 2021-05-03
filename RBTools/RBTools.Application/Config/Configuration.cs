@@ -1,4 +1,6 @@
-﻿using RBTools.Application.Models;
+﻿using RBTools.Application.Config.Exceptions;
+using RBTools.Application.Models;
+using System;
 using System.Collections.Generic;
 
 namespace RBTools.Application.Config
@@ -16,9 +18,9 @@ namespace RBTools.Application.Config
                 IConfiguration settings = settingsManager.Load();
                 ((IConfiguration)this).RestoreFrom(settings);
             }
-            catch
+            catch (Exception exception)
             {
-                // TODO
+                throw new InvalidSettingsException("Failed to load settings", exception);
             }
         }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using RBTools.Application.Communication.DTO;
+using RBTools.Application.Config.IOAbstractions;
 using RBTools.Domain.Commands;
 using RBTools.Domain.Options;
 using RBTools.Domain.Options.Post.DiffGeneration;
@@ -12,12 +13,20 @@ using RBTools.Domain.Options.Post.Subversion;
 
 namespace RBTools.Application.Communication.Mapping
 {
-    internal static class Mapper
+    public class PostCommandDtoMapper : IMapper<RbtPostDto, PostCommand>
     {
-        public static IRbtCommand AsPostCommand(this RbtPostDto dto)
+        private readonly ITempFileProvider _tempFileProvider;
+        private static readonly char[] LineBreakCharacters = new[] { '\n', '\r', '\f' };
+
+        public PostCommandDtoMapper(ITempFileProvider tempFileProvider)
+        {
+            _tempFileProvider = tempFileProvider;
+        }
+
+        public PostCommand Map(RbtPostDto dto)
         {
             var options = new List<IRbtOption>();
-            
+
             if (dto.Server != default)
                 options.Add(new Server(dto.Server));
             if (dto.Repository != default)
@@ -25,7 +34,18 @@ namespace RBTools.Application.Communication.Mapping
             if (dto.UpdateDescription != default)
                 options.Add(new ChangeDescription(dto.UpdateDescription));
             if (dto.Description != default)
-                options.Add(new Description(dto.Description));
+            {
+                if (!HasLineBreaks(dto.Description))
+                {
+                    options.Add(new Description(dto.Description));
+                }
+                else
+                {
+                    IFile descriptionFile = _tempFileProvider.Create();
+                    descriptionFile.Write(dto.Description);
+                    options.Add(new DescriptionFile(descriptionFile.Path));
+                }
+            }
             if (dto.Summary != default)
                 options.Add(new Summary(dto.Summary));
             if (dto.BugIds != null && dto.BugIds.Any())
@@ -35,7 +55,18 @@ namespace RBTools.Application.Communication.Mapping
             if (dto.TargetPeople != null && dto.TargetPeople.Any())
                 options.Add(new TargetPeople(dto.TargetPeople));
             if (dto.TestingDone != default)
-                options.Add(new TestingDone(dto.TestingDone));
+            {
+                if (!HasLineBreaks(dto.TestingDone))
+                {
+                    options.Add(new TestingDone(dto.TestingDone));
+                }
+                else
+                {
+                    IFile testingDoneFile = _tempFileProvider.Create();
+                    testingDoneFile.Write(dto.TestingDone);
+                    options.Add(new TestingDoneFile(testingDoneFile.Path));
+                }
+            }
             if (dto.OpenBrowser)
                 options.Add(new Open());
             if (dto.Publish)
@@ -50,8 +81,13 @@ namespace RBTools.Application.Communication.Mapping
                 options.AddRange(dto.IncludePaths.Select(p => new Include(p)));
             if (dto.Revision != default)
                 options.Add(new Revision(dto.Revision));
-                
+
             return new PostCommand(options);
+        }
+
+        private static bool HasLineBreaks(string text)
+        {
+            return LineBreakCharacters.Any(text.Contains);
         }
     }
 }

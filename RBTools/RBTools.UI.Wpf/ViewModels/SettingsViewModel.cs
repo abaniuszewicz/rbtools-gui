@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 using RBTools.Application.Config;
-using RBTools.Application.Exceptions;
+using RBTools.Application.Config.Exceptions;
 using RBTools.UI.Wpf.SeedWork;
 
 namespace RBTools.UI.Wpf.ViewModels
@@ -18,7 +18,7 @@ namespace RBTools.UI.Wpf.ViewModels
             
             ImportCommand = new RelayCommand<object>(o => Import());
             ExportCommand = new RelayCommand<object>(o => Export());
-            SaveCommand = new RelayCommand<object>(o => Save(), o => _memento.HasStateChanged(Configuration.ToConfiguration()));
+            SaveCommand = new RelayCommand<object>(o => Save(), o => _memento.HasStateChanged(Configuration));
         }
 
         public ConfigurationViewModel Configuration { get; }
@@ -33,7 +33,7 @@ namespace RBTools.UI.Wpf.ViewModels
                 IConfiguration configuration = _settingsManager.Import();
                 Configuration.FromConfiguration(configuration);
             }
-            catch (UserAbortedActionException)
+            catch (UserAbortedFileLoadingException)
             {
                 return;
             }

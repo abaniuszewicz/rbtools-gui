@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Data;
 
-namespace RBTools.UI.Wpf.Converters
+namespace RBTools.UI.Wpf.Views.Converters
 {
     public class IgnoreNewItemPlaceholderConverter : IValueConverter
     {

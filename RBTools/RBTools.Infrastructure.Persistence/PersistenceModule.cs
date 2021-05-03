@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using RBTools.Application.Config;
+using RBTools.Application.Config.IOAbstractions;
 using RBTools.Infrastructure.Persistence.IO;
-using RBTools.Infrastructure.Persistence.IO.TempFiles;
 using RBTools.Infrastructure.Persistence.Serialization;
 
 namespace RBTools.Infrastructure.Persistence
@@ -15,7 +15,7 @@ namespace RBTools.Infrastructure.Persistence
             builder.RegisterType<JsonSerializer>().As<ISerializer>();
             builder.RegisterType<JsonFileLoadSave>().As<IFileLoadSave>();
             builder.RegisterType<SettingsManager>().As<IConfigurationManager>();
-            builder.RegisterType<TempFile>().As<ITempFile>();
+            builder.RegisterType<File>().As<IFile>();
             builder.RegisterType<TempFileProvider>().As<ITempFileProvider>();
         }
     }
