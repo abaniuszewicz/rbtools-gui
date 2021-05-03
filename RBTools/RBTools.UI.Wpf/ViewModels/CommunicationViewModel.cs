@@ -1,5 +1,5 @@
 ﻿using System;
-using RBTools.Application;
+using RBTools.Application.Commands;
 using RBTools.Application.Communication.Events;
 using RBTools.UI.Wpf.SeedWork;
 

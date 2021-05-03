@@ -3,17 +3,17 @@ using RBTools.Application.Communication.Events;
 using RBTools.Application.Config;
 using RBTools.Domain.Commands;
 
-namespace RBTools.Application
+namespace RBTools.Application.Commands
 {
     public abstract class CommandIssuer : IDisposable
     {
         private readonly CommandProcess _commandProcess;
-        
+
         public event EventHandler<MessageEventArgs> MessageReceived
         {
             add => _commandProcess.MessageReceived += value;
             remove => _commandProcess.MessageReceived -= value;
-        } 
+        }
 
         protected CommandIssuer(IConfiguration settings)
         {
@@ -28,7 +28,7 @@ namespace RBTools.Application
 
         public virtual void Dispose()
         {
-           _commandProcess?.Dispose();
+            _commandProcess?.Dispose();
         }
     }
 }

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Linq;
 using RBTools.Application.Communication.DTO;
-using RBTools.UI.Wpf.ViewModels;
+using RBTools.Application.Communication.Mapping;
 
-namespace RBTools.UI.Wpf.Utilities
+namespace RBTools.UI.Wpf.ViewModels.Mapping
 {
-    public static class Mapper
+    public class SendViewModelToDtoMapper : IMapper<SendViewModel, RbtPostDto>
     {
-        public static RbtPostDto CreateDto(SendViewModel vm)
+        public RbtPostDto Map(SendViewModel vm)
         {
             var dto = new RbtPostDto()
             {

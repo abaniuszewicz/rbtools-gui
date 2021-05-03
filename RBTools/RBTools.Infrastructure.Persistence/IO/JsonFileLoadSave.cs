@@ -1,5 +1,5 @@
 ﻿using Microsoft.Win32;
-using RBTools.Application.Exceptions;
+using RBTools.Application.Config.Exceptions;
 using System;
 using System.IO;
 
@@ -12,7 +12,7 @@ namespace RBTools.Infrastructure.Persistence.IO
         public string Load(string filename)
         {
             var path = GetPathFromFilename(filename);
-            return File.ReadAllText(path);
+            return System.IO.File.ReadAllText(path);
         }
 
         public string Load()
@@ -24,16 +24,16 @@ namespace RBTools.Infrastructure.Persistence.IO
 
             var result = dialog.ShowDialog();
             if (!result.HasValue || !result.Value)
-                throw new UserAbortedActionException("Load operation was aborted by the user");
+                throw new UserAbortedFileLoadingException("Load operation was aborted by the user");
 
-            return File.ReadAllText(dialog.FileName);
+            return System.IO.File.ReadAllText(dialog.FileName);
         }
 
         public void Save(string filename, string content)
         {
             var path = GetPathFromFilename(filename);
             System.IO.Directory.CreateDirectory(Directory);
-            File.WriteAllText(path, content);
+            System.IO.File.WriteAllText(path, content);
         }
 
         public void Save(string content)
@@ -48,7 +48,7 @@ namespace RBTools.Infrastructure.Persistence.IO
             if (!result.HasValue || !result.Value)
                 return;
 
-            File.WriteAllText(dialog.FileName, content);
+            System.IO.File.WriteAllText(dialog.FileName, content);
         }
 
         public static string GetPathFromFilename(string filename)

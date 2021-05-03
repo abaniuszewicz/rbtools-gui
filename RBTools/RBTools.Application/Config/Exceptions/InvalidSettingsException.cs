@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RBTools.Application.Exceptions
+namespace RBTools.Application.Config.Exceptions
 {
     public class InvalidSettingsException : Exception
     {
@@ -8,7 +8,7 @@ namespace RBTools.Application.Exceptions
         {
         }
 
-        public InvalidSettingsException(string message, Exception innerException) 
+        public InvalidSettingsException(string message, Exception innerException)
             : base(message, innerException)
         {
         }

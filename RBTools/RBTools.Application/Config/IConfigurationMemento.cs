@@ -1,7 +1,9 @@
-﻿namespace RBTools.Application.Config
+﻿using System;
+
+namespace RBTools.Application.Config
 {
     public interface IConfigurationMemento : IConfiguration
     {
-        public bool HasStateChanged(IConfiguration current);
+        public bool HasStateChanged(IEquatable<IConfiguration> current);
     }
 }

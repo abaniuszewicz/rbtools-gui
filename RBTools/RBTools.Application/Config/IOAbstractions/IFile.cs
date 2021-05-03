@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace RBTools.Infrastructure.Persistence.IO.TempFiles
+namespace RBTools.Application.Config.IOAbstractions
 {
-    public interface ITempFile : IDisposable
+    public interface IFile : IDisposable
     {
         public string Path { get; }
 

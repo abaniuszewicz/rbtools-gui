@@ -1,16 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using RBTools.Application.Config.IOAbstractions;
+using System.Collections.Generic;
 using System.IO;
 
-namespace RBTools.Infrastructure.Persistence.IO.TempFiles
+namespace RBTools.Infrastructure.Persistence.IO
 {
     public class TempFileProvider : ITempFileProvider
     {
-        private List<ITempFile> _tempFiles = new();
+        private List<IFile> _tempFiles = new();
 
-        public ITempFile Create()
+        public IFile Create()
         {
             var path = Path.GetTempFileName();
-            ITempFile file = new TempFile(path);
+            IFile file = new File(path);
             _tempFiles.Add(file);
 
             return file;

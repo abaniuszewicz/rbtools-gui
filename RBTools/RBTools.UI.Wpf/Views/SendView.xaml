@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:ui="http://schemas.modernwpf.com/2019"
-      xmlns:converters="clr-namespace:RBTools.UI.Wpf.Converters" 
+      xmlns:converters="clr-namespace:RBTools.UI.Wpf.Views.Converters" 
       xmlns:viewmodels="clr-namespace:RBTools.UI.Wpf.ViewModels" 
       d:DataContext="{d:DesignInstance Type=viewmodels:SendViewModel}"
       mc:Ignorable="d" 
@@ -77,7 +77,8 @@
                           Grid.Row="0" Grid.Column="0">
                     <ui:ListView ItemsSource="{Binding Configuration.Groups}"
                                  SelectionMode="Multiple"
-                                 ScrollViewer.CanContentScroll="False">
+                                 ScrollViewer.CanContentScroll="False"
+                                 VirtualizingPanel.VirtualizationMode="Recycling">
                         <ui:ListView.Resources>
                             <Style TargetType="{x:Type ui:ListViewItem}">
                                 <Setter Property="Content" Value="{Binding Abbreviation, Mode=OneWay}"/>
@@ -92,7 +93,8 @@
                           Grid.Row="0" Grid.Column="1">
                     <ui:ListView ItemsSource="{Binding Configuration.People}"
                                  SelectionMode="Multiple"
-                                 ScrollViewer.CanContentScroll="False">
+                                 ScrollViewer.CanContentScroll="False"
+                                 VirtualizingPanel.VirtualizationMode="Recycling">
                         <ui:ListView.Resources>
                             <Style TargetType="{x:Type ui:ListViewItem}">
                                 <Setter Property="Content" Value="{Binding Abbreviation, Mode=OneWay}"/>
@@ -131,7 +133,9 @@
                          DockPanel.Dock="Bottom"/>
                 <TextBox ui:ControlHelper.Header="Changes"
                          ui:ControlHelper.PlaceholderText="What has been updated"
-                         Style="{StaticResource MultiLineTextBox}"
+                         Style="{StaticResource OneLineTextBox}"
+                         TextWrapping="Wrap"
+                         VerticalScrollBarVisibility="Auto"
                          Text="{Binding UpdateDescription, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          IsEnabled="{Binding ReviewType, Converter={StaticResource IsUpdateReviewTypeConverter}}"
                          DockPanel.Dock="Bottom"/>
