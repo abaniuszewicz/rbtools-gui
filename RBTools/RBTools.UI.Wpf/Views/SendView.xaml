@@ -75,7 +75,7 @@
 
                 <GroupBox Header="Groups"
                           Grid.Row="0" Grid.Column="0">
-                    <ui:ListView ItemsSource="{Binding Configuration.Groups}"
+                    <ui:ListView ItemsSource="{Binding Configuration.SelectableGroups}"
                                  SelectionMode="Multiple"
                                  ScrollViewer.CanContentScroll="False"
                                  VirtualizingPanel.VirtualizationMode="Recycling">
@@ -91,7 +91,7 @@
 
                 <GroupBox Header="People"
                           Grid.Row="0" Grid.Column="1">
-                    <ui:ListView ItemsSource="{Binding Configuration.People}"
+                    <ui:ListView ItemsSource="{Binding Configuration.SelectablePeople}"
                                  SelectionMode="Multiple"
                                  ScrollViewer.CanContentScroll="False"
                                  VirtualizingPanel.VirtualizationMode="Recycling">

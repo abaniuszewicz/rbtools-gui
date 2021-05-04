@@ -14,8 +14,8 @@ namespace RBTools.UI.Wpf.ViewModels.Mapping
                 OpenBrowser = vm.Configuration.OpenInBrowser,
                 Publish = vm.Configuration.Publish,
                 SvnShowCopiesAsAdds = vm.Configuration.SvnShowCopiesAsAdds,
-                TargetGroups = vm.Configuration.Groups.Where(g => g.IsSelected).Select(g => g.Value),
-                TargetPeople = vm.Configuration.People.Where(p => p.IsSelected).Select(p => p.Value),
+                TargetGroups = vm.Configuration.SelectableGroups.Where(g => g.IsSelected).Select(g => g.Value),
+                TargetPeople = vm.Configuration.SelectablePeople.Where(p => p.IsSelected).Select(p => p.Value),
                 IncludePaths = Environment.GetCommandLineArgs().Skip(1),
             };
 

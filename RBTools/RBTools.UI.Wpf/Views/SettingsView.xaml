@@ -59,7 +59,7 @@
                       Style="{StaticResource EvenlySpacedGroupBox}"
                       Grid.Row="0" Grid.Column="0">
                 <DataGrid Style="{StaticResource DataGrid}"
-                          ItemsSource="{Binding Configuration.Groups}">
+                          ItemsSource="{Binding Configuration.SelectableGroups}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Display"
                                             Width="100"
@@ -77,7 +77,7 @@
                       Style="{StaticResource EvenlySpacedGroupBox}"
                       Grid.Row="0" Grid.Column="1">
                 <DataGrid Style="{StaticResource DataGrid}"
-                          ItemsSource="{Binding Configuration.People}">
+                          ItemsSource="{Binding Configuration.SelectablePeople}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Display"
                                             Width="100"

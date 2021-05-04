@@ -14,7 +14,7 @@ namespace RBTools.UI.Wpf.ViewModels
         {
             Configuration = configuration;
             _settingsManager = settingsManager;
-            _memento = new ConfigurationMemento(configuration.ToConfiguration());
+            _memento = new ConfigurationMemento(configuration);
             
             ImportCommand = new RelayCommand<object>(o => Import());
             ExportCommand = new RelayCommand<object>(o => Export());
@@ -31,7 +31,7 @@ namespace RBTools.UI.Wpf.ViewModels
             try
             {
                 IConfiguration configuration = _settingsManager.Import();
-                Configuration.FromConfiguration(configuration);
+                ((IConfiguration)Configuration).RestoreFrom(configuration);
             }
             catch (UserAbortedFileLoadingException)
             {
@@ -41,15 +41,13 @@ namespace RBTools.UI.Wpf.ViewModels
 
         private void Export()
         {
-            IConfiguration configuration = Configuration.ToConfiguration();
-            _settingsManager.Export(configuration);
+            _settingsManager.Export(Configuration);
         }
 
         private void Save()
         {
-            IConfiguration configuration = Configuration.ToConfiguration();
-            _settingsManager.Save(configuration);
-            _memento = new ConfigurationMemento(configuration);
+            _settingsManager.Save(Configuration);
+            _memento = new ConfigurationMemento(Configuration);
         }
     }
 }
