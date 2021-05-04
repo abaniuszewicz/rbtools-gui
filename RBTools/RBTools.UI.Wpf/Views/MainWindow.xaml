@@ -7,7 +7,7 @@
         Title="MainWindow" Height="768" Width="1366"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         ui:WindowHelper.UseModernWindowStyle="True">
-    
+
     <ui:NavigationView x:Name="NavigationView" 
                        IsBackEnabled="{Binding ElementName=Frame, Path=CanGoBack}"
                        ItemInvoked="NavigationView_ItemInvoked"

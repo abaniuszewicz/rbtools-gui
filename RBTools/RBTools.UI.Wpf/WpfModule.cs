@@ -20,9 +20,9 @@ namespace RBTools.UI.Wpf
             builder.RegisterType<SendViewModelToDtoMapper>().As<IMapper<SendViewModel, RbtPostDto>>();
 
             builder.RegisterType<MainWindow>().AsSelf();
+            builder.RegisterType<SettingsView>().AsSelf();
             builder.RegisterType<CommunicationView>().AsSelf();
             builder.RegisterType<SendView>().AsSelf();
-            builder.RegisterType<SettingsView>().AsSelf();
         }
     }
 }

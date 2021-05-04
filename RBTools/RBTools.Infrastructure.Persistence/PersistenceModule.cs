@@ -14,7 +14,7 @@ namespace RBTools.Infrastructure.Persistence
 
             builder.RegisterType<JsonSerializer>().As<ISerializer>();
             builder.RegisterType<JsonFileLoadSave>().As<IFileLoadSave>();
-            builder.RegisterType<SettingsManager>().As<IConfigurationManager>();
+            builder.RegisterType<ConfigurationManager>().As<IConfigurationManager>();
             builder.RegisterType<File>().As<IFile>();
             builder.RegisterType<TempFileProvider>().As<ITempFileProvider>();
         }

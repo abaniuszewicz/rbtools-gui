@@ -22,12 +22,12 @@ namespace RBTools.UI.Wpf.Views
 
             _navigationItemToDestinationType = new (NavigationViewItemBase, WindowsControls.Page)[]
             {
-                (SendNavigationItem, scope.Resolve<SendView>()),
-                (CommunicationNavigationItem, scope.Resolve<CommunicationView>()),
                 (SettingsNavigationItem, scope.Resolve<SettingsView>()),
+                (CommunicationNavigationItem, scope.Resolve<CommunicationView>()),
+                (SendNavigationItem, scope.Resolve<SendView>()),
             };
 
-            Frame.Navigate(_navigationItemToDestinationType.First().destination);
+            Frame.Navigate(_navigationItemToDestinationType.Last().destination);
         }
 
         private void NavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)

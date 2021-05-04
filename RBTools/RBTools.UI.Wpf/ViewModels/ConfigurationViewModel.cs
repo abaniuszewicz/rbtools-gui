@@ -11,15 +11,11 @@ namespace RBTools.UI.Wpf.ViewModels
 {
     public class ConfigurationViewModel : NotifyPropertyChanged, IEquatable<IConfiguration>
     {
-        private string _repositoryRoot;
-        private string _repositoryUrl;
-        private string _repositoryName;
-        private bool _openInBrowser;
-        private bool _publish;
-        private bool _svnShowCopiesAsAdds;
+        private readonly IConfiguration _configuration;
 
         public ConfigurationViewModel(IConfiguration configuration)
         {
+            _configuration = configuration;
             FromConfiguration(configuration);
         }
 
@@ -28,66 +24,66 @@ namespace RBTools.UI.Wpf.ViewModels
 
         public string RepositoryRoot
         {
-            get => _repositoryRoot;
+            get => _configuration.RepositoryRoot;
             set
             {
-                if (_repositoryRoot == value) return;
-                _repositoryRoot = value;
+                if (_configuration.RepositoryRoot == value) return;
+                _configuration.RepositoryRoot = value;
                 OnPropertyChanged();
             }
         }
 
         public string RepositoryUrl
         {
-            get => _repositoryUrl;
+            get => _configuration.RepositoryUrl;
             set
             {
-                if (_repositoryUrl == value) return;
-                _repositoryUrl = value;
+                if (_configuration.RepositoryUrl == value) return;
+                _configuration.RepositoryUrl = value;
                 OnPropertyChanged();
             }
         }
 
         public string RepositoryName
         {
-            get => _repositoryName;
+            get => _configuration.RepositoryName;
             set
             {
-                if (_repositoryName == value) return;
-                _repositoryName = value;
+                if (_configuration.RepositoryName == value) return;
+                _configuration.RepositoryName = value;
                 OnPropertyChanged();
             }
         }
 
         public bool OpenInBrowser
         {
-            get => _openInBrowser;
+            get => _configuration.OpenInBrowser;
             set
             {
-                if (_openInBrowser == value) return;
-                _openInBrowser = value;
+                if (_configuration.OpenInBrowser == value) return;
+                _configuration.OpenInBrowser = value;
                 OnPropertyChanged();
             }
         }
 
         public bool Publish
         {
-            get => _publish;
+            get => _configuration.Publish;
             set
             {
-                if (_publish == value) return;
-                _publish = value;
+                if (_configuration.Publish == value) return;
+                _configuration.Publish = value;
                 OnPropertyChanged();
             }
         }
 
         public bool SvnShowCopiesAsAdds
         {
-            get => _svnShowCopiesAsAdds;
+            get => _configuration.SvnShowCopiesAsAdds;
             set
             {
-                if (_svnShowCopiesAsAdds == value) return;
-                _svnShowCopiesAsAdds = value;
+                if (_configuration.SvnShowCopiesAsAdds == value) return;
+                _configuration.SvnShowCopiesAsAdds = value;
                 OnPropertyChanged();
             }
         }

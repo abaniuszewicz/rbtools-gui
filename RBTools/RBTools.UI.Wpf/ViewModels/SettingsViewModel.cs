@@ -10,7 +10,7 @@ namespace RBTools.UI.Wpf.ViewModels
         private IConfigurationMemento _memento;
         private readonly IConfigurationManager _settingsManager;
 
-        public SettingsViewModel(ConfigurationViewModel configuration, IConfigurationManager settingsManager)
+        public SettingsViewModel(IConfigurationManager settingsManager, ConfigurationViewModel configuration)
         {
             Configuration = configuration;
             _settingsManager = settingsManager;
