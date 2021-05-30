@@ -14,6 +14,7 @@ namespace RBTools.Application.Config
         public bool OpenInBrowser { get; set; }
         public bool Publish { get; set; }
         public bool SvnShowCopiesAsAdds { get; set; }
+        public bool Markdown { get; set; }
 
         public void RestoreFrom(IConfiguration settings)
         {
@@ -28,6 +29,7 @@ namespace RBTools.Application.Config
             OpenInBrowser = settings.OpenInBrowser;
             Publish = settings.Publish;
             SvnShowCopiesAsAdds = settings.SvnShowCopiesAsAdds;
+            Markdown = settings.Markdown;
         }
     }
 }

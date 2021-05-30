@@ -98,6 +98,17 @@ namespace RBTools.UI.Wpf.ViewModels
             }
         }
 
+        public bool Markdown
+        {
+            get => _configuration.Markdown;
+            set
+            {
+                if (_configuration.Markdown == value) return;
+                _configuration.Markdown = value;
+                OnPropertyChanged();
+            }
+        }
+
         private static void ReplaceContent<T>(ObservableCollection<T> original, IEnumerable<T> replacements)
         {
             original.Clear();

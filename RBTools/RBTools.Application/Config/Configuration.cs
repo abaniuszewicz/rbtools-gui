@@ -13,5 +13,6 @@ namespace RBTools.Application.Config
         public bool OpenInBrowser { get; set; }
         public bool Publish { get; set; }
         public bool SvnShowCopiesAsAdds { get; set; }
+        public bool Markdown { get; set; }
     }
 }

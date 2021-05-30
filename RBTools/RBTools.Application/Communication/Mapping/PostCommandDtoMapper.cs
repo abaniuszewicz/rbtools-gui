@@ -67,6 +67,8 @@ namespace RBTools.Application.Communication.Mapping
                     options.Add(new TestingDoneFile(testingDoneFile.Path));
                 }
             }
+            if (dto.Markdown)
+                options.Add(new Markdown());
             if (dto.OpenBrowser)
                 options.Add(new Open());
             if (dto.Publish)
