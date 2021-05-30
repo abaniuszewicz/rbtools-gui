@@ -117,6 +117,8 @@
                               IsChecked="{Binding Configuration.Publish, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <CheckBox Content="SVN show copies as adds"
                               IsChecked="{Binding Configuration.SvnShowCopiesAsAdds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <CheckBox Content="Markdown"
+                              IsChecked="{Binding Configuration.Markdown, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
             </GroupBox>
         </Grid>

@@ -54,6 +54,11 @@ namespace RBTools.Application.Communication.DTO
         /// Content for 'Testing done' field.
         /// </summary>
         public string TestingDone { get; set; }
+
+        /// <summary>
+        /// Specifies if summary, description and change description should be interpreted as Markdown-formatted text.
+        /// </summary>
+        public bool Markdown { get; set; }
         
         #endregion
         

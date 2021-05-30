@@ -20,6 +20,7 @@ namespace RBTools.Application.Config
         public bool OpenInBrowser { get; set; }
         public bool Publish { get; set; }
         public bool SvnShowCopiesAsAdds { get; set; }
+        public bool Markdown { get; set; }
 
         public bool HasStateChanged(IConfiguration current)
         {
@@ -30,7 +31,8 @@ namespace RBTools.Application.Config
                          && (RepositoryName ?? string.Empty) == (current.RepositoryName ?? string.Empty)
                          && OpenInBrowser == current.OpenInBrowser
                          && Publish == current.Publish
-                         && SvnShowCopiesAsAdds == current.SvnShowCopiesAsAdds;
+                         && SvnShowCopiesAsAdds == current.SvnShowCopiesAsAdds
+                         && Markdown == current.Markdown;
 
             return !equals;
         }

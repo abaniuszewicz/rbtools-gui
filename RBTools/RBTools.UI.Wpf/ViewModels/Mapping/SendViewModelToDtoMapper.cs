@@ -14,6 +14,7 @@ namespace RBTools.UI.Wpf.ViewModels.Mapping
                 OpenBrowser = vm.Configuration.OpenInBrowser,
                 Publish = vm.Configuration.Publish,
                 SvnShowCopiesAsAdds = vm.Configuration.SvnShowCopiesAsAdds,
+                Markdown = vm.Configuration.Markdown,
                 TargetGroups = vm.Configuration.SelectableGroups.Where(g => g.IsSelected).Select(g => g.Value),
                 TargetPeople = vm.Configuration.SelectablePeople.Where(p => p.IsSelected).Select(p => p.Value),
                 IncludePaths = Environment.GetCommandLineArgs().Skip(1),
