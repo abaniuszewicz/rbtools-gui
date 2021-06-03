@@ -23,13 +23,21 @@ namespace RBTools.UI.Wpf.ViewModels
         public IEnumerable<AbbreviatedOption> Groups
         {
             get => SelectableGroups.Select(g => g.ToAbbreviatedOption()).ToArray();
-            set => ReplaceContent(SelectableGroups, value.Select(ao => new SelectableAbbreviatedOptionViewModel(ao)));
+            set
+            {
+                if (value is null) return;
+                ReplaceContent(SelectableGroups, value.Select(ao => new SelectableAbbreviatedOptionViewModel(ao)));
+            }
         }
 
         public IEnumerable<AbbreviatedOption> People
         {
             get => SelectablePeople.Select(p => p.ToAbbreviatedOption()).ToArray();
-            set => ReplaceContent(SelectablePeople, value.Select(ao => new SelectableAbbreviatedOptionViewModel(ao)));
+            set
+            {
+                if (value is null) return;
+                ReplaceContent(SelectablePeople, value.Select(ao => new SelectableAbbreviatedOptionViewModel(ao)));
+            }
         }
 
         public string RepositoryRoot
