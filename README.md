@@ -15,11 +15,11 @@ Using RBTools GUI you can forget about:
 - [x] typing all of paths that should be included in the review - paths are assigned based on files you select for the review
 - [x] having to escape CLI-illegal characters - this will be done behind the scenes for your convenience
 
-### :x: Resign from rigid command line interface
+### :x: Standard approach
 
 ![rbt-cli-workflow](Assets/rbtools_cli.gif)
 
-### :heavy_check_mark: Boost your productivity using GUI-driven approach
+### :heavy_check_mark: GUI-driven approach
 
 ![rbtools-gui-workflow](Assets/review_board_gui.gif)
 
